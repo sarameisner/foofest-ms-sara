@@ -3,19 +3,43 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(#2C2C2A);
+  --foreground: var(#2C2C2A);
+  --accent-color:var(#881523);
+  --light-grey:var(rgba(255, 255, 255, 0.54));
+  --light-grey-font:var(rgba(255, 255, 255, 0.50));
+  --font-color:var(#FFF);
+  --padding-10: 10px;
+  --padding-20: 20px;
+  --padding-50: 50px;
+  --padding-100:100px;
+  --padding-200:200px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+h1{
+  font-family:"Bangla Sangam MN";
+  color: var(--font-color);
+}
+
+h2 {
+  font-family:"Bangla Sangam MN";
+  color: var(--font-color);
+}
+h3 {
+  font-family:"Be Vietnam Pro";
+  color: var(--font-color);
+}
+h4 {
+  font-family: "La Belle Aurore";
+  color: var(--font-color);
+}
+p {
+  font-family:"Be Vietnam Pro";
+  color: var(--font-color);
 }
