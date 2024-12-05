@@ -2,8 +2,8 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import ProgramIcon from "../../public/pics/program.svg";
-import LineupIcon from "../../public/pics/lineup.svg";
+import ProgramIcon from "../../public/pics/programicon.svg";
+import LineupIcon from "../../public/pics/music-lineup.svg";
 import TicketIcon from "../../public/pics/ticket.svg";
 import BasketIcon from "../../public/pics/basket.svg";
 
