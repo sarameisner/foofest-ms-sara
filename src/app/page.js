@@ -1,11 +1,15 @@
-import Nav from "@/components/Nav";
+"use client";
+import React from "react";
+import TopNav from "@/components/TopNav";
 import Footer from "@/components/Footer";
-import FrontPageHeader from "@/components/FrontPageHeader";
+import BottomNav from "../components/BottomNav";
 
 export default function Home() {
   return (
     <div>
+      <TopNav />
       <Footer />
+      <BottomNav />
     </div>
   );
 }
