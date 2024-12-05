@@ -37,7 +37,9 @@ h3 {
   font-family: "Be Vietnam Pro", sans-serif;
   color: var(--font-color);
 }
-
+a {
+  font-family: "Bangla Sangam MN", sans-serif;
+}
 h4 {
   font-family: "La Belle Aurore", serif;
   color: var(--font-color);
