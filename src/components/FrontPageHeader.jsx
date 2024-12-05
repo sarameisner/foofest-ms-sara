@@ -1,5 +1,7 @@
 const FrontPageHeader = () => {
-    return ( <div></div> );
+    return ( <div>
+        hejsa sara
+    </div> );
 }
  
 export default FrontPageHeader;
