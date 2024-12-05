@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import Kurv from "../../public/pics/kurv.svg";
+import TicketIcon from "../../public/pics/ticket.svg";
 import Person from "../../public/pics/person.svg";
 
 const TopNav = () => {
@@ -33,7 +33,7 @@ const TopNav = () => {
         <div className="flex items-center space-x-6">
           {/* billet ikon */}
           <Link href="/cart">
-            <Image src={Kurv} alt="Cart" width={40} height={40} className="hover:scale-110 transition-transform duration-200" />
+            <Image src={TicketIcon} alt="Cart" width={40} height={40} className="hover:scale-110 transition-transform duration-200" />
           </Link>
 
           {/* profil ikon */}
