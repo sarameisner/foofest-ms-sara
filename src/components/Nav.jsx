@@ -1,5 +1,5 @@
 const Nav = () => {
-    return ( <div></div> );
+    return ( <div> hejsa Sara</div> );
 }
  
 export default Nav;
