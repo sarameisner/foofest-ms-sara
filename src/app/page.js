@@ -6,6 +6,7 @@ import TopNav from "@/components/TopNav";
 export default function Home() {
   return (
     <div>
+      <Footer />
       <TopNav/>
  
     </div>

@@ -1,45 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&family=La+Belle+Aurore&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: var(#2C2C2A);
-  --foreground: var(#2C2C2A);
-  --accent-color:var(#881523);
-  --light-grey:var(rgba(255, 255, 255, 0.54));
-  --light-grey-font:var(rgba(255, 255, 255, 0.50));
-  --font-color:var(#FFF);
+  --background: #2c2c2a;
+  --foreground: #2c2c2a;
+  --accent-color: #881523;
+  --light-grey: rgba(255, 255, 255, 0.54);
+  --light-grey-font: rgba(255, 255, 255, 0.5);
+  --font-color: #fff;
   --padding-10: 10px;
   --padding-20: 20px;
   --padding-50: 50px;
-  --padding-100:100px;
-  --padding-200:200px;
+  --padding-100: 100px;
+  --padding-200: 200px;
 }
-
-
 body {
+  font-family: "Be Vietnam Pro", sans-serif;
   color: var(--foreground);
   background: var(--background);
- 
 }
-h1{
-  font-family:"Bangla Sangam MN";
+
+h1 {
+  font-family: "Bangla Sangam MN", sans-serif;
   color: var(--font-color);
 }
 
 h2 {
-  font-family:"Bangla Sangam MN";
+  font-family: "Bangla Sangam MN", sans-serif;
   color: var(--font-color);
 }
+
 h3 {
-  font-family:"Be Vietnam Pro";
+  font-family: "Be Vietnam Pro", sans-serif;
   color: var(--font-color);
 }
+
 h4 {
-  font-family: "La Belle Aurore";
+  font-family: "La Belle Aurore", serif;
   color: var(--font-color);
 }
+
 p {
-  font-family:"Be Vietnam Pro";
+  font-family: "Be Vietnam Pro", sans-serif;
   color: var(--font-color);
 }
