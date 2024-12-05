@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Be Vietnam Pro", "sans-serif"],
+        sans: ["Bangla Sangam MN", "sans-serif"],
         serif: ["La Belle Aurore", "serif"],
         display: ["Bangla Sangam MN", "sans-serif"],
       },
