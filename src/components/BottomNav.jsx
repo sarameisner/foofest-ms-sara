@@ -9,7 +9,7 @@ const BottomNav = () => {
       <div className="flex justify-around items-center py-4">
         {/* program */}
         <Link href="/program" className="group flex flex-col items-center">
-          <Image src="/pics/programicon.svg" alt="Program" width={30} height={30} className="hover:scale-110 transition-transform duration-200" />
+          <Image src="/pics/programicon.png" alt="Program" width={30} height={30} className="hover:scale-110 transition-transform duration-200" />
           <p className="text-sm mt-1 group-hover:text-gray-300">PROGRAM</p>
         </Link>
 
@@ -21,8 +21,8 @@ const BottomNav = () => {
 
         {/* tickets */}
         <Link href="/tickets" className="group flex flex-col items-center">
-          <Image src="/pics/ticket.svg" alt="Tickets" width={30} height={30} className="hover:scale-110 transition-transform duration-200" />
-          <p className="text-sm mt-1 group-hover:text-gray-300">TICKETS</p>
+          <Image src="/pics/ticket.svg" alt="Tickets" width={35} height={35} className="hover:scale-110 transition-transform duration-200" />
+          <p className="text-sm mt-1 pt-2 group-hover:text-gray-300">TICKETS</p>
         </Link>
 
         {/* basket */}
