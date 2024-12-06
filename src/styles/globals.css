@@ -44,7 +44,16 @@ h4 {
   font-family: "La Belle Aurore", serif;
   color: var(--font-color);
 }
+button {
+  font-family: "Bangla Sangam MN", sans-serif;
+  font-size: 1rem;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
 
+button:hover {
+  transform: scale(1.05);
+  background-color: #771219;
+}
 p {
   font-family: "Bangla Sangam MN", sans-serif;
   color: var(--font-color);
