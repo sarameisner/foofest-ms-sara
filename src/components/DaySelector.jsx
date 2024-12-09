@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import React from "react";
 
 const DaySelector = ({ onDayChange, selectedDay }) => {
   const dayMapping = {
@@ -17,17 +16,37 @@ const DaySelector = ({ onDayChange, selectedDay }) => {
   };
 
   return (
-    <div>
-      {Object.keys(dayMapping).map((day) => (
-        <button
-          key={day}
-          onClick={() => handleDayClick(day)}
+    <div className="grid grid-cols-2 ">
+      {/* Første kolonne: Mandag til Torsdag */}
+      <div>
+        {["Monday", "Tuesday", "Wednesday", "Thursday"].map((day) => (
+          <button
+          style={{ backgroundColor: "transparent" }}
+            key={day}
+            onClick={() => handleDayClick(day)}
+            className="w-full text-start mb-2 text-white uppercase"
+          >
+            {selectedDay === dayMapping[day] && "☆"} {/* Fremhæv med stjerne */}
+            {day}
+          </button>
+        ))}
+      </div>
 
-        >
-          {selectedDay === dayMapping[day] && "☆"} {/* Fremhæv den valgte dag med en stjerne */}
-          {day}
-        </button>
-      ))}
+      {/* Anden kolonne: Fredag til Søndag og All */}
+      <div>
+        {["Friday", "Saturday", "Sunday", "All"].map((day) => (
+          <button
+          style={{ backgroundColor: "transparent" }}
+            key={day}
+            onClick={() => handleDayClick(day)}
+            className="w-full text-start mb-2 text-white uppercase"
+    
+          >
+            {selectedDay === dayMapping[day] || day === "All" ? "☆" : null}
+            {day}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
