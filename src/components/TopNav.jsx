@@ -36,7 +36,6 @@ const TopNav = () => {
             <Link href="/cart">
               <Image src={TicketIcon} alt="Cart" width={40} height={40} className="hover:scale-110 transition-transform duration-200" />
             </Link>
-            {cart.length > 0 && <span className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cart.length}</span>}
           </div>
 
           {/* profil ikon */}
