@@ -1,4 +1,4 @@
-// /src/pages/_app.js
+import { CartProvider } from "@/contexts/CartContext"; // Importer CartProvider
 import "../styles/globals.css"; // Importer globale stilarter
 import TopNav from "@/components/TopNav";
 import Footer from "@/components/Footer";
@@ -6,25 +6,19 @@ import BottomNav from "@/components/BottomNav";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div className="layout-wrapper">
-      {/* Vis TopNav på større skærme */}
-      <div>
+    <CartProvider>
+      <div className="layout-wrapper">
         <TopNav />
+        <main>
+          <Component {...pageProps} />
+        </main>
+        <Footer />
+        {/* Sørg for, at BottomNav kun vises på mobile enheder */}
+        <div className="block md:hidden">
+          <BottomNav />
+        </div>
       </div>
-
-      {/* Vis den aktuelle side */}
-      <main>
-        <Component {...pageProps} />
-      </main>
-
-      {/* Footer */}
-      <Footer />
-
-      {/* Vis BottomNav på mindre skærme */}
-      <div className="block md:hidden">
-        <BottomNav />
-      </div>
-    </div>
+    </CartProvider>
   );
 }
 
