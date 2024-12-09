@@ -7,11 +7,11 @@ import Person from "../../public/pics/person.svg";
 
 const TopNav = () => {
   return (
-    <header className="p-6 text-white bg-[#2C2C2A] border-b" style={{ borderColor: "var(--light-grey-font)" }}>
+    <header className="p-6 text-white bg-transparent absolute top-0 left-0 w-full z-50" style={{ borderColor: "var(--light-grey-font)" }}>
       <nav className="flex items-center justify-between">
         {/* venstre */}
         <div className="flex-shrink-0">
-          <h4 className="text-[6rem] font-bold italic" style={{ color: "var(--font-color)" }}>
+          <h4 className="text-[6rem] text-center md:text-left" style={{ color: "var(--font-color)" }}>
             Foo
           </h4>
         </div>
