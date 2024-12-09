@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import FrontPage from "../../public/pics/frontpagepic.jpg";
 import DaySelector from "@/components/DaySelector";
 
@@ -71,7 +72,7 @@ const Schedule = () => {
           let isBandPlaying = false;
 
           // Loop through all stages and days to check if the band plays on the selected day
-          Object.entries(schedule).forEach(([stage, days]) => {
+          Object.entries(schedule).forEach(([ days]) => {
             if (days[day] && days[day].some((act) => act.act === band.name)) {
               isBandPlaying = true;
             }
@@ -84,8 +85,10 @@ const Schedule = () => {
                 isBandPlaying ? "bg-[#881523] rounded-s text-white rounded-[0.25rem] transition-all duration-300 " : "bg-transparent"
               }`}
             >
-              <p className="text-[1.25rem] uppercase p-1 ">{band.name}</p>
+                <Link href={`/bands/${band.name.toLowerCase().replace(/ /g, "-")}`}>
+              <p className="text-[1.25rem] uppercase p-1 ">{band.name}</p></Link>
             </div>
+            
           );
         })}
       </div>
