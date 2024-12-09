@@ -1,4 +1,7 @@
 import "../styles/globals.css";
+import TopNav from "@/components/TopNav";
+import Footer from "@/components/Footer";
+import BottomNav from "@/components/BottomNav";
 
 export const metadata = {
   title: "Next.js",
@@ -8,7 +11,19 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+    
+      <div className="layout-wrapper">
+    <div className="hidden md:block">
+      <TopNav />
+    </div>
+    <body>{children}</body>
+    <Footer />
+
+ 
+    <div className="block md:hidden">
+      <BottomNav />
+    </div>
+  </div>
     </html>
   );
 }
