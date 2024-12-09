@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Regular Ticket",
+    "price": 799
+  },
+  {
+    "id": 2,
+    "name": "VIP Ticket",
+    "price": 1299
+  }
+]
