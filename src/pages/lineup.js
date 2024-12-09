@@ -56,15 +56,15 @@ const Schedule = () => {
   </div>
 
   {/* DaySelector under overskriften på mobil */}
-  <div className="block md:hidden mt-4">
-    <div className="text-center">
+  <div className="block md:hidden mt-4 z-10 align-self-center ">
+    <div className="absolute top-52 left-[55%] transform -translate-x-1/2 -translate-y-1/2 text-center">
       <DaySelector onDayChange={filterBands} selectedDay={day} />
     </div>
   </div>
 </div>
 
       {/* Grid til visning af bands */}
-      <div className="flex flex-row flex-wrap w-[80vw] m-auto justify-center lg:grid-cols-5 gap-3 mt-28">
+      <div className="flex flex-row flex-wrap w-[80vw] m-auto justify-center lg:grid-cols-5 gap-3 mt-36 pb-[50px]">
         {/* Vis alle bands */}
         {bands.map((band, index) => {
           // Check if the band is playing on the selected day
@@ -81,10 +81,10 @@ const Schedule = () => {
             <div
               key={index}
               className={`text-center ${
-                isBandPlaying ? "bg-[#881523] rounded-s text-white rounded-[0.25rem] transition-all duration-300" : "bg-transparent"
+                isBandPlaying ? "bg-[#881523] rounded-s text-white rounded-[0.25rem] transition-all duration-300 " : "bg-transparent"
               }`}
             >
-              <p className="font-semibold uppercase p-1">{band.name}</p>
+              <p className="text-[1.25rem] uppercase p-1 ">{band.name}</p>
             </div>
           );
         })}
