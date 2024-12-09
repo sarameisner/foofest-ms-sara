@@ -11,12 +11,7 @@ const FrontPageHeader = () => {
       {/* sektion med baggrundsbilledet */}
       <div className="relative w-full h-[60vh] bg-cover bg-center">
         <Image src={backgroundImage} alt="Concert Background" layout="fill" objectFit="cover" className="-z-10" />
-
-        {/* logo (centreret kun på mobil) */}
-        <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-30 md:hidden">
-          <h1 className="text-6xl font-serif text-white">Foo</h1>
-        </div>
-
+        
         {/* dato placeret lidt længere nede */}
         <div className="absolute top-[70%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
           <p className="text-xl md:text-3xl font-normal text-white">2.12.2024 - 20.12.2024</p>

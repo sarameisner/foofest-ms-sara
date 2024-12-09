@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <div className="layout-wrapper">
       {/* Vis TopNav på større skærme */}
-      <div className="hidden md:block">
+      <div>
         <TopNav />
       </div>
 
