@@ -7,7 +7,11 @@ import ButtonWIcon from "@/components/ButtonWIcon";
 import Banner from "@/components/Banner";
 
 const Tickets = () => {
-  const { tickets, addToCart } = useContext(CartContext); // henter tickets fra CartContext
+  const { tickets, addToCart } = useContext(CartContext); // Henter tickets fra CartContext
+
+  // if (!tickets) {
+  //   return <p>Loading tickets...</p>; // Tilføjer fallback for indlæsningssituationer
+  // }
 
   return (
     <div>
