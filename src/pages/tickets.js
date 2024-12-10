@@ -1,24 +1,10 @@
 import React from "react";
 import Tickets from "@/components/Tickets";
-import path from "path";
-import fs from "fs";
 
-export default function TicketsPage({ tickets }) {
+export default function TicketsPage() {
   return (
     <>
-      <Tickets tickets={tickets} />
+      <Tickets />
     </>
   );
-}
-
-export async function getStaticProps() {
-  const filePath = path.join(process.cwd(), "tickets.json");
-  const fileContents = fs.readFileSync(filePath, "utf8");
-  const tickets = JSON.parse(fileContents);
-
-  return {
-    props: {
-      tickets,
-    },
-  };
 }
