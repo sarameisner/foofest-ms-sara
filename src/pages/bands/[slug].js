@@ -72,7 +72,10 @@ const BandDetails = () => {
     }
   }
 
-  const imageUrl = `/logos/${bandDetails.logo}`; // Sti til bandets logo
+  let imageUrl = "https://peach-polar-planarian.glitch.me/logos/" + bandDetails.logo;
+
+  if ((bandDetails.logo = "")) {
+  }
   return (
     <div>
       {/* Banner med bandets navn */}
@@ -80,18 +83,15 @@ const BandDetails = () => {
 
       <div className="grid max-w-[1000px] m-auto grid-cols-1 mt-10 mb-52 md:grid-cols-2 gap-20">
         {/* Første kolonne: Billede */}
-        <div className="relative w-full h-64 md:h-96 px-4 md:px-0"> {/* Tilføj padding kun på mobil */}
-          <Image
-            src={imageUrl}
-            alt={bandDetails.name}
-            fill
-            objectFit="cover"
-            className="rounded-lg"
-          />
+        <div className="relative w-full h-64 md:h-96 px-4 md:px-0">
+          {" "}
+          {/* Tilføj padding kun på mobil */}
+          <img src={imageUrl} alt="{bandDetails.name}"></img>
         </div>
 
-
-        <div className="px-4 md:px-0"> {/* Tilføj padding kun på mobil */}
+        <div className="px-4 md:px-0">
+          {" "}
+          {/* Tilføj padding kun på mobil */}
           {/* Dag, tidspunkt og scene */}
           {bandSchedule ? (
             <div className="grid grid-cols-3 md:grid-rows-3 gap-4">
@@ -108,31 +108,14 @@ const BandDetails = () => {
           ) : (
             <p className="text-gray-500">No schedule information available.</p>
           )}
-
           <p className="mb-10">{bandDetails.bio}</p>
-
           {/* Knap centreret på mobil */}
           <div className="block md:hidden flex items-center justify-center mt-10">
-            <ButtonWIcon
-              text="Add to your favorite"
-              defaultIcon={<Image src={Hjerte} alt="Default Icon" width={20} height={20} />}
-              activeIcon={<Image src={Hjerte} alt="Active Icon" width={20} height={20} />}
-              defaultBgColor="#881523"
-              activeBgColor="#ffffff"
-              onClick={() => console.log("Button toggled!")}
-            />
+            <ButtonWIcon text="Add to your favorite" defaultIcon={<Image src={Hjerte} alt="Default Icon" width={20} height={20} />} activeIcon={<Image src={Hjerte} alt="Active Icon" width={20} height={20} />} defaultBgColor="#881523" activeBgColor="#ffffff" onClick={() => console.log("Button toggled!")} />
           </div>
-          
           {/* Knap synlig på både mobil og desktop, men ikke centreret på desktop */}
           <div className="hidden md:block flex justify-center mt-10">
-            <ButtonWIcon
-              text="Add to your favorite"
-              defaultIcon={<Image src={Hjerte} alt="Default Icon" width={20} height={20} />}
-              activeIcon={<Image src={Hjerte} alt="Active Icon" width={20} height={20} />}
-              defaultBgColor="#881523"
-              activeBgColor="#ffffff"
-              onClick={() => console.log("Button toggled!")}
-            />
+            <ButtonWIcon text="Add to your favorite" defaultIcon={<Image src={Hjerte} alt="Default Icon" width={20} height={20} />} activeIcon={<Image src={Hjerte} alt="Active Icon" width={20} height={20} />} defaultBgColor="#881523" activeBgColor="#ffffff" onClick={() => console.log("Button toggled!")} />
           </div>
         </div>
       </div>
@@ -141,4 +124,3 @@ const BandDetails = () => {
 };
 
 export default BandDetails;
-

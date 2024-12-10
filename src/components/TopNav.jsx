@@ -47,7 +47,7 @@ const TopNav = () => {
         {/* Højre - Billet og Profil ikoner */}
         <div className="flex items-center space-x-6 md:flex hidden">
           {/* Billet ikon */}
-          <Link href="/cart">
+          <Link href="/basket">
             <div className="relative">
               <Image src={TicketIcon} alt="Cart" width={40} height={40} className="hover:scale-110 transition-transform duration-200" />
               {/* Vis antal varer i kurven */}
