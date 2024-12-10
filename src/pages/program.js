@@ -1,5 +1,6 @@
 "use client";
 import Banner from "@/components/Banner";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import StageFiltering from "@/components/Stagefiltering"; // For Stage Filtering
 import DayFiltering from "@/components/DayFiltering"; // Ny dropdown til dagene
@@ -113,33 +114,38 @@ const Program = () => {
 
         {/* Schedule Section */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 w-full max-w-[1200px] mx-auto pb-52">
-          {Object.entries(filteredSchedule).length === 0 ? (
-            <div className="text-center text-gray-500 col-span-full">No data available for this filter</div>
-          ) : (
-            Object.entries(filteredSchedule).map(([stage, days]) => (
-              <div key={stage} className=" p-4">
-                <h3 className="text-xl text-center font-bold mb-5 uppercase">{stage}</h3>
-                <div className="space-y-2">
-                  {Object.entries(days).map(([dayKey, acts]) => (
-                    <div key={dayKey}>
-                      <h4 className="text-center">{dayKey}</h4>
-                      {acts.map((act, index) => (
-                        <div
-                          key={index}
-                          className="grid grid-cols-[6fr,1fr,1fr] text-white items-center"
-                        >
-                          <span className="uppercase">{act.act}</span>
-                          <span>-</span>
-                          <span className="text-white">{act.start}</span>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
+  {Object.entries(filteredSchedule).length === 0 ? (
+    <div className="text-center text-gray-500 col-span-full">No data available for this filter</div>
+  ) : (
+    Object.entries(filteredSchedule).map(([stage, days]) => (
+      <div key={stage} className=" p-4">
+        <h3 className="text-xl text-center font-bold mb-5 uppercase">{stage}</h3>
+        <div className="space-y-2">
+          {Object.entries(days).map(([dayKey, acts]) => (
+            <div key={dayKey}>
+              <h4 className="text-center">{dayKey}</h4>
+              {acts.map((act, index) => (
+                <div
+                  key={index}
+                  className="grid grid-cols-[6fr,1fr,1fr] text-white items-center"
+                >
+                  <span className="uppercase">
+                    {/* Link to band's specific page */}
+                    <Link href={`/bands/${act.act.toLowerCase().replace(/ /g, "-")}`}>
+                      {act.act}
+                    </Link>
+                  </span>
+                  <span>-</span>
+                  <span className="text-white">{act.start}</span>
                 </div>
-              </div>
-            ))
-          )}
+              ))}
+            </div>
+          ))}
         </div>
+      </div>
+    ))
+  )}
+</div>
       </div>
     </div>
   );
