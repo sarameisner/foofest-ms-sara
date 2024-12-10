@@ -11,7 +11,7 @@ const BandDetails = () => {
     const [schedule, setSchedule] = useState(null);
     const [bandDetails, setBandDetails] = useState(null);
     const [loading, setLoading] = useState(true);
-  
+   
     useEffect(() => {
       if (!slug) return;
   

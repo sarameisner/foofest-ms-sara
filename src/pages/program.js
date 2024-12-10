@@ -125,20 +125,17 @@ const Program = () => {
             <div key={dayKey}>
               <h4 className="text-center">{dayKey}</h4>
               {acts.map((act, index) => (
-                <div
-                  key={index}
-                  className="grid grid-cols-[6fr,1fr,1fr] text-white items-center"
-                >
-                  <span className="uppercase">
-                    {/* Link to band's specific page */}
-                    <Link href={`/bands/${act.act.toLowerCase().replace(/ /g, "-")}`}>
-                      {act.act}
-                    </Link>
-                  </span>
-                  <span>-</span>
-                  <span className="text-white">{act.start}</span>
-                </div>
-              ))}
+  <div key={index} className="grid grid-cols-[6fr,1fr,1fr] text-white items-center">
+    <span className="uppercase">
+      {/* Link to band's specific page */}
+      <Link href={`/bands/${act.act.toLowerCase().replace(/ /g, "-")}`}>
+        {act.act}
+      </Link>
+    </span>
+    <span>-</span>
+    <span className="text-white">{act.start}</span>
+  </div>
+))}
             </div>
           ))}
         </div>

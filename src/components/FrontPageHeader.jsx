@@ -29,11 +29,11 @@ const FrontPageHeader = () => {
 
       {/* sektion med armbånd */}
       <div className="w-full bg-[var(--background)] flex flex-col items-center space-y-12 py-24 z-10">
-        <a href="/lineup" className="transform rotate-[-5deg] hover:scale-105 transition-transform">
-          <Image src={lineupBracelet} alt="Lineup Bracelet" width={700} height={180} className="drop-shadow-lg" />
+        <a href="/program" className="transform rotate-[-5deg] hover:scale-105 transition-transform">
+          <Image src={lineupBracelet} alt="Program Bracelet" width={700} height={180} className="drop-shadow-lg" />
         </a>
-        <a href="/program" className="transform rotate-[3deg] hover:scale-105 transition-transform">
-          <Image src={programBracelet} alt="Program Bracelet" width={700} height={180} className="drop-shadow-lg" />
+        <a href="/lineup" className="transform rotate-[3deg] hover:scale-105 transition-transform">
+          <Image src={programBracelet} alt="Lineup Bracelet" width={700} height={180} className="drop-shadow-lg" />
         </a>
         <a href="/tickets" className="transform rotate-[-8deg] hover:scale-105 transition-transform">
           <Image src={ticketsBracelet} alt="Tickets Bracelet" width={700} height={180} className="drop-shadow-lg" />
