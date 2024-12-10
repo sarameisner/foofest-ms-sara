@@ -56,7 +56,7 @@ const TopNav = () => {
           </Link>
 
           {/* Profil ikon */}
-          <Link href="/profile">
+          <Link href="/favorites">
             <Image src={Person} alt="Profile" width={30} height={30} className="hover:scale-110 transition-transform duration-200" />
           </Link>
         </div>

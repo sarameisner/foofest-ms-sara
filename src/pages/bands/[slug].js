@@ -85,8 +85,9 @@ const BandDetails = () => {
         {/* Første kolonne: Billede */}
         <div className="relative w-full h-64 md:h-96 px-4 md:px-0">
           {" "}
-          {/* Tilføj padding kun på mobil */}
-          <img src={imageUrl} alt="{bandDetails.name}"></img>
+          <div className="relative p-2 w-96 before:content-[''] before:absolute before:-top-4 before:-right-4 before:-z-10 before:w-full before:h-full before:border-[8px] before:border-[#881523] before:opacity-100 before:rounded-lg">
+
+          <img src={imageUrl} alt="{bandDetails.name}"></img></div>
         </div>
 
         <div className="px-4 md:px-0">

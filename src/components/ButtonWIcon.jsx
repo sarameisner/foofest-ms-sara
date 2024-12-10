@@ -23,7 +23,7 @@ const ButtonWIcon = ({ text, defaultIcon, activeIcon, defaultBgColor, activeBgCo
       }}
       className="hover:opacity-90 transition-all duration-200"
     >
-      <span style={{ marginRight: "0.5rem", display: "flex", alignItems: "center" }}>{isActive ? activeIcon : defaultIcon}</span>
+      <span style={{ marginRight: "0.5rem", display: "flex", alignItems: "center"}}>{isActive ? activeIcon : defaultIcon}</span>
       <span>{text}</span>
     </button>
   );
