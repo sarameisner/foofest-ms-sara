@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import FrontPage from "../../public/pics/frontpagepic.jpg";
 import DaySelector from "@/components/DaySelector";
 
@@ -37,31 +38,30 @@ const Schedule = () => {
     <div className="p-6 mt-40">
       {/* Baggrundsbillede */}
       <div className="relative h-[10rem]">
-  <Image
-    src={FrontPage}
-    alt="Background"
-    layout="fill"
-    objectFit="cover" // Sikrer at billedet fylder containeren uden at blive forvrænget
-    objectPosition="center" // Centrerer billedet
-    className="absolute inset-0"
-  />
+        <Image
+          src={FrontPage}
+          alt="Background"
+          layout="fill"
+          objectFit="cover" // Sikrer at billedet fylder containeren uden at blive forvrænget
+          objectPosition="center" // Centrerer billedet
+          className="absolute inset-0"
+        />
 
-  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white">
-    <h1 className="text-4xl font-bold">LINE UP</h1>
-  </div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white">
+          <h1 className="text-4xl font-bold">LINE UP</h1>
+        </div>
 
+        <div className="hidden md:block absolute top-1/2 left-4 transform -translate-y-1/2">
+          <DaySelector onDayChange={filterBands} selectedDay={day} />
+        </div>
 
-  <div className="hidden md:block absolute top-1/2 left-4 transform -translate-y-1/2">
-    <DaySelector onDayChange={filterBands} selectedDay={day} />
-  </div>
-
-  {/* DaySelector under overskriften på mobil */}
-  <div className="block md:hidden mt-4 z-10 align-self-center ">
-    <div className="absolute top-52 left-[55%] transform -translate-x-1/2 -translate-y-1/2 text-center">
-      <DaySelector onDayChange={filterBands} selectedDay={day} />
-    </div>
-  </div>
-</div>
+        {/* DaySelector under overskriften på mobil */}
+        <div className="block md:hidden mt-4 z-10 align-self-center ">
+          <div className="absolute top-52 left-[55%] transform -translate-x-1/2 -translate-y-1/2 text-center">
+            <DaySelector onDayChange={filterBands} selectedDay={day} />
+          </div>
+        </div>
+      </div>
 
       {/* Grid til visning af bands */}
       <div className="flex flex-row flex-wrap w-[80vw] m-auto justify-center lg:grid-cols-5 gap-3 mt-36 pb-[50px]">
@@ -70,21 +70,33 @@ const Schedule = () => {
           // Check if the band is playing on the selected day
           let isBandPlaying = false;
 
-          // Loop through all stages and days to check if the band plays on the selected day
-          Object.entries(schedule).forEach(([stage, days]) => {
-            if (days[day] && days[day].some((act) => act.act === band.name)) {
-              isBandPlaying = true;
-            }
-          });
+          if (day === "all") {
+            // Hvis "all" er valgt, highlight alle bands
+            isBandPlaying = true;
+          } else {
+            // Loop gennem schedule for at finde bands for den valgte dag
+            Object.entries(schedule).forEach(([stage, days]) => {
+              if (
+                days[day] && 
+                days[day].some((act) => act.act.toLowerCase() === band.name.toLowerCase())
+              ) {
+                isBandPlaying = true;
+              }
+            });
+          }
 
           return (
             <div
               key={index}
               className={`text-center ${
-                isBandPlaying ? "bg-[#881523] rounded-s text-white rounded-[0.25rem] transition-all duration-300 " : "bg-transparent"
+                isBandPlaying
+                  ? "bg-[#881523] rounded-s text-white rounded-[0.25rem] transition-all duration-300"
+                  : "bg-transparent"
               }`}
             >
-              <p className="text-[1.25rem] uppercase p-1 ">{band.name}</p>
+              <Link href={`/bands/${band.name.toLowerCase().replace(/ /g, "-")}`}>
+                <p className="text-[1.25rem] uppercase p-1">{band.name}</p>
+              </Link>
             </div>
           );
         })}
@@ -94,3 +106,4 @@ const Schedule = () => {
 };
 
 export default Schedule;
+

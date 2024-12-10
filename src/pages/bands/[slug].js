@@ -3,44 +3,86 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import ButtonWIcon from "@/components/ButtonWIcon";
 import Banner from "@/components/Banner";
+import Hjerte from "../../../public/pics/heart.svg";
+
+const daysMap = {
+  Mon: "Monday",
+  Tue: "Tuesday",
+  Wed: "Wednesday",
+  Thu: "Thursday",
+  Fri: "Friday",
+  Sat: "Saturday",
+  Sun: "Sunday",
+};
 
 const BandDetails = () => {
   const router = useRouter();
-  const { slug } = router.query; 
+  const { slug } = router.query;
+  const [schedule, setSchedule] = useState(null);
   const [bandDetails, setBandDetails] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!slug) return; // Vent på, at slug bliver tilgængelig
+    if (!slug) return;
 
-    const fetchBandDetails = async () => {
+    const fetchData = async () => {
       try {
+        // Fetch band details
         const res = await fetch(`https://peach-polar-planarian.glitch.me/bands/${slug}`);
         if (!res.ok) throw new Error("Failed to fetch band details.");
-        const data = await res.json();
-        setBandDetails(data);
+        const bandData = await res.json();
+        setBandDetails(bandData);
+
+        // Fetch schedule data
+        const scheduleRes = await fetch("https://peach-polar-planarian.glitch.me/schedule");
+        if (!scheduleRes.ok) throw new Error("Failed to fetch schedule data.");
+        const scheduleData = await scheduleRes.json();
+        setSchedule(scheduleData);
+
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching band details:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    fetchBandDetails();
+    fetchData();
   }, [slug]);
 
   if (loading) return <p>Loading...</p>;
   if (!bandDetails) return <p>Band not found</p>;
 
-  return (
+  // Match bandet med schedule-data for at finde dag, tid og scene
+  let bandSchedule = null;
+  if (schedule) {
+    for (const [stage, days] of Object.entries(schedule)) {
+      for (const [day, acts] of Object.entries(days)) {
+        const foundAct = acts.find((act) => act.act === bandDetails.name);
+        if (foundAct) {
+          bandSchedule = {
+            day: day, // Brug forkortelsen (f.eks. 'Mon', 'Tue', etc.)
+            time: foundAct.start, // Brug start-tidspunkt
+            stage,
+          };
+          break;
+        }
+      }
+      if (bandSchedule) break; // Exit outer loop hvis bandet findes
+    }
+  }
 
-    <div className="p-6">
-            <Banner text={bandDetails.name}/>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  const imageUrl = `/logos/${bandDetails.logo}`; // Sti til bandets logo
+  return (
+    <div>
+      {/* Banner med bandets navn */}
+      <Banner text={bandDetails.name} />
+
+      <div className="grid max-w-[1000px] m-auto grid-cols-1 mt-10 mb-52 md:grid-cols-2 gap-20">
         {/* Første kolonne: Billede */}
-        <div className="relative w-full h-64 md:h-96">
+        <div className="relative w-full h-64 md:h-96 px-4 md:px-0"> {/* Tilføj padding kun på mobil */}
           <Image
-            src={bandDetails.logo.startsWith("http") ? bandDetails.logo : `/uploads/${bandDetails.logo}`} 
+            src={imageUrl}
             alt={bandDetails.name}
             fill
             objectFit="cover"
@@ -48,33 +90,50 @@ const BandDetails = () => {
           />
         </div>
 
-        {/* Anden kolonne: Band detaljer */}
-        <div>
 
-          {/* Dag og tidspunkt */}
-          <p className="mb-2">
-            <span className="font-semibold">Day:</span> {bandDetails.day}
-          </p>
-          <p className="mb-2">
-            <span className="font-semibold">Time:</span> {bandDetails.time}
-          </p>
+        <div className="px-4 md:px-0"> {/* Tilføj padding kun på mobil */}
+          {/* Dag, tidspunkt og scene */}
+          {bandSchedule ? (
+            <div className="grid grid-cols-3 md:grid-rows-3 gap-4">
+              <p className="text-center md:text-left mb-2">
+                <span className="text-xl uppercase">{bandSchedule.day}</span>
+              </p>
+              <p className="text-center md:text-left mb-2">
+                <span className="text-xl">{bandSchedule.time}</span>
+              </p>
+              <p className="text-center md:text-left mb-2">
+                <span className="text-xl uppercase">{bandSchedule.stage}</span>
+              </p>
+            </div>
+          ) : (
+            <p className="text-gray-500">No schedule information available.</p>
+          )}
 
-          {/* Scene */}
-          <p className="mb-2">
-            <span className="font-semibold">Stage:</span> {bandDetails.stage}
-          </p>
+          <p className="mb-10">{bandDetails.bio}</p>
 
-          {/* Beskrivelse */}
-          <h2 className="text-2xl font-semibold mt-6">Description</h2>
-          <p className="mb-4">{bandDetails.description}</p>
-
-          {/* Knap */}
-          <button
-            className="bg-[#881523] text-white px-4 py-2 rounded-md hover:bg-[#a71a2d] transition-colors"
-            onClick={() => alert(`You clicked on ${bandDetails.name}`)}
-          >
-            Read More
-          </button>
+          {/* Knap centreret på mobil */}
+          <div className="block md:hidden flex items-center justify-center mt-10">
+            <ButtonWIcon
+              text="Add to your favorite"
+              defaultIcon={<Image src={Hjerte} alt="Default Icon" width={20} height={20} />}
+              activeIcon={<Image src={Hjerte} alt="Active Icon" width={20} height={20} />}
+              defaultBgColor="#881523"
+              activeBgColor="#ffffff"
+              onClick={() => console.log("Button toggled!")}
+            />
+          </div>
+          
+          {/* Knap synlig på både mobil og desktop, men ikke centreret på desktop */}
+          <div className="hidden md:block flex justify-center mt-10">
+            <ButtonWIcon
+              text="Add to your favorite"
+              defaultIcon={<Image src={Hjerte} alt="Default Icon" width={20} height={20} />}
+              activeIcon={<Image src={Hjerte} alt="Active Icon" width={20} height={20} />}
+              defaultBgColor="#881523"
+              activeBgColor="#ffffff"
+              onClick={() => console.log("Button toggled!")}
+            />
+          </div>
         </div>
       </div>
     </div>
