@@ -6,6 +6,7 @@ import BottomNav from "@/components/BottomNav";
 
 function MyApp({ Component, pageProps }) {
   return (
+    // vores provider til createContext
     <CartProvider>
       <div className="layout-wrapper">
         <TopNav />
