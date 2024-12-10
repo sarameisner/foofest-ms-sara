@@ -18,7 +18,8 @@ function DayFiltering({ options, onChange }) {
       >
         {options.find(option => option.value === selected)?.label}
       </div>
-      {isOpen && (
+      
+      {isOpen && ( // henter isOpen const'en for at åbne efter onClick længere oppe
         <div className="absolute bg-[#881523] text-white rounded-md shadow-lg mt-2 z-10 w-full">
           {options.map((option) => (
             <div

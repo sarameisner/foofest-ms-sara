@@ -8,7 +8,7 @@ import DaySelector from "@/components/DaySelector";
 const Schedule = () => {
   const [schedule, setSchedule] = useState({});
   const [bands, setBands] = useState([]);
-  const [day, setDay] = useState(null); // Start med null, så ingen dag er valgt
+  const [day, setDay] = useState(null); 
 
   // Hent både schedule og banddata samtidigt
   useEffect(() => {

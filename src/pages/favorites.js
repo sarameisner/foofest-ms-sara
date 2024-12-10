@@ -3,21 +3,26 @@ import Banner from "@/components/Banner";
 import ButtonWIcon from "@/components/ButtonWIcon";
 
 const Favorites = () => {
-  const [favorites, setFavorites] = useState([]);
-
-  useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    console.log("Loaded Favorites:", storedFavorites); // Debug log
-    setFavorites(storedFavorites);
-  }, []);
-
-  const handleRemoveFavorite = (indexToRemove) => {
-    const updatedFavorites = favorites.filter((_, index) => index !== indexToRemove);
-    setFavorites(updatedFavorites);
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-    console.log("Updated Favorites after removal:", updatedFavorites);
-  };
-
+    //  variabel til at gemme brugerens favoritter
+    const [favorites, setFavorites] = useState([]);
+  
+    // useEffect hooker når komponenten først bliver renderet
+    useEffect(() => {
+      // vi henter de gemte favoritter fra localStorage
+      const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+      console.log("Loaded Favorites:", storedFavorites); // Debug log for at vise de indlæste favoritter
+      setFavorites(storedFavorites); // sætter de hentede favoritter i state
+    }, []); // Tomt afhængighedsarray betyder, at effekten kun kører én gang ved komponentens første render
+  
+    // Funktion så vi kan remove favoriter
+    const handleRemoveFavorite = (indexToRemove) => {
+      // Fjerner favoritter
+      const updatedFavorites = favorites.filter((_, index) => index !== indexToRemove);
+      setFavorites(updatedFavorites); // Opdaterer state med de opdaterede favoritter
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites)); // Gemmer de opdaterede favoritter i localStorage
+      console.log("Updated Favorites after removal:", updatedFavorites); // Debug log for at vise de opdaterede favoritter
+    };
+  
   return (
     <div className="mb-52">
       <Banner text="Your profile" />

@@ -6,78 +6,101 @@ import Banner from "@/components/Banner";
 import Hjerte from "../../../public/pics/heart.svg";
 
 const BandDetails = () => {
+    // Vi ruger  router til at få adgang til `slug`
     const router = useRouter();
     const { slug } = router.query;
-    const [schedule, setSchedule] = useState(null);
-    const [bandDetails, setBandDetails] = useState(null);
-    const [loading, setLoading] = useState(true);
-   
+  
+    // State variabler til at gemme de hentede data
+    const [schedule, setSchedule] = useState(null);         
+    const [bandDetails, setBandDetails] = useState(null);   
+    const [loading, setLoading] = useState(true);   
+  
+    // useEffect der henter data, når `slug` ændres
     useEffect(() => {
+      // Hvis `slug` ikke er tilgængelig, gør vi ikke noget 
       if (!slug) return;
   
+      // hunktion til at hente band data og tidsplan data
       const fetchData = async () => {
         try {
+          // henter detaljer om det specifikke band baseret på slug
           const res = await fetch(`https://peach-polar-planarian.glitch.me/bands/${slug}`);
-          if (!res.ok) throw new Error("Failed to fetch band details.");
-          const bandData = await res.json();
-          setBandDetails(bandData);
+          if (!res.ok) throw new Error("Fejl ved hentning af band detaljer."); // fejl afhentning besked
+          const bandData = await res.json(); // parser banddetaljerne til JSON
+          setBandDetails(bandData); // gem banddata i state
   
+          // henter data ligesom oven over, bare med schedule data
           const scheduleRes = await fetch("https://peach-polar-planarian.glitch.me/schedule");
-          if (!scheduleRes.ok) throw new Error("Failed to fetch schedule data.");
-          const scheduleData = await scheduleRes.json();
-          setSchedule(scheduleData);
+          if (!scheduleRes.ok) throw new Error("Fejl ved hentning af tidsplan data."); 
+          const scheduleData = await scheduleRes.json(); 
+          setSchedule(scheduleData); 
   
-          setLoading(false);
+          setLoading(false); // sætter loading til false når data er hentet
         } catch (error) {
-          console.error("Error fetching data:", error);
+          console.error("Fejl ved hentning af data:", error); 
         }
       };
   
+      // call funktionen til at hente data
       fetchData();
-    }, [slug]);
+    }, [slug]); 
   
+
     if (loading) return <p>Loading...</p>;
-    if (!bandDetails) return <p>Band not found</p>;
   
+
+    if (!bandDetails) return <p>Bandet blev ikke fundet</p>;
+  
+    // funktion til at tilføje bandet til brugerens favoritter
     const handleAddToFavorites = () => {
-        if (!bandSchedule) {
-          console.error("No schedule information available for this band.");
-          return;
-        }
-      
-        const favoriteBand = {
-          name: bandDetails.name,
-          bio: bandDetails.bio,
-          logo: bandDetails.logo,
-          day: bandSchedule.day,
-          time: bandSchedule.time,
-          stage: bandSchedule.stage,
-        };
-      
-        const existingFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-        const updatedFavorites = [...existingFavorites, favoriteBand];
-        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-        console.log(`${bandDetails.name} added to favorites!`);
+      // tjekker om der er tidsplaninformation tilgængelig for bandet
+      if (!bandSchedule) {
+        console.error("Der er ikke tidsplaninformation tilgængelig for dette band.");
+        return;
+      }
+  
+      // Opretter et objekt til favorit siden, til hjælpe af localstoarage neden under. 
+      const favoriteBand = {
+        name: bandDetails.name,
+        bio: bandDetails.bio,
+        logo: bandDetails.logo,
+        day: bandSchedule.day,
+        time: bandSchedule.time,
+        stage: bandSchedule.stage,
       };
   
+      // Henter eksisterende favoritter fra localStorage, eller en tom array hvis der ikke er nogen
+      const existingFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+      const updatedFavorites = [...existingFavorites, favoriteBand]; // Tilføjer det nuværende band til favoritter
+  
+      // Gemmer de opdaterede favoritter tilbage i localStorage
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  
+      console.log(`${bandDetails.name} blev tilføjet til favoritter!`); 
+    };
+  
+    // Finder bandets tidsplan i `schedule` data
     let bandSchedule = null;
     if (schedule) {
+      // Går igennem hver scene i tidsplanen
       for (const [stage, days] of Object.entries(schedule)) {
+        // Går igennem hver dag i scenens tidsplan
         for (const [day, acts] of Object.entries(days)) {
+          // Finder den handling (band) der matcher det nuværende bands navn
           const foundAct = acts.find((act) => act.act === bandDetails.name);
           if (foundAct) {
+            // Hvis fundet, sætter vi bandSchedule objektet med dag, tid og scene
             bandSchedule = {
               day: day,
               time: foundAct.start,
               stage,
             };
-            break;
+            break; // Stopper løkken når bandet er fundet
           }
         }
-        if (bandSchedule) break;
+        if (bandSchedule) break; // stopper den ydre løkke hvis bandSchedule er sat
       }
     }
-  
     const imageUrl = "https://peach-polar-planarian.glitch.me/logos/" + bandDetails.logo;
   
     return (

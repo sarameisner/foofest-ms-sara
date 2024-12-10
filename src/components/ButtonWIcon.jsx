@@ -4,8 +4,8 @@ const ButtonWIcon = ({ text, defaultIcon, activeIcon, defaultBgColor, activeBgCo
   const [isActive, setIsActive] = useState(false);
 
   const handleButtonClick = () => {
-    setIsActive((prev) => !prev); // Skift tilstanden
-    if (onClick) onClick(); // Kald en eventuel onClick-funktion
+    setIsActive((prev) => !prev); 
+    if (onClick) onClick(); 
   };
 
   return (

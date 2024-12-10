@@ -5,41 +5,44 @@ import ButtonWIcon from "./ButtonWIcon";
 import Star from "../../public/pics/star.svg"
 
 export default function Modal({ isOpen, closeModal }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSignUp, setIsSignUp] = useState(false); // For switching between login and sign up
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Perform login logic here, e.g., API call
-    console.log("Logging in with", email, password);
-    // After login, close the modal
-    closeModal();
-  };
-
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    // Perform sign-up logic here, e.g., API call
-    console.log("Signing up with", email, password);
-    // After sign-up, close the modal
-    closeModal();
-  };
-
-  const handleContinueAsGuest = () => {
-    console.log("Continuing as guest");
-    closeModal(); // Close modal when clicking continue as guest
-  };
-
-  const switchToSignUp = () => {
-    setIsSignUp(true); // Switch to sign-up form
-  };
-
-  const switchToLogin = () => {
-    setIsSignUp(false); // Switch back to login form
-  };
-
-  if (!isOpen) return null;
-
+    // State variabler til at holde styr på input felterne (email, password) og om brugeren er på login eller sign-up formularen
+    const [email, setEmail] = useState(""); //  email
+    const [password, setPassword] = useState(""); // password
+    const [isSignUp, setIsSignUp] = useState(false); 
+  
+    // Funktion til at håndtere login formularens indsendelse
+    const handleLogin = (e) => {
+      e.preventDefault(); // Forhindrer standard formular opførsel (f.eks. side-refresh)
+      console.log("Logging in with", email, password); // Log email og password 
+      closeModal(); // Luk modalvinduet efter login
+    };
+  
+    // Funktion til at håndtere sign-up formularens indsendelse
+    const handleSignUp = (e) => {
+      e.preventDefault(); // Forhindrer standard formular opførsel 
+      console.log("Signing up with", email, password); // Log email og password
+      closeModal(); // Luk modalvinduet efter sign-up
+    };
+  
+    // Funktion til at fortsætte som gæst (uden at logge ind)
+    const handleContinueAsGuest = () => {
+      console.log("Continuing as guest"); // Log besked om at brugeren fortsætter som gæst
+      closeModal(); // Luk modalvinduet når man fortsætter som gæst
+    };
+  
+    // Funktion til at skifte til sign-up formularen
+    const switchToSignUp = () => {
+      setIsSignUp(true); // Sæt isSignUp til true for at vise sign-up formularen
+    };
+  
+    // Funktion til at skifte til login formularen
+    const switchToLogin = () => {
+      setIsSignUp(false); // Sæt isSignUp til false for at vise login formularen
+    };
+  
+    // Hvis modalvinduet ikke er åbent, render ikke noget (return null)
+    if (!isOpen) return null;
+  
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
       {/* Modal Background with Image */}
