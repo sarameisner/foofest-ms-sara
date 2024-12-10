@@ -16,7 +16,7 @@ const TopNav = () => {
       <nav className="flex items-center justify-between w-full">
         {/* Venstre - Logo for større skærme */}
         <div className="flex-shrink-0 md:flex hidden">
-          <Link href="/page.js">
+          <Link href="/index">
             {" "}
             <h4 className="text-[6rem] text-left" style={{ color: "var(--font-color)" }}>
               Foo
