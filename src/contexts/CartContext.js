@@ -1,9 +1,3 @@
-// createContext er en funktion i React, der opretter en kontekst (altså en
-// delt tilstand) som kan bruges til at dele data mellem komponenter, uden at man skal sende props igennem mange lag af komponenter manuelt.
-// Når du bruger konteksten, skal man også definere en provider.
-// En provider giver data til alle komponenter, der er “børn” af denne
-// kontekst.
-
 "use client";
 import React, { createContext, useState } from "react";
 
@@ -30,12 +24,30 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  const removeFromCart = (id) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
+  const updateQuantity = (id, quantity) => {
+    setCartItems((prevItems) => prevItems.map((item) => (item.id === id ? { ...item, quantity } : item)));
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
+  const cartTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
   return (
     <CartContext.Provider
       value={{
         tickets,
         cartItems,
         addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+        cartTotal,
       }}
     >
       {children}
