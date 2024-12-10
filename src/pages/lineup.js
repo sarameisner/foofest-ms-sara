@@ -8,7 +8,7 @@ import DaySelector from "@/components/DaySelector";
 const Schedule = () => {
   const [schedule, setSchedule] = useState({});
   const [bands, setBands] = useState([]);
-  const [day, setDay] = useState("all");
+  const [day, setDay] = useState(null); // Start med null, så ingen dag er valgt
 
   // Hent både schedule og banddata samtidigt
   useEffect(() => {
@@ -70,9 +70,9 @@ const Schedule = () => {
           // Check if the band is playing on the selected day
           let isBandPlaying = false;
 
-          if (day === "all") {
-            // Hvis "all" er valgt, highlight alle bands
-            isBandPlaying = true;
+          if (!day) {
+            // Hvis ingen dag er valgt, sæt ingen bands som highlighteret
+            isBandPlaying = false;
           } else {
             // Loop gennem schedule for at finde bands for den valgte dag
             Object.entries(schedule).forEach(([stage, days]) => {
@@ -106,4 +106,3 @@ const Schedule = () => {
 };
 
 export default Schedule;
-
