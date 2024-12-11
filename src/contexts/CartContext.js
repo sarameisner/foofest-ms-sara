@@ -11,6 +11,14 @@ export const CartProvider = ({ children }) => {
     const clearCart = () => {
         setCartItems([]);
       };
+// liste over brugeroplysninger
+const [userInfos, setUserInfos] = useState([]);
+// opdatere funktion til at håndtere brugers oplysninger
+const updateUserInfo = (index, newInfo) => {
+  const updatedUserInfos = [...userInfos];
+  updatedUserInfos[index] = { ...updatedUserInfos[index], ...newInfo };
+  setUserInfos(updatedUserInfos);
+};
   // startdata af billetterne
   const [tickets] = useState([
     { id: 1, name: "Regular Ticket", price: 799 },
@@ -69,6 +77,16 @@ export const CartProvider = ({ children }) => {
     calculateCartTotal();
   }, [cartItems, selectedOptional]);
 
+  useEffect(() => {
+    const newInfos = cartItems.reduce((acc, item) => {
+      for (let i = 0; i < item.quantity; i++) {
+        acc.push({ name: "", email: "", birthday: "", ticketType: item.name });
+      }
+      return acc;
+    }, []);
+    setUserInfos(newInfos);
+  }, [cartItems]);
+
   // her returnerer vi alt hvad der er nødvendigt for at have vores checkout flow
   return (
     <CartContext.Provider
@@ -84,6 +102,8 @@ export const CartProvider = ({ children }) => {
         selectedOptional,
         setSelectedOptional,
         userInfo,
+        userInfos,
+        updateUserInfo,
         setUserInfo,
         cartTotal,
       }}

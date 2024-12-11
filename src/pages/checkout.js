@@ -9,7 +9,7 @@ import { CartContext } from "../contexts/CartContext";
 function Checkout() {
   const [currentStep, setCurrentStep] = useState(0);
 
-  const { cartItems, cartTotal, selectedCamping, setSelectedCamping, selectedOptional, setSelectedOptional, userInfo, setUserInfo } = useContext(CartContext);
+  const { cartItems, cartTotal, selectedCamping, setSelectedCamping, selectedOptional, setSelectedOptional, userInfos, updateUserInfo } = useContext(CartContext);
 
   const [paymentDetails, setPaymentDetails] = useState({
     cardOwner: "",
@@ -28,8 +28,8 @@ function Checkout() {
       content: <SelectOptional selectedOptions={selectedOptional} setOptions={setSelectedOptional} />,
     },
     {
-      title: "",
-      content: <BookingInfo info={userInfo} setInfo={setUserInfo} />,
+      title: "Your Information",
+      content: <BookingInfo userInfos={userInfos} updateUserInfo={updateUserInfo} />,  // Pass userInfos and updateUserInfo
     },
     {
       title: "",
