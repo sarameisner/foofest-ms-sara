@@ -9,6 +9,7 @@ import ticketPlain from "../../public/pics/ticketplain.svg";
 import ticketWStar from "../../public/pics/ticketwstar.svg";
 import Image from "next/image";
 import Star from "../../public/pics/star.svg";
+import BlackStar from "../../public/pics/blackstar.svg";
 
 const Basket = () => {
   const { cartItems, clearCart, updateItemQuantity, cartTotal } = useContext(CartContext);
@@ -54,7 +55,11 @@ const Basket = () => {
           )}
 
           <div className="flex justify-center mt-6">
-            <ButtonWIcon text="Clear basket" defaultIcon={<Image src={Star} alt="Star Icon" width={20} height={20} />} activeIcon={<Image src={Star} alt="Star Icon Active" width={20} height={20} />} defaultBgColor="#881523" activeBgColor="#ffffff" onClick={clearCart} className="w-full max-w-xs h-12 flex items-center justify-center" />
+            <ButtonWIcon 
+            text="Clear basket" 
+            defaultIcon={<Image src={Star} alt="Star Icon" width={20} height={20} />} 
+            activeIcon={<Image src={BlackStar} alt="Active Icon" width={20} height={20} />} 
+            defaultBgColor="#881523" activeBgColor="#ffffff" onClick={clearCart} className="w-full max-w-xs h-12 flex items-center justify-center" />
           </div>
         </div>
 
@@ -80,7 +85,7 @@ const Basket = () => {
           <p className="text-xl font-bold">
             <strong>Total:</strong> <span className="float-right">{totalWithFee},-</span>
           </p>
-          <ButtonWIcon text="Checkout" defaultIcon={<Image src={Star} alt="Star Icon" width={20} height={20} />} activeIcon={<Image src={Star} alt="Star Icon Active" width={20} height={20} />} defaultBgColor="#881523" activeBgColor="#ffffff" onClick={handleCheckout} className="mt-6 w-full h-12 flex items-center justify-center" />
+          <ButtonWIcon text="Checkout" defaultIcon={<Image src={Star} alt="Star Icon" width={20} height={20} />} activeIcon={<Image src={Star} alt="Star Icon Active" width={20} height={20} />} defaultBgColor="#881523" activeBgColor="#ffffff" onClick={handleCheckout} className="mt-6 w-full h-12 grid  m-auto items-center justify-center" />
         </div>
       </div>
     </div>

@@ -7,6 +7,10 @@ import React, { createContext, useState, useEffect } from "react";
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+    // fjerner items fra kurven i basket
+    const clearCart = () => {
+        setCartItems([]);
+      };
   // startdata af billetterne
   const [tickets] = useState([
     { id: 1, name: "Regular Ticket", price: 799 },
@@ -71,6 +75,7 @@ export const CartProvider = ({ children }) => {
       value={{
         tickets,
         cartItems,
+        clearCart,
         addToCart,
         updateItemQuantity,
         removeFromCart,
