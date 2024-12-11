@@ -4,8 +4,8 @@ const ButtonWIcon = ({ text, defaultIcon, activeIcon, defaultBgColor, activeBgCo
   const [isActive, setIsActive] = useState(false);
 
   const handleButtonClick = () => {
-    setIsActive((prev) => !prev); // Skift tilstanden
-    if (onClick) onClick(); // Kald en eventuel onClick-funktion
+    setIsActive((prev) => !prev); 
+    if (onClick) onClick(); 
   };
 
   return (
@@ -23,7 +23,7 @@ const ButtonWIcon = ({ text, defaultIcon, activeIcon, defaultBgColor, activeBgCo
       }}
       className="hover:opacity-90 transition-all duration-200"
     >
-      <span style={{ marginRight: "0.5rem", display: "flex", alignItems: "center" }}>{isActive ? activeIcon : defaultIcon}</span>
+      <span style={{ marginRight: "0.5rem", display: "flex", alignItems: "center"}}>{isActive ? activeIcon : defaultIcon}</span>
       <span>{text}</span>
     </button>
   );

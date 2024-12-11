@@ -17,7 +17,7 @@ const DaySelector = ({ onDayChange, selectedDay }) => {
 
   return (
     <div className="grid grid-cols-2 ">
-      {/* Første kolonne: Mandag til Torsdag */}
+    
       <div>
         {["Monday", "Tuesday", "Wednesday", "Thursday"].map((day) => (
           <button
@@ -26,13 +26,13 @@ const DaySelector = ({ onDayChange, selectedDay }) => {
             onClick={() => handleDayClick(day)}
             className="w-full text-start font-bold mb-2 text-white uppercase"
           >
-            {selectedDay === dayMapping[day] && "☆"} {/* Fremhæv med stjerne */}
+            {selectedDay === dayMapping[day] && "☆"} 
             {day}
           </button>
         ))}
       </div>
 
-      {/* Anden kolonne: Fredag til Søndag og All */}
+      
       <div>
         {["Friday", "Saturday", "Sunday", "All"].map((day) => (
           <button

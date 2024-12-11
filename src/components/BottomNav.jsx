@@ -32,7 +32,7 @@ const BottomNav = () => {
         </Link>
 
         {/* profile */}
-        <Link href="/profile" className="group flex flex-col items-center">
+        <Link href="/favorites" className="group flex flex-col items-center">
           <Image src="/pics/person.svg" alt="Profile" width={30} height={30} className="hover:scale-110 transition-transform duration-200" />
           <p className="text-sm mt-1 group-hover:text-gray-300">PROFILE</p>
         </Link>

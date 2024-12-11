@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <footer
       // linjen over footeren
-      className="py-8 border-t"
+      className="py-8 pb-40 border-t"
       style={{
         backgroundColor: "var(--background)",
         color: "var(--font-color)",
@@ -10,7 +10,7 @@ const Footer = () => {
       }}
     >
       <div className="container mx-auto flex flex-wrap justify-between items-start gap-8 md:gap-16">
-        {/* venstre side */}
+   
         <div className="space-y-2 flex-1">
           {/* Overskrift */}
           <h4 className="text-[6rem] text-center md:text-left" style={{ color: "var(--font-color)" }}>

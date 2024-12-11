@@ -1,0 +1,23 @@
+.band {
+    color: var(--clr-white);
+    text-transform: uppercase;
+    font-family: var(--font-text);
+    font-size: 1.125rem;
+    font-weight: 400;
+    margin: 0rem 0.5rem;
+    transition: all 0.5s ease;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  
+  .band.visible {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeIn 0.7s ease-in-out forwards;
+  }
+  
+  .band.active {
+    background-color: var(--accent-color);
+    border-radius: 5px;
+      }
+  

@@ -13,7 +13,8 @@ const TopNav = () => {
     <header className="p-6 text-white bg-transparent absolute top-0 left-0 w-full z-50" style={{ borderColor: "var(--light-grey-font)" }}>
       <nav className="flex items-center justify-between w-full">
         <div className="flex-shrink-0 md:flex hidden">
-          <Link href="/index">
+          <Link href="/">
+            {" "}
             <h4 className="text-[6rem] text-left" style={{ color: "var(--font-color)" }}>
               Foo
             </h4>
@@ -21,9 +22,11 @@ const TopNav = () => {
         </div>
 
         <div className="md:hidden absolute left-1/2 top-6 transform -translate-x-1/2">
-          <h4 className="text-[6rem] text-center" style={{ color: "var(--font-color)" }}>
-            Foo
-          </h4>
+          <Link href="/">
+            <h4 className="text-[6rem] text-center" style={{ color: "var(--font-color)" }}>
+              Foo
+            </h4>
+          </Link>
         </div>
 
         <div className="hidden md:flex flex-grow justify-center space-x-8 text-white">
@@ -45,7 +48,9 @@ const TopNav = () => {
               {cartItems.length > 0 && <span className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cartItems.reduce((total, item) => total + item.quantity, 0)}</span>}
             </div>
           </Link>
-          <Link href="/profile">
+
+          {/* Profil ikon */}
+          <Link href="/favorites">
             <Image src={Person} alt="Profile" width={30} height={30} className="hover:scale-110 transition-transform duration-200" />
           </Link>
         </div>

@@ -6,14 +6,14 @@ import FrontPage from "../../public/pics/frontpagepic.jpg"
 const Banner = ({text}) => {
     return (     
     <div className="p-6 mt-40">
-        {/* Baggrundsbillede */}
+      
         <div className="relative h-[10rem]">
     <Image
       src={FrontPage}
       alt="Background"
       layout="fill"
-      objectFit="cover" // Sikrer at billedet fylder containeren uden at blive forvrænget
-      objectPosition="center" // Centrerer billedet
+      objectFit="cover" 
+      objectPosition="center" 
       className="absolute inset-0"
     />
   
