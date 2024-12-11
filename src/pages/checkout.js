@@ -3,6 +3,7 @@ import Camping from "@/components/Camping";
 import BookingInfo from "@/components/BookingInfo";
 import PaymentForm from "@/components/PaymentForm";
 import SelectOptional from "@/components/SelectOptional";
+import CheckoutCompleted from "@/components/CheckoutCompleted";
 import { CartContext } from "../contexts/CartContext";
 
 function Checkout() {
@@ -34,6 +35,10 @@ function Checkout() {
     {
       title: "Payment",
       content: <PaymentForm paymentDetails={paymentDetails} setPaymentDetails={setPaymentDetails} />,
+    },
+    {
+      title: "Booking Completed",
+      content: <CheckoutCompleted />,
     },
   ];
 
@@ -74,11 +79,6 @@ function Checkout() {
           {currentStep < steps.length - 1 && (
             <button onClick={() => setCurrentStep((prev) => prev + 1)} className="p-2 bg-[var(--accent-color)] text-white rounded-lg hover:bg-[var(--light-grey)]">
               Next
-            </button>
-          )}
-          {currentStep === steps.length - 1 && (
-            <button onClick={() => alert("Booking Complete!")} className="p-2 bg-[var(--accent-color)] text-white rounded-lg hover:bg-[var(--light-grey)]">
-              Pay
             </button>
           )}
         </div>
