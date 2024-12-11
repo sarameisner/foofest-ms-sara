@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
         </main>
         <Footer />
         {/* Sørg for, at BottomNav kun vises på mobile enheder */}
-        <div className="block md:hidden">
+        <div className="z-20 block md:hidden">
           <BottomNav />
         </div>
       </div>

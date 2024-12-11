@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const BottomNav = () => {
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-[#2C2C2A] border-t border-gray-600 text-white">
+    <nav className="fixed z-1 bottom-0 left-0 w-full bg-[#2C2C2A] border-t border-gray-600 text-white">
       <div className="flex justify-around items-center py-4">
         {/* program */}
         <Link href="/program" className="group flex flex-col items-center">
