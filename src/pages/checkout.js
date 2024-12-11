@@ -11,7 +11,6 @@ function Checkout() {
 
   const { cartItems, cartTotal, selectedCamping, setSelectedCamping, selectedOptional, setSelectedOptional, userInfo, setUserInfo } = useContext(CartContext);
 
-  // Initialisering af paymentDetails
   const [paymentDetails, setPaymentDetails] = useState({
     cardOwner: "",
     cardNumber: "",
@@ -21,46 +20,61 @@ function Checkout() {
 
   const steps = [
     {
-      title: "Choose Camping Area",
+      title: "",
       content: <Camping selectedCampingArea={selectedCamping} setCampingArea={setSelectedCamping} />,
     },
     {
-      title: "Select Optional Add-Ons",
+      title: "",
       content: <SelectOptional selectedOptions={selectedOptional} setOptions={setSelectedOptional} />,
     },
     {
-      title: "Booking Information",
+      title: "",
       content: <BookingInfo info={userInfo} setInfo={setUserInfo} />,
     },
     {
-      title: "Payment",
+      title: "",
       content: <PaymentForm paymentDetails={paymentDetails} setPaymentDetails={setPaymentDetails} />,
     },
     {
-      title: "Booking Completed",
+      title: "",
       content: <CheckoutCompleted />,
     },
   ];
 
   const renderInfoBox = () => (
-    <div className="p-4 bg-gray-800 text-white rounded-lg border">
+    <div className="p-6 bg-[var(--background)] text-[var(--font-color)] border-4 border-[var(--accent-color)] rounded-lg">
       <h3 className="text-lg font-bold mb-4">Your Selection</h3>
+      {cartItems.map((item, index) => (
+        <div key={index} className="mb-4">
+          <p>
+            <strong>Type:</strong> <span className="float-right">{item.name}</span>
+          </p>
+          <p>
+            <strong>Amount:</strong> <span className="float-right">{item.quantity}</span>
+          </p>
+          <p>
+            <strong>Price:</strong> <span className="float-right">{item.price * item.quantity},-</span>
+          </p>
+        </div>
+      ))}
       <p>
-        <strong>Tickets:</strong>{" "}
-        {cartItems.map((item) => (
-          <span key={item.id}>
-            {item.name} ({item.quantity}) - {item.price * item.quantity} DKK
-          </span>
-        ))}
+        <strong>Campsite:</strong> <span className="float-right">{selectedCamping || "N/A"}</span>
       </p>
       <p>
-        <strong>Camping Area:</strong> {selectedCamping || "None"}
+        <strong>Tent 2 person:</strong> <span className="float-right">{selectedOptional.find((o) => o.name.includes("2 person tent"))?.quantity || "N/A"}</span>
       </p>
       <p>
-        <strong>Optional Add-Ons:</strong> {selectedOptional.length > 0 ? selectedOptional.map((item) => `${item.name} (${item.quantity})`).join(", ") : "None"}
+        <strong>Tent 3 person:</strong> <span className="float-right">{selectedOptional.find((o) => o.name.includes("3 person tent"))?.quantity || "N/A"}</span>
       </p>
       <p>
-        <strong>Total:</strong> {cartTotal} DKK
+        <strong>Green camping:</strong> <span className="float-right">{selectedOptional.find((o) => o.name.includes("Green camping"))?.quantity || "N/A"}</span>
+      </p>
+      <p>
+        <strong>Booking fee:</strong> <span className="float-right">99,-</span>
+      </p>
+      <hr className="my-4 border-gray-600" />
+      <p className="text-xl font-bold">
+        <strong>Total:</strong> <span className="float-right">{cartTotal + 99},-</span>
       </p>
     </div>
   );
@@ -71,7 +85,8 @@ function Checkout() {
         <h2 className="text-3xl font-bold text-center mb-6">{steps[currentStep].title}</h2>
         {steps[currentStep].content}
         <div className="mt-8 flex justify-between">
-          {currentStep > 0 && (
+          {/* Skjul "Previous"-knappen på sidste trin */}
+          {currentStep > 0 && currentStep < steps.length - 1 && (
             <button onClick={() => setCurrentStep((prev) => prev - 1)} className="p-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
               Previous
             </button>
@@ -83,7 +98,7 @@ function Checkout() {
           )}
         </div>
       </div>
-      <div className="w-full pt-[52px] md:w-1/3">{renderInfoBox()}</div>
+      <div className="w-full pt-[50px] md:w-1/3 md:my-12">{renderInfoBox()}</div>
     </div>
   );
 }
