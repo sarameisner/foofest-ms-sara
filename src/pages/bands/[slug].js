@@ -4,6 +4,7 @@ import Image from "next/image";
 import ButtonWIcon from "@/components/ButtonWIcon";
 import Banner from "@/components/Banner";
 import Hjerte from "../../../public/pics/heart.svg";
+import SortHjerte from "../../../public/pics/blackheart.svg"
 
 const BandDetails = () => {
     // Vi ruger  router til at få adgang til `slug`
@@ -132,6 +133,7 @@ const BandDetails = () => {
               <ButtonWIcon
                 text="Add to your favorite"
                 defaultIcon={<Image src={Hjerte} alt="Heart Icon" width={20} height={20} />}
+                activeIcon={<Image src={SortHjerte} alt="Active Icon" width={20} height={20} />}
                 defaultBgColor="#881523"
                 onClick={handleAddToFavorites}
               />

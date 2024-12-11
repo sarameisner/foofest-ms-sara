@@ -26,9 +26,11 @@ const TopNav = () => {
 
         {/* Midten - Logo for mobil version */}
         <div className="md:hidden absolute left-1/2 top-6 transform -translate-x-1/2">
+        <Link href="/">
           <h4 className="text-[6rem] text-center" style={{ color: "var(--font-color)" }}>
             Foo
           </h4>
+          </Link>
         </div>
 
         {/* Navigationslinks for større skærme */}

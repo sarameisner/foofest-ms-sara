@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Banner from "@/components/Banner";
 import ButtonWIcon from "@/components/ButtonWIcon";
+import Hjerte from "../../public/pics/heart.svg"
+import Image from "next/image";
+import SorteHjerte from "../../public/pics/blackheart.svg"
 
 const Favorites = () => {
     //  variabel til at gemme brugerens favoritter
@@ -58,6 +61,8 @@ const Favorites = () => {
             <div className="mt-4 grid justify-center">
               <ButtonWIcon
                 text="Remove"
+                defaultIcon={<Image src={Hjerte} alt="Heart" width={20} height={20} />}
+                activeIcon={<Image src={SorteHjerte} alt="Heart-black" width={20} height={20} />}
                 defaultBgColor="#881523"
                 onClick={() => handleRemoveFavorite(index)}
               />
