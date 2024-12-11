@@ -1,0 +1,56 @@
+.procenter {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 1.625rem;
+    justify-items: center;
+  }
+  
+  .parent {
+    display: grid;
+    text-align: center;
+    align-items: center;
+    --offset-pos: 5px; /* Small offset for the border */
+    animation: pie-animation 1s linear infinite; /* Increased speed for fast rotation */
+    border: var(--offset-pos) solid transparent;
+    background: radial-gradient(circle at 50% calc(var(--offset-pos) / 2), transparent calc(var(--offset-pos) / 2), transparent 0) border-box,
+      linear-gradient(white, white) padding-box,
+      conic-gradient(white var(--percent), transparent 0) border-box; /* White around, transparent center */
+    position: relative;
+    aspect-ratio: 1;
+    width: 150px;
+    border-radius: 50%;
+    margin-inline: auto;
+  }
+  
+  @keyframes pie-animation {
+    0% {
+      --percent: 0%;
+    }
+    100% {
+      --percent: 100%;
+    }
+  }
+  
+  .section {
+    height: 33rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    inline-size: min(950px, 100% - 1rem);
+    margin: auto;
+    align-items: center;
+    gap: 5.5625rem;
+  }
+  
+  @media (max-width: 800px) {
+    .section {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      height: 25rem;
+      gap: 2rem;
+    }
+  
+    .parent {
+      width: 100px;
+    }
+  }
+  
