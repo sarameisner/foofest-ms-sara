@@ -72,7 +72,7 @@ function Checkout() {
       <p>
         <strong>Booking fee:</strong> <span className="float-right">99,-</span>
       </p>
-      <hr className="my-4 border-gray-600" />
+      <hr className="my-4" />
       <p className="text-xl font-bold">
         <strong>Total:</strong> <span className="float-right">{cartTotal + 99},-</span>
       </p>
