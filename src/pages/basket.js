@@ -8,6 +8,7 @@ import Banner from "../components/Banner";
 import ticketPlain from "../../public/pics/ticketplain.svg";
 import ticketWStar from "../../public/pics/ticketwstar.svg";
 import Image from "next/image";
+import ListItem from "@/components/ListItem";
 import Star from "../../public/pics/star.svg";
 import BlackStar from "../../public/pics/blackstar.svg";
 
@@ -30,25 +31,17 @@ const Basket = () => {
         <div className="md:col-span-2 flex flex-col gap-6">
           {cartItems.length > 0 ? (
             cartItems.map((item) => (
-              <div key={item.id} className="flex items-center justify-between p-4 border-b border-gray-700">
-                {/* Ticket Image */}
-                <img src={item.name === "Regular Ticket" ? ticketPlain.src : ticketWStar.src} alt={`${item.name}`} className="h-12 w-12" />
-                {/* Ticket Details */}
-                <div className="flex flex-col items-start flex-grow ml-4">
-                  <h2 className="text-lg font-bold">{item.name}</h2>
-                  <p>{item.price * item.quantity},-</p>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <button onClick={() => updateItemQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1} className="bg-white text-black rounded-full w-8 h-8 flex items-center justify-center">
-                    -
-                  </button>
-                  <span className="text-lg">{item.quantity}</span>
-                  <button onClick={() => updateItemQuantity(item.id, item.quantity + 1)} className="bg-white text-black rounded-full w-8 h-8 flex items-center justify-center">
-                    +
-                  </button>
-                </div>
-              </div>
+                <ListItem
+                key={item.id}
+                item={{ 
+                  name: item.name, 
+                  price: item.price * item.quantity, 
+                  icon: item.name === "Regular Ticket" ? ticketPlain : ticketWStar
+                }}
+                quantity={item.quantity}
+                onAdd={() => updateItemQuantity(item.id, item.quantity + 1)}
+                onRemove={() => updateItemQuantity(item.id, item.quantity - 1)}
+              />
             ))
           ) : (
             <p className="text-gray-400 text-center">Your basket is empty.</p>
