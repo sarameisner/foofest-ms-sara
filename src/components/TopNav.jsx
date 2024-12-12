@@ -45,7 +45,7 @@ const TopNav = () => {
           <Link href="/basket">
             <div className="relative">
               <Image src={TicketIcon} alt="Cart" width={40} height={40} className="hover:scale-110 transition-transform duration-200" />
-              {cartItems.length > 0 && <span className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cartItems.reduce((total, item) => total + item.quantity, 0)}</span>}
+              {cartItems.length > 0 && <span className="absolute bottom-4 left-7 bg-[--accent-color] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cartItems.reduce((total, item) => total + item.quantity, 0)}</span>}
             </div>
           </Link>
 
