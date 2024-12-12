@@ -7,10 +7,11 @@ import CheckoutCompleted from "@/components/CheckoutCompleted";
 import { CartContext } from "../contexts/CartContext";
 
 function Checkout() {
+  // vores state til at holde styr på hvor vi er i checkout flowet
   const [currentStep, setCurrentStep] = useState(0);
-
+  // funktioner til de forskellige steps i vores checkout
   const { cartItems, cartTotal, selectedCamping, setSelectedCamping, selectedOptional, setSelectedOptional, userInfo, setUserInfo } = useContext(CartContext);
-
+  // betalings state
   const [paymentDetails, setPaymentDetails] = useState({
     cardOwner: "",
     cardNumber: "",
@@ -18,6 +19,7 @@ function Checkout() {
     cvv: "",
   });
 
+  // komponenterne til checkout flowet definereres her
   const steps = [
     {
       title: "",
@@ -40,7 +42,7 @@ function Checkout() {
       content: <CheckoutCompleted />,
     },
   ];
-
+  // infoboksen som går igen igennem hele flowet
   const renderInfoBox = () => (
     <div className="p-6 bg-[var(--background)] text-[var(--font-color)] border-4 border-[var(--accent-color)] rounded-lg">
       <h3 className="text-lg font-bold mb-4">Your Selection</h3>
@@ -78,7 +80,7 @@ function Checkout() {
       </p>
     </div>
   );
-
+  // alt det vi returnerer i browseren
   return (
     <div className="mt-16 flex flex-col md:flex-row gap-6 px-4 md:px-12">
       <div className="flex-1">
