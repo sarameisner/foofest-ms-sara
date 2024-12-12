@@ -1,0 +1,235 @@
+.cardWrapper {
+    position: relative;
+    perspective: 1000px; 
+    width: 340px; 
+    height: 215px; 
+  }
+  .cardBackBox {
+    position: absolute;
+    top: 35%; /* Placer boxen lidt under striben */
+    left: 5%;
+    width: 240px;
+    height: 30px;
+    background: #FCFFFE; /* Lys farve til CVV-feltet */
+    border: 1px solid #6386c3;
+    border-radius: 5px;
+  }
+  .cardBack {
+    background: linear-gradient(
+        135deg,
+        rgba(115, 157, 235, 0.9) 0%,
+        rgba(51, 100, 179, 0.98) 100%
+      );
+    transform: rotateY(180deg); /* Roter bagsiden så den vender mod os */
+    z-index: 1;
+    position: relative;
+    border-radius: 12px;
+  }
+
+  .cardBackStrip {
+    position: absolute;
+    top: 60%; /* Juster hvor stripe skal være */
+    left: 0;
+    width: 100%;
+    height: 50px; /* Juster højden af striben */
+    background: #fff; /* Hvid stripe */
+    border-radius: 5px;
+  }
+  .cardFlipped .cardFront {
+    transform: rotateY(180deg); 
+    z-index: 1;
+  }
+  
+  
+  .cardFlipped .cardBack {
+    transform: rotateY(0deg);
+    z-index: 2; 
+  }
+  
+  .cardBack .cardBackLabel,
+  .cardBack .cardBackCVV {
+    z-index: 3; 
+    position: absolute;
+
+  }
+  
+  .cardFlipped .card {
+    transform: rotateY(180deg);
+  }
+ .cardBackLabel {
+    top: 40%;
+    left: 50%;
+    font-size: 10px;
+    color: black;
+  }
+  
+  .cardBackCVV {
+    position: absolute;
+    top: 38%;
+    left: 60%;
+    font-size: 14px;
+    color: black;
+    letter-spacing: 1px;
+  }
+  
+  .cardFront,
+  .cardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Skjul bagsiden, når den ikke vises */
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .cardFront {
+    background: linear-gradient(
+      135deg,
+      rgba(115, 157, 235, 0.9) 0%,
+      rgba(51, 100, 179, 0.98) 100%
+    );
+    z-index: 2;
+  }
+  .cardFlipped .cardBack {
+    transform: rotateY(0deg);
+    z-index: 3;
+  }
+  #card-form input {
+    display: block;
+    margin-bottom: 10px;
+    height: 32px;
+    width: 250px;
+    padding: 8px;
+    border: none;
+    font-size: 14px;
+    border: 1px solid #737373;
+  }
+
+  .card {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    height: 100%;
+    backface-visibility: hidden; /* Skjul bagsiden, når den roterer */
+    transform-style: preserve-3d; /* Sørg for 3D-effekt */
+    transform-origin: center; /* Flip omkring midten */
+    transition: transform 0.6s ease-in-out;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(115, 157, 235, 0.9) 0%, rgba(115, 157, 235, 0.96) 1%, rgba(51, 100, 179, 0.98) 100%), url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJUlEQVQIW2NkwAT/GdHE/jMwMDAiC4IFQIpggjABuEq4CqhR/wEbSQcEINihPwAAAABJRU5ErkJggg==) repeat;
+    border-radius: 12px;
+    box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.12);
+    font-size: 16px;
+    color: #f2f2f2;
+    text-shadow: 0 0 3px #0f1a2d;
+    font-family: "Courier New", Courier, monospace;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 1px solid #6386c3;
+  }
+
+  #card-front {
+    z-index: 2;
+  }
+
+  #card-number, #card-name, #expiry-date, #valid-until, .chip {
+    position: absolute;
+    z-index: 5;
+  }
+  .cardName {
+    top: 45%;
+    left:10%;
+    position: absolute;
+  }
+  .expiryDate {
+    top:60%;
+    left:10%;
+    position: absolute;
+  }
+  .cardnumber {
+    top: 30%;  
+    left: 10%; 
+    position: absolute;
+  }
+  #card-name {
+    bottom: 13%;
+  }
+
+  #expiry-date, #valid-until {
+    left: 73%;
+  }
+
+  #valid-until {
+    bottom: 22%;
+    font-size: 8px;
+    font-style: italic;
+  }
+
+  #expiry-date {
+    bottom: 13%;
+    font-size: 14px;
+  }
+
+  .chip {
+    top: 60%;
+    width: 50px;
+    height: 40px;
+    left: 70%;
+    border-radius: 12px;
+    background: #fdfff9;
+    background: linear-gradient(135deg, #fdfff9 0%, #ebeee6 40%, #cfd5cb 100%);
+    border-radius: 6px;
+    border: 1px solid #6386c3;
+    box-shadow: 0px 0px 6px 5px rgba(255, 255, 255, 0.18) inset, 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+  }
+
+  .chip-top {
+    position: absolute;
+    z-index: 10;
+    left: 11%;
+    top: 24%;
+    width: 34px;
+    height: 23px;
+    background: #bfbfbf;
+    border-radius: 2px;
+  }
+
+
+
+  #card-back {
+    z-index: 1;
+    display: none;
+  }
+
+  #card-back-strip {
+    position: absolute;
+    left: 0;
+    top: 10%;
+    width: 340px;
+    height: 40px;
+    background: #45484d;
+    background: linear-gradient(135deg, #45484d 0%, #191919 100%);
+  }
+
+  #card-back-box {
+    position: absolute;
+    left: 4%;
+    top: 37%;
+    width: 240px;
+    height: 30px;
+    background: #FCFFFE;
+    border: 1px solid #6386c3;
+  }
+
+  #card-back-label {
+    position: absolute;
+    left: 78%;
+    top: 38%;
+    font-size: 8px;
+    font-style: italic;
+  }
+
+  #card-back-cvv {
+    position: absolute;
+    font-size: 14px;
+    left: 78%;
+    top: 44%;
+  }

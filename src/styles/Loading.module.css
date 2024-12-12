@@ -1,0 +1,51 @@
+
+  
+  .parent {
+    display: grid;
+    text-align: center;
+    justify-content: center;
+    animation: pie-animation 2s linear infinite; /* Rotation animation */
+    border: 10px solid transparent; /* Justeret til en fast værdi */
+    background: radial-gradient(circle at 50% 5px, transparent 5px, transparent 0) border-box,
+      linear-gradient(#2c2c2a, #2c2c2a) padding-box,
+      conic-gradient(var(--accent-color) 15%, transparent 0) border-box; /* Justeret procent og farve */
+    position: relative;
+    aspect-ratio: 1;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-inline: auto;
+    overflow: hidden; /* Sørger for at ingenting går udenfor cirklen */
+  }
+  
+  @keyframes pie-animation {
+    0% {
+      transform: rotate(0deg); /* Startrotation */
+    }
+    100% {
+      transform: rotate(360deg); /* Rotation hele vejen rundt */
+    }
+  }
+  
+  .section {
+    height: 30rem;
+    display: grid;
+    inline-size: min(950px, 100% - 1rem);
+    margin: auto;
+    align-items: center;
+  }
+  
+  @media (max-width: 800px) {
+    .section {
+        display: grid;
+        inline-size: min(950px, 100% - 1rem);
+        margin: auto;
+      gap: 2rem;
+    }
+  
+    .parent {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  

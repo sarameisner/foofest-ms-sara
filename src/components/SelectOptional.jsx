@@ -1,18 +1,20 @@
 import React, { useContext } from "react";
-import Image from "next/image";
 import { CartContext } from "../contexts/CartContext";
+import ListItem from "./ListItem"; 
 import TentIcon from "../../public/pics/tent.svg";
 import GreenIcon from "../../public/pics/greenicon.svg";
 
 function SelectOptional() {
   const { selectedOptional, setSelectedOptional } = useContext(CartContext);
 
+  // Valgmulighederne
   const optionalItems = [
     { id: 1, name: "2 person tent (including the tent)", price: 299, icon: TentIcon },
     { id: 2, name: "3 person tent (including the tent)", price: 399, icon: TentIcon },
     { id: 3, name: "Green camping", price: 249, icon: GreenIcon },
   ];
 
+  // Tilføj et item
   const handleAdd = (item) => {
     const existingItem = selectedOptional.find((p) => p.id === item.id);
     if (existingItem) {
@@ -22,6 +24,7 @@ function SelectOptional() {
     }
   };
 
+  // Fjern et item
   const handleRemove = (item) => {
     const existingItem = selectedOptional.find((p) => p.id === item.id);
     if (existingItem && existingItem.quantity > 1) {
@@ -32,32 +35,29 @@ function SelectOptional() {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="pt-[50px] basket-container text-white p-4 md:p-8">
       <h3 className="text-2xl font-bold">Choose Optional Add-Ons</h3>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+      <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 max-w-5xl mx-auto">
         {optionalItems.map((item) => (
-          <li key={item.id} className="flex items-center justify-between border rounded p-4">
-            <div className="flex items-center gap-4">
-              <Image src={item.icon} alt={item.name} width={40} height={40} />
-              <div>
-                <h4 className="text-lg font-semibold">{item.name}</h4>
-                <p>{item.price} DKK</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <button onClick={() => handleRemove(item)} className="p-2 bg-red-500 text-white rounded">
-                -
-              </button>
-              <span>{selectedOptional.find((p) => p.id === item.id)?.quantity || 0}</span>
-              <button onClick={() => handleAdd(item)} className="p-2 bg-green-500 text-white rounded">
-                +
-              </button>
-            </div>
+          <li key={item.id} className="md:col-span-3 flex flex-col gap-6">
+            <ListItem
+              item={{
+                name: item.name,
+                price: item.price,
+                icon: item.icon,
+              }}
+              quantity={selectedOptional.find((p) => p.id === item.id)?.quantity || 0}
+              onAdd={() => handleAdd(item)} // Send kun item, som forventes af handleAdd
+              onRemove={() => handleRemove(item)} // Send kun item, som forventes af handleRemove
+              iconSize={40} // Tilpas ikonstørrelsen
+            />
           </li>
         ))}
       </ul>
-    </div>
+      </div>
   );
 }
 
 export default SelectOptional;
+

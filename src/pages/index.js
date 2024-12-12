@@ -1,19 +1,29 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Loading from "@/components/Loading";
 import FrontPageHeader from "@/components/FrontPageHeader";
 import Popup from "@/components/PopUp";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true); 
+
+  setTimeout(() => {
+    setLoading(false); // Data er hentet, fjern loading
+  }, 100); // Simuler en forsinkelse på 3 sekunder for demonstration
 
   // Åbn modal automatisk når komponenten først bliver indlæst
   useEffect(() => {
     setIsModalOpen(true);
   }, []);
 
+  
   const closeModal = () => {
     setIsModalOpen(false); // Luk modal
   };
+  if (loading) {
+    return <Loading />; // Vis Loading-komponenten, mens data bliver hentet
+  }
 
   return (
     <div>

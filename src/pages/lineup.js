@@ -2,11 +2,11 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Band from "@/components/Band"; // Brug den importerede komponent
+import Band from "@/components/Band"; 
 import FrontPage from "../../public/pics/frontpagepic.jpg";
 import DaySelector from "@/components/DaySelector";
 import Loading from "@/components/Loading";
-import styles from "../styles/Schedule.module.css";
+
 
 const Schedule = () => {
   const [schedule, setSchedule] = useState({});
