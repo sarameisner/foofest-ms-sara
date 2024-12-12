@@ -30,9 +30,8 @@ const Basket = () => {
           {cartItems.length > 0 ? (
             cartItems.map((item) => (
               <div key={item.id} className="flex items-center justify-between p-4 border-b border-gray-700">
-                {/* Ticket Image */}
                 <img src={item.name === "Regular Ticket" ? ticketPlain.src : ticketWStar.src} alt={`${item.name}`} className="h-12 w-12" />
-                {/* Ticket Details */}
+
                 <div className="flex flex-col items-start flex-grow ml-4">
                   <h2 className="text-lg font-bold">{item.name}</h2>
                   <p>{item.price * item.quantity},-</p>
