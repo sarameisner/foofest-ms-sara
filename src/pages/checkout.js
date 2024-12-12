@@ -10,7 +10,18 @@ function Checkout() {
   // vores state til at holde styr på hvor vi er i checkout flowet
   const [currentStep, setCurrentStep] = useState(0);
 
-  const { cartItems, cartTotal, selectedCamping, setSelectedCamping, selectedOptional, setSelectedOptional, userInfo, setUserInfo } = useContext(CartContext);
+  const { cartItems, cartTotal, selectedCamping, setSelectedCamping, selectedOptional, setSelectedOptional, userInfos, setUserInfo } = useContext(CartContext);
+  
+  const updateUserInfo = (index, updatedInfo) => {
+    setUserInfo((prevUserInfos) => {
+      const newUserInfos = [...prevUserInfos];
+      newUserInfos[index] = {
+        ...newUserInfos[index],
+        ...updatedInfo, // Opdaterer de relevante felter
+      };
+      return newUserInfos;
+    });
+  };
 
   const [paymentDetails, setPaymentDetails] = useState({
     cardOwner: "",
