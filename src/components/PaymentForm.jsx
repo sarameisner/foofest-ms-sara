@@ -33,8 +33,11 @@ function PaymentForm() {
     }
   };
 
-  const handleCardFlip = () => {
-    setCardFlipped((prev) => !prev);
+
+
+  const handleCardFlip = (e) => {
+    const isFlippingToBack = e.type === "focus";
+    setCardFlipped(isFlippingToBack);
   };
 
   const isCardNumberValid = paymentDetails.cardNumber.length === 16;
@@ -45,45 +48,35 @@ function PaymentForm() {
     <div>
       <h1 style={{ marginBottom: "40px" }}>Interactive Card Payment Form</h1>
 
-<div className="grid grid-cols-1 w-[200px] m-auto">
-      <div className={styles.cardWrapper}>
-  {/* Front of the Card */}
-  <div className={`${styles.card} ${cardFlipped ? styles.hidden : ""}`}>
-    {/* Card Number */}
-    <div className={styles.cardNumber}>
-      {paymentDetails.cardNumber.padEnd(16, "#").match(/.{1,4}/g)?.join(" ") || "#### #### #### ####"}
+<div className=" grid pb-10 w-[340px] m-auto">
+<div className={`${styles.cardWrapper}`}>
+  <div className={`${styles.card} ${cardFlipped ? styles.cardFlipped : ""}`}>
+    {/* Forsiden af kortet */}
+    <div className={styles.cardFront}>
+      <div className={styles.cardnumber}>
+        {paymentDetails.cardNumber.padEnd(16, "#").match(/.{1,4}/g)?.join(" ") || "#### #### #### ####"}
+      </div>
+      <div className={styles.cardName}>{paymentDetails.cardName || "Cardholder Name"}</div>
+      <div className={styles.expiryDate}>{paymentDetails.expiryDate || "MM/YY"}</div>
+      <div className={styles.chip}></div>
     </div>
-    {/* Cardholder Name */}
-    <div className={styles.cardName}>
-      {paymentDetails.cardName || "Cardholder Name"}
-    </div>
-    {/* Expiry Date */}
-    <div className={styles.expiryDate}>
-      {paymentDetails.expiryDate || "MM/YY"}
-    </div>
-    {/* Chip */}
-    <div className={styles.chip}></div>
-    {/* Visa Logo */}
-    <div className={styles.visaLogo}>VISA</div>
-  </div>
 
-  {/* Back of the Card */}
-  <div className={`${styles.cardBack} ${cardFlipped ? "" : styles.hidden}`}>
-    <div className={styles.cardBackStrip}></div>
-    <div className={styles.cardBackBox}></div>
-    <div className={styles.cardBackLabel}>CVV</div>
-    <div className={styles.cardBackCVV}>
-      {paymentDetails.cvv || "###"}
+    {/* Bagsiden af kortet */}
+    <div className={styles.cardBack}>
+      <div className={styles.cardBackStrip}></div>
+      <div className={styles.cardBackBox}></div>
+      <div className={styles.cardBackLabel}>CVV</div>
+      <div className={styles.cardBackCVV}>{paymentDetails.cvv || "###"}</div>
     </div>
   </div>
 </div>
 </div>
 
       {/* Input Form */}
-      <form id="card-form" className="flex flex-col gap-4">
+      <form id="card-form" className="grid w-[350px] m-auto gap-4">
         <input
           type="text"
-          className={`${styles.cardname} p-2 rounded border border-gray-300`}
+          className={`${styles.cardname} p-1 border-4 r bg-transparent text-white rounded-xl border-[#881523]`}
           name="cardName"
           placeholder="Name"
           maxLength="20"
@@ -94,7 +87,7 @@ function PaymentForm() {
         />
         <input
           type="text"
-          className={`${styles.cardNumber} p-2 rounded border border-gray-300`}
+          className={`${styles.cardNumber} p-1 border-4 r bg-transparent text-white rounded-xl border-[#881523]`}
           name="cardNumber"
           placeholder="Card Number"
           maxLength="16"
@@ -108,7 +101,7 @@ function PaymentForm() {
         )}
         <input
           type="text"
-          className={`${styles.expirydate} p-2 rounded border border-gray-300`}
+          className={`${styles.expirydate} p-1 border-4 r bg-transparent text-white rounded-xl border-[#881523]`}
           name="expiryDate"
           placeholder="Expiry Date (MM/YY)"
           maxLength="5"
@@ -120,28 +113,22 @@ function PaymentForm() {
           <span className="text-red-500 text-sm">Enter a valid expiry date (MM/YY).</span>
         )}
         <input
-          id="flip"
-          type="text"
-          className={`${styles.cvvnumber} p-2 rounded border border-gray-300`}
-          name="cvv"
-          placeholder="CVV Number"
-          maxLength="3"
-          value={paymentDetails.cvv}
-          onChange={handleInputChange}
-          autoComplete="off"
-          required
-        />
+  id="flip"
+  type="text"
+  className={`${styles.cvvnumber} p-1 border-4 bg-transparent text-white rounded-xl border-[#881523]`}
+  name="cvv"
+  placeholder="CVV Number"
+  maxLength="3"
+  value={paymentDetails.cvv}
+  onFocus={handleCardFlip} // Flip to back
+  onBlur={handleCardFlip} // Flip back to front
+  onChange={handleInputChange}
+  autoComplete="off"
+  required
+/>
         {!isCvvValid && <span className="text-red-500 text-sm">CVV must be 3 digits.</span>}
       </form>
-
-      {/* Button to Flip Card */}
-      <button
-        id="flip"
-        onClick={handleCardFlip}
-        className="p-2 bg-indigo-500 text-white rounded mt-4"
-      >
-        Flip Card
-      </button>
+    
     </div>
   
   );

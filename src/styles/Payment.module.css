@@ -1,9 +1,98 @@
-
-  #card-form {
-    margin-left: 20px;
-    float: left;
+.cardWrapper {
+    position: relative;
+    perspective: 1000px; 
+    width: 340px; 
+    height: 215px; 
+  }
+  .cardBackBox {
+    position: absolute;
+    top: 35%; /* Placer boxen lidt under striben */
+    left: 5%;
+    width: 240px;
+    height: 30px;
+    background: #FCFFFE; /* Lys farve til CVV-feltet */
+    border: 1px solid #6386c3;
+    border-radius: 5px;
+  }
+  .cardBack {
+    background: linear-gradient(
+        135deg,
+        rgba(115, 157, 235, 0.9) 0%,
+        rgba(51, 100, 179, 0.98) 100%
+      );
+    transform: rotateY(180deg); /* Roter bagsiden så den vender mod os */
+    z-index: 1;
+    position: relative;
+    border-radius: 12px;
   }
 
+  .cardBackStrip {
+    position: absolute;
+    top: 60%; /* Juster hvor stripe skal være */
+    left: 0;
+    width: 100%;
+    height: 50px; /* Juster højden af striben */
+    background: #fff; /* Hvid stripe */
+    border-radius: 5px;
+  }
+  .cardFlipped .cardFront {
+    transform: rotateY(180deg); 
+    z-index: 1;
+  }
+  
+  
+  .cardFlipped .cardBack {
+    transform: rotateY(0deg);
+    z-index: 2; 
+  }
+  
+  .cardBack .cardBackLabel,
+  .cardBack .cardBackCVV {
+    z-index: 3; 
+    position: absolute;
+
+  }
+  
+  .cardFlipped .card {
+    transform: rotateY(180deg);
+  }
+ .cardBackLabel {
+    top: 40%;
+    left: 50%;
+    font-size: 10px;
+    color: black;
+  }
+  
+  .cardBackCVV {
+    position: absolute;
+    top: 38%;
+    left: 60%;
+    font-size: 14px;
+    color: black;
+    letter-spacing: 1px;
+  }
+  
+  .cardFront,
+  .cardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Skjul bagsiden, når den ikke vises */
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .cardFront {
+    background: linear-gradient(
+      135deg,
+      rgba(115, 157, 235, 0.9) 0%,
+      rgba(51, 100, 179, 0.98) 100%
+    );
+    z-index: 2;
+  }
+  .cardFlipped .cardBack {
+    transform: rotateY(0deg);
+    z-index: 3;
+  }
   #card-form input {
     display: block;
     margin-bottom: 10px;
@@ -15,23 +104,17 @@
     border: 1px solid #737373;
   }
 
-  .card-wrapper {
-    
-    background: white;
-    overflow: visible;
-    width: 340px;
-    height: 215px;
-  }
-
   .card {
-    width: 340px;
-    height: 215px;
     position: absolute;
-    top: 0;
-    left: 0;
+    width: 100%;
+    z-index: 1;
+    height: 100%;
+    backface-visibility: hidden; /* Skjul bagsiden, når den roterer */
+    transform-style: preserve-3d; /* Sørg for 3D-effekt */
+    transform-origin: center; /* Flip omkring midten */
+    transition: transform 0.6s ease-in-out;
     overflow: hidden;
     background: linear-gradient(135deg, rgba(115, 157, 235, 0.9) 0%, rgba(115, 157, 235, 0.96) 1%, rgba(51, 100, 179, 0.98) 100%), url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJUlEQVQIW2NkwAT/GdHE/jMwMDAiC4IFQIpggjABuEq4CqhR/wEbSQcEINihPwAAAABJRU5ErkJggg==) repeat;
-    background: -webkit-linear-gradient(-45deg, rgba(115, 157, 235, 0.9) 0%, rgba(115, 157, 235, 0.96) 1%, rgba(51, 100, 179, 0.98) 100%), url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAJUlEQVQIW2NkwAT/GdHE/jMwMDAiC4IFQIpggjABuEq4CqhR/wEbSQcEINihPwAAAABJRU5ErkJggg==) repeat;
     border-radius: 12px;
     box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.12);
     font-size: 16px;
@@ -47,20 +130,25 @@
     z-index: 2;
   }
 
-  #card-number, #card-name, #expiry-date, #valid-until, .chip, #visa-logo {
+  #card-number, #card-name, #expiry-date, #valid-until, .chip {
     position: absolute;
     z-index: 5;
   }
-
-  #card-number, #card-name, .chip {
-    left: 10%;
+  .cardName {
+    top: 45%;
+    left:10%;
+    position: absolute;
   }
-
-  #card-number {
-    top: 50%;
-    font-size: 20px;
+  .expiryDate {
+    top:60%;
+    left:10%;
+    position: absolute;
   }
-
+  .cardnumber {
+    top: 30%;  
+    left: 10%; 
+    position: absolute;
+  }
   #card-name {
     bottom: 13%;
   }
@@ -81,9 +169,10 @@
   }
 
   .chip {
-    top: 20%;
+    top: 60%;
     width: 50px;
     height: 40px;
+    left: 70%;
     border-radius: 12px;
     background: #fdfff9;
     background: linear-gradient(135deg, #fdfff9 0%, #ebeee6 40%, #cfd5cb 100%);
@@ -103,24 +192,7 @@
     border-radius: 2px;
   }
 
-  #visa-logo {
-    font-family: "Arial Black", Gadget, sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    font-style: italic;
-    background: #FCFFFE;
-    color: #1A1F71;
-    top: 7%;
-    right: 5%;
-    width: 78px;
-    height: 42px;
-    text-align: center;
-    line-height: 26px;
-    border-radius: 2px;
-    border-top: 8px #1A1F71 solid;
-    border-bottom: 8px #F6B700 solid;
-    text-shadow: none;
-  }
+
 
   #card-back {
     z-index: 1;
