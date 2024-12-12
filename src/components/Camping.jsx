@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import backgroundCard from "../../public/pics/card.png";
 import backgroundWhite from "../../public/pics/white.png";
+import Loading from "./Loading";
 
 function Camping({ selectedCampingArea, setCampingArea, ticketCount }) {
   const [campingData, setCampingData] = useState([]);
@@ -28,7 +29,7 @@ function Camping({ selectedCampingArea, setCampingArea, ticketCount }) {
   }, []);
 
   if (loading) {
-    return <p className="text-center">Loading camping options...</p>;
+    return <Loading/>;
   }
 
   if (error) {
