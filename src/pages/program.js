@@ -3,13 +3,15 @@ import Banner from "@/components/Banner";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import StageFiltering from "@/components/Stagefiltering"; // For stage filtering
-import DayFiltering from "@/components/DayFiltering"; // For days filtering
+import DayFiltering from "@/components/DayFiltering";
+import Loading from "@/components/Loading"; // For days filtering
 
 const Program = () => {
     const [schedule, setSchedule] = useState({}); 
     const [bands, setBands] = useState([]); 
     const [day, setDay] = useState("all"); 
     const [selectedStage, setSelectedStage] = useState("all"); 
+    const [loading, setLoading] = useState(true);
   
     useEffect(() => {
       const fetchData = async () => {
@@ -27,8 +29,10 @@ const Program = () => {
           setBands(bandsData); // Sætter hentet bands data i state
         } catch (error) {
           console.error("Error fetching data:", error); 
-        }
-      };
+        } finally {
+            setLoading(false); // Når data er hentet (eller fejl), sæt loading til false
+          }
+        };
   
       fetchData(); // Kalder fetchData for at hente data
     }, []); // Tomt afhængighedsarray betyder, at effekten kun kører én gang ved første render
@@ -78,6 +82,9 @@ const Program = () => {
   
       return filtered; 
     };
+    if (loading) {
+        return <Loading />; // Vis Loading-komponenten, mens data bliver hentet
+      }
   
     // Filtrerer programmet baseret på både den valgte scene og dag
     const filteredSchedule = filterDay(filterSchedule());

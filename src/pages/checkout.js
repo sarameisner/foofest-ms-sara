@@ -9,9 +9,9 @@ import { CartContext } from "../contexts/CartContext";
 function Checkout() {
   // vores state til at holde styr på hvor vi er i checkout flowet
   const [currentStep, setCurrentStep] = useState(0);
-  // funktioner til de forskellige steps i vores checkout
+
   const { cartItems, cartTotal, selectedCamping, setSelectedCamping, selectedOptional, setSelectedOptional, userInfo, setUserInfo } = useContext(CartContext);
-  // betalings state
+
   const [paymentDetails, setPaymentDetails] = useState({
     cardOwner: "",
     cardNumber: "",
@@ -30,8 +30,8 @@ function Checkout() {
       content: <SelectOptional selectedOptions={selectedOptional} setOptions={setSelectedOptional} />,
     },
     {
-      title: "",
-      content: <BookingInfo info={userInfo} setInfo={setUserInfo} />,
+      title: "Your Information",
+      content: <BookingInfo userInfos={userInfos} updateUserInfo={updateUserInfo} />, // Pass userInfos and updateUserInfo
     },
     {
       title: "",
@@ -74,7 +74,7 @@ function Checkout() {
       <p>
         <strong>Booking fee:</strong> <span className="float-right">99,-</span>
       </p>
-      <hr className="my-4 border-gray-600" />
+      <hr className="my-4" />
       <p className="text-xl font-bold">
         <strong>Total:</strong> <span className="float-right">{cartTotal + 99},-</span>
       </p>
