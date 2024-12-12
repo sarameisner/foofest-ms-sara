@@ -5,7 +5,7 @@ const Loading = () => {
     <div>
       <section className={styles.section}>
         <div className={styles.procenter}>
-          <div className={styles.parent} style={{ '--percent': '85%' }}></div>
+          <div className={styles.parent} ></div>
         </div>
       </section>
     </div>
