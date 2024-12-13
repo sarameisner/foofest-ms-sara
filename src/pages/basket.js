@@ -40,7 +40,7 @@ const Basket = () => {
                 }}
                 quantity={item.quantity}
                 onAdd={() => updateItemQuantity(item.id, item.quantity + 1)}
-                onRemove={() => updateItemQuantity(item.id, item.quantity - 1)}
+                onRemove={() => updateItemQuantity(item.id, item.quantity - 1) + clearCart}
               />
             ))
           ) : (
