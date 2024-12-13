@@ -62,11 +62,11 @@ function Camping({ selectedCampingArea, setCampingArea, ticketCount }) {
                     : "cursor-pointer"
                 } ${isSelected ? "border-white" : "border-transparent"}`}
               >
-                <div className={`absolute inset-0 z-0 before:content-[''] before:absolute before:-top-1 before:-right-8 before:-z-10 before:w-full before:h-24 before:border-[8px] before:border-[#881523]   before:opacity-100 before:rounded-lg transition-all duration-500 ease-out group-hover:top-[1rem] group-hover:left-[1rem] ${
+                <div className={`absolute inset-0  before:content-[''] before:absolute before:-top-1 before:-right-8 before:-z-10 before:w-full before:h-24 before:border-[8px] before:border-[#881523]   before:opacity-100 before:rounded-lg transition-all duration-500 ease-out group-hover:top-[1rem] group-hover:left-[1rem] ${
                     isSelected ? "before:border-[white]" : ""}`}></div>
 
                 <div
-                  className="relative w-full z-10 p-8 group-hover:translate-x-4 group-hover:translate-y-4 transition-all duration-500 ease-out rounded-2xl flex flex-col justify-center items-center ${
+                  className="relative w-full  p-8 group-hover:translate-x-4 group-hover:translate-y-4 transition-all duration-500 ease-out rounded-2xl flex flex-col justify-center items-center ${
                     "
                 >
                   <div className="absolute rounded-xl inset-0 z-0">
@@ -80,7 +80,7 @@ function Camping({ selectedCampingArea, setCampingArea, ticketCount }) {
                     />
                   </div>
 
-                  <div className="relative z-10 flex justify-between gap-10">
+                  <div className="relative flex justify-between gap-10">
                     <h4 className={`text-lg ${
                     isSelected ? "text-black":""}`}>{area.area}</h4>
                     <p className={`opacaity-50 ${

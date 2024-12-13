@@ -31,7 +31,7 @@ const BottomNav = () => {
         </Link>
         </div>
         {/* basket */}
-        <Link href="/cart" className="group flex flex-col items-center">
+        <Link href="/basket" className="group flex flex-col items-center">
           <Image src="/pics/basket.svg" alt="Basket" width={30} height={30} className="hover:scale-110 transition-transform duration-200" />
           <p className="text-sm mt-1 group-hover:text-gray-300">BASKET</p>
         </Link>
