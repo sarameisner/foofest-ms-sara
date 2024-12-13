@@ -6,6 +6,9 @@ import PaymentForm from "@/components/PaymentForm";
 import SelectOptional from "@/components/SelectOptional";
 import CheckoutCompleted from "@/components/CheckoutCompleted";
 import { CartContext } from "../contexts/CartContext";
+import ButtonWIcon from "@/components/ButtonWIcon";
+import Image from "next/image";
+import StarIcon from "../../public/pics/star.svg"; // Ikon til knapperne
 
 function Checkout() {
   // vores state til at holde styr på hvor vi er i checkout flowet
@@ -127,26 +130,15 @@ function Checkout() {
           {steps[currentStep].content}
           {/* Navigation */}
           <div className="mt-8 flex justify-between">
-            {currentStep > 0 && (
-              <button
-                onClick={() => setCurrentStep((prev) => prev - 1)}
-                className="p-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
-              >
-                Previous
-              </button>
-            )}
-            {currentStep < steps.length - 1 && (
-              <button
-                onClick={() => setCurrentStep((prev) => prev + 1)}
-                className="p-2 bg-[var(--accent-color)] text-white rounded-lg hover:bg-[var(--light-grey)]"
-              >
-                Next
-              </button>
-            )}
+       
           </div>
         </div>
         {/* Infoboks til højre */}
-        <div className="w-full md:w-1/3 md:my-12">{renderInfoBox()}</div>
+        <div className="w-full md:w-1/3 md:my-12">{renderInfoBox()}
+        <div className="flex justify-center gap-2 mt-4">
+          {currentStep > 0 && <ButtonWIcon text="Previous" defaultIcon={<Image src={StarIcon} alt="Previous Icon" width={20} height={20} />} activeIcon={<Image src={StarIcon} alt="Previous Icon Active" width={20} height={20} />} defaultBgColor="var(--accent-color)" activeBgColor="#ffffff" onClick={() => setCurrentStep((prev) => prev - 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
+          {currentStep < steps.length - 1 && <ButtonWIcon text="Next" defaultIcon={<Image src={StarIcon} alt="Next Icon" width={20} height={20} />} activeIcon={<Image src={StarIcon} alt="Next Icon Active" width={20} height={20} />} defaultBgColor="var(--accent-color)" activeBgColor="#ffffff" onClick={() => setCurrentStep((prev) => prev + 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
+        </div></div>
       </div>
     </div>
   );
