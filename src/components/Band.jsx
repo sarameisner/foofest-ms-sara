@@ -36,9 +36,10 @@ const Band = ({ band, isBandPlaying, index }) => {
       }`}
       style={{ "--index": index }}
     >
-      <Link href={`/bands/${band.name.toLowerCase().replace(/ /g, "-")}`}>
+      <Link href={`/bands/${band.slug || band.name.toLowerCase().replace(/ /g, "-")}`}>
         <p className="text-[1.25rem] uppercase p-1">{band.name}</p>
       </Link>
+      
     </div>
   );
 };
