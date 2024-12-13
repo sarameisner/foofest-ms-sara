@@ -26,8 +26,8 @@ function SelectOptional() {
   // Tilføj et item
   const handleAdd = (item) => {
     if (item.capacity) {
-      // Sørg for, at teltkapaciteten ikke overskrider antallet af billetter, hvis det er kritisk
-      if (totalCoveredCapacity + item.capacity > totalTickets && totalTickets > 1) {
+      // Sørg for, at det samlede dækkede antal ikke overstiger antallet af billetter
+      if (totalCoveredCapacity + item.capacity > totalTickets) {
         alert("You can't select more tents than the total ticket capacity.");
         return;
       }
@@ -41,7 +41,7 @@ function SelectOptional() {
     }
   };
 
-  // fjerenr et item
+  // Fjern et item
   const handleRemove = (item) => {
     const existingItem = selectedOptional.find((p) => p.id === item.id);
     if (existingItem && existingItem.quantity > 1) {
@@ -53,6 +53,11 @@ function SelectOptional() {
 
   return (
     <div className="mt-10 basket-container text-white md:p-8">
+      <h2 className="text-center text-xl font-bold mb-6">Select Your Optional Items</h2>
+      <p className="text-center mb-6">
+        You have {totalTickets} ticket(s). Please select tents accordingly.
+      </p>
+
       <ul className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
         {optionalItems.map((item) => (
           <li key={item.id} className="md:col-span-3 flex flex-col gap-6">
@@ -65,7 +70,7 @@ function SelectOptional() {
               quantity={selectedOptional.find((p) => p.id === item.id)?.quantity || 0}
               onAdd={() => handleAdd(item)} // Send kun item, som forventes af handleAdd
               onRemove={() => handleRemove(item)} // Send kun item, som forventes af handleRemove
-              iconSize={40}
+              iconSize={40} // Tilpas ikonstørrelsen
             />
           </li>
         ))}
