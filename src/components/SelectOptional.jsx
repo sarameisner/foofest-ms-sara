@@ -41,7 +41,7 @@ function SelectOptional() {
     }
   };
 
-  // Fjern et item
+  // fjerenr et item
   const handleRemove = (item) => {
     const existingItem = selectedOptional.find((p) => p.id === item.id);
     if (existingItem && existingItem.quantity > 1) {
@@ -65,7 +65,7 @@ function SelectOptional() {
               quantity={selectedOptional.find((p) => p.id === item.id)?.quantity || 0}
               onAdd={() => handleAdd(item)} // Send kun item, som forventes af handleAdd
               onRemove={() => handleRemove(item)} // Send kun item, som forventes af handleRemove
-              iconSize={40} // Tilpas ikonstørrelsen
+              iconSize={40}
             />
           </li>
         ))}
