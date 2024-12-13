@@ -5,19 +5,21 @@ import PaymentForm from "@/components/PaymentForm";
 import SelectOptional from "@/components/SelectOptional";
 import CheckoutCompleted from "@/components/CheckoutCompleted";
 import { CartContext } from "../contexts/CartContext";
+import ButtonWIcon from "@/components/ButtonWIcon"; // Importer ButtonWIcon
+import Image from "next/image";
+import StarIcon from "../../public/pics/star.svg"; // Ikon til knapperne
 
 function Checkout() {
-  // vores state til at holde styr på hvor vi er i checkout flowet
   const [currentStep, setCurrentStep] = useState(0);
 
   const { cartItems, cartTotal, selectedCamping, setSelectedCamping, selectedOptional, setSelectedOptional, userInfos, setUserInfo } = useContext(CartContext);
-  
+
   const updateUserInfo = (index, updatedInfo) => {
     setUserInfo((prevUserInfos) => {
       const newUserInfos = [...prevUserInfos];
       newUserInfos[index] = {
         ...newUserInfos[index],
-        ...updatedInfo, // Opdaterer de relevante felter
+        ...updatedInfo,
       };
       return newUserInfos;
     });
@@ -30,7 +32,6 @@ function Checkout() {
     cvv: "",
   });
 
-  // komponenterne til checkout flowet definereres her
   const steps = [
     {
       title: "",
@@ -41,8 +42,8 @@ function Checkout() {
       content: <SelectOptional selectedOptions={selectedOptional} setOptions={setSelectedOptional} />,
     },
     {
-      title: "Your Information",
-      content: <BookingInfo userInfos={userInfos} updateUserInfo={updateUserInfo} />, // Pass userInfos and updateUserInfo
+      title: "",
+      content: <BookingInfo userInfos={userInfos} updateUserInfo={updateUserInfo} />,
     },
     {
       title: "",
@@ -53,7 +54,7 @@ function Checkout() {
       content: <CheckoutCompleted />,
     },
   ];
-  // infoboksen som går igen igennem hele flowet
+
   const renderInfoBox = () => (
     <div className="p-6 bg-[var(--background)] text-[var(--font-color)] border-4 border-[var(--accent-color)] rounded-lg">
       <h3 className="text-lg font-bold mb-4">Your Selection</h3>
@@ -91,27 +92,22 @@ function Checkout() {
       </p>
     </div>
   );
-  // alt det vi returnerer i browseren
+
+  // Alt det vi returnerer i browseren
   return (
     <div className="mt-16 flex flex-col md:flex-row gap-6 px-4 md:px-12">
       <div className="flex-1">
         <h2 className="text-3xl font-bold text-center mb-6">{steps[currentStep].title}</h2>
         {steps[currentStep].content}
-        <div className="mt-8 flex justify-between">
-          {/* Skjul "Previous"-knappen på sidste trin */}
-          {currentStep > 0 && currentStep < steps.length - 1 && (
-            <button onClick={() => setCurrentStep((prev) => prev - 1)} className="p-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
-              Previous
-            </button>
-          )}
-          {currentStep < steps.length - 1 && (
-            <button onClick={() => setCurrentStep((prev) => prev + 1)} className="p-2 bg-[var(--accent-color)] text-white rounded-lg hover:bg-[var(--light-grey)]">
-              Next
-            </button>
-          )}
+      </div>
+      <div className="w-full pt-[50px] md:w-1/3 md:my-12">
+        {renderInfoBox()}
+        {/* Knapper under infoboksen */}
+        <div className="flex justify-center gap-2 mt-4">
+          {currentStep > 0 && <ButtonWIcon text="Previous" defaultIcon={<Image src={StarIcon} alt="Previous Icon" width={20} height={20} />} activeIcon={<Image src={StarIcon} alt="Previous Icon Active" width={20} height={20} />} defaultBgColor="var(--accent-color)" activeBgColor="#ffffff" onClick={() => setCurrentStep((prev) => prev - 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
+          {currentStep < steps.length - 1 && <ButtonWIcon text="Next" defaultIcon={<Image src={StarIcon} alt="Next Icon" width={20} height={20} />} activeIcon={<Image src={StarIcon} alt="Next Icon Active" width={20} height={20} />} defaultBgColor="var(--accent-color)" activeBgColor="#ffffff" onClick={() => setCurrentStep((prev) => prev + 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
         </div>
       </div>
-      <div className="w-full pt-[50px] md:w-1/3 md:my-12">{renderInfoBox()}</div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { CartContext } from "../contexts/CartContext";
-import ListItem from "./ListItem"; 
+import ListItem from "./ListItem";
 import TentIcon from "../../public/pics/tent.svg";
 import GreenIcon from "../../public/pics/greenicon.svg";
 
@@ -55,9 +55,8 @@ function SelectOptional() {
           </li>
         ))}
       </ul>
-      </div>
+    </div>
   );
 }
 
 export default SelectOptional;
-
