@@ -53,10 +53,6 @@ function SelectOptional() {
 
   return (
     <div className="mt-10 basket-container text-white md:p-8">
-      <h2 className="text-center text-xl font-bold mb-6">Select Your Optional Items</h2>
-      <p className="text-center mb-6">
-        You have {totalTickets} ticket(s). Please select tents accordingly.
-      </p>
 
       <ul className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
         {optionalItems.map((item) => (

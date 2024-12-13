@@ -43,19 +43,19 @@ function Checkout() {
   // komponenterne til checkout flowet definereres her
   const steps = [
     {
-      title: "Camping",
+      title: "Choose Camping area",
       content: <Camping selectedCampingArea={selectedCamping} setCampingArea={setSelectedCamping} />,
     },
     {
-      title: "Select Optional",
+      title: "Choose tent",
       content: <SelectOptional selectedOptions={selectedOptional} setOptions={setSelectedOptional} />,
     },
     {
-      title: "Your Information",
+      title: "Information",
       content: <BookingInfo userInfos={userInfos} updateUserInfo={updateUserInfo} />,
     },
     {
-      title: "Payment Form",
+      title: "Payment",
       content: <PaymentForm paymentDetails={paymentDetails} setPaymentDetails={setPaymentDetails} />,
     },
     {
@@ -114,7 +114,7 @@ function Checkout() {
 
   // alt det vi returnerer i browseren
   return (
-    <div className="mt-16">
+    <div className="mt-40">
       {/* Progress menu fylder hele bredden */}
       {currentStep < steps.length - 1 && (
         <div className="w-full">
@@ -124,7 +124,6 @@ function Checkout() {
       {/* Hovedlayout */}
       <div className="flex flex-col md:flex-row gap-6 px-4 md:px-12">
         <div className="flex-1">
-          <h2 className="text-3xl font-bold text-center mb-6">{steps[currentStep].title}</h2>
           {steps[currentStep].content}
           {/* Navigation */}
           <div className="mt-8 flex justify-between">
