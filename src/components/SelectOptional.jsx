@@ -35,10 +35,9 @@ function SelectOptional() {
   };
 
   return (
-    <div className="pt-[50px] basket-container text-white p-4 md:p-8">
-      <h3 className="text-2xl font-bold">Choose Optional Add-Ons</h3>
+    <div className="mt-10 basket-container text-white md:p-8">
 
-      <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 max-w-5xl mx-auto">
+      <ul className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
         {optionalItems.map((item) => (
           <li key={item.id} className="md:col-span-3 flex flex-col gap-6">
             <ListItem

@@ -45,8 +45,7 @@ function PaymentForm() {
   const isCvvValid = paymentDetails.cvv.length === 3;
 
   return (
-    <div>
-      <h1 style={{ marginBottom: "40px" }}>Interactive Card Payment Form</h1>
+    <div className="mt-10">
 
 <div className=" grid pb-10 w-[340px] m-auto">
 <div className={`${styles.cardWrapper}`}>

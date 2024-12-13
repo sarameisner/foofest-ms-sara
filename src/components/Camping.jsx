@@ -41,10 +41,9 @@ function Camping({ selectedCampingArea, setCampingArea, ticketCount }) {
   }
 
   return (
-    <div className="pt-[50px]">
+    <div className="mt-10">
       <div>
-        <h3 className="text-2xl font-bold mb-4">Choose a Camping Area</h3>
-        <ul className="grid grid-cols-1 sm:grid-cols-1 w-[400px] m-auto mt-10 lg:grid-cols-1 gap-5">
+        <ul className="grid grid-cols-1 sm:grid-cols-1 w-[400px] m-auto mt-5 lg:grid-cols-1 gap-5">
           {campingData.map((area) => {
             // Disable if not enough spots or no spots available
             const isDisabled = area.available < ticketCount || area.available === 0;
