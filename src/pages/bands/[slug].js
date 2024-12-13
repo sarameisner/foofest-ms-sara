@@ -5,6 +5,7 @@ import ButtonWIcon from "@/components/ButtonWIcon";
 import Banner from "@/components/Banner";
 import Hjerte from "../../../public/pics/heart.svg";
 import SortHjerte from "../../../public/pics/blackheart.svg";
+import Loading from "@/components/Loading";
 
 const BandDetails = () => {
   // Vi ruger  router til at få adgang til `slug`
@@ -39,6 +40,8 @@ const BandDetails = () => {
         setLoading(false); // sætter loading til false når data er hentet
       } catch (error) {
         console.error("Fejl ved hentning af data:", error);
+      }finally {
+        setLoading(false); // Når data er hentet, stop med at loade
       }
     };
 
@@ -46,7 +49,9 @@ const BandDetails = () => {
     fetchData();
   }, [slug]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return <Loading />; // Vis Loading-komponenten, mens data bliver hentet
+  }
 
   if (!bandDetails) return <p>Bandet blev ikke fundet</p>;
 
