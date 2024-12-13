@@ -26,8 +26,8 @@ function SelectOptional() {
   // Tilføj et item
   const handleAdd = (item) => {
     if (item.capacity) {
-      // Sørg for, at det samlede dækkede antal ikke overstiger antallet af billetter
-      if (totalCoveredCapacity + item.capacity > totalTickets) {
+      // Sørg for, at teltkapaciteten ikke overskrider antallet af billetter, hvis det er kritisk
+      if (totalCoveredCapacity + item.capacity > totalTickets && totalTickets > 1) {
         alert("You can't select more tents than the total ticket capacity.");
         return;
       }
