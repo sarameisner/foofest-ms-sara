@@ -8,8 +8,7 @@ function BookingInfo({ userInfos, updateUserInfo }) {
   };
 
   return (
-    <div className="flex flex-col gap-8">
-      <h3 className="text-2xl font-bold  mb-4">Booking Information</h3>
+    <div className="flex flex-col gap-8 mt-10">
       <form className="flex flex-col gap-5">
         {userInfos.map((info, index) => (
           <div key={index} className="p-4 rounded-md gap-10  ">
