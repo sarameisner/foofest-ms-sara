@@ -100,7 +100,12 @@ const BandDetails = () => {
       if (bandSchedule) break; // stopper den ydre løkke hvis bandSchedule er sat
     }
   }
-  const imageUrl = "https://peach-polar-planarian.glitch.me/logos/" + bandDetails.logo;
+  let imageUrl;
+  if (bandDetails.logo.match(/[^/]+(jpg|png)$/)) {
+    imageUrl = "https://peach-polar-planarian.glitch.me/logos/" + bandDetails.logo;
+  } else {
+    imageUrl = bandDetails.logo;
+  }
 
   return (
     <div>
