@@ -62,8 +62,10 @@ const Favorites = () => {
               <ButtonWIcon
                 text="Remove"
                 defaultIcon={<Image src={Hjerte} alt="Heart" width={20} height={20} />}
-                activeIcon={<Image src={SorteHjerte} alt="Heart-black" width={20} height={20} />}
+                activeIcon={<Image src={Hjerte} alt="Heart-black" width={20} height={20} />}
                 defaultBgColor="#881523"
+                activeColor="#fffff"
+                activeBgColor="#881523"
                 onClick={() => handleRemoveFavorite(index)}
               />
             </div>

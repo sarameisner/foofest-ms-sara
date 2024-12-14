@@ -8,12 +8,13 @@ import CheckoutCompleted from "@/components/CheckoutCompleted";
 import { CartContext } from "../contexts/CartContext";
 import ButtonWIcon from "@/components/ButtonWIcon";
 import Image from "next/image";
-import StarIcon from "../../public/pics/star.svg"; // Ikon til knapperne
+import StarIcon from "../../public/pics/star.svg";
+ // Ikon til knapperne
 
 function Checkout() {
   // vores state til at holde styr på hvor vi er i checkout flowet
   const [currentStep, setCurrentStep] = useState(0);
-
+  const [reservationId, setReservationId] = useState(null);
   const {
     cartItems,
     cartTotal,
@@ -48,7 +49,7 @@ function Checkout() {
   const steps = [
     {
       title: "Choose Camping area",
-      content: <Camping selectedCampingArea={selectedCamping} setCampingArea={setSelectedCamping} />,
+      content: <Camping selectedCampingArea={selectedCamping} setCampingArea={setSelectedCamping} ticketCount={cartItems.length} setReservationId={setReservationId} />,
     },
     {
       title: "Choose tent",
@@ -137,8 +138,8 @@ function Checkout() {
         {/* Infoboks til højre */}
         <div className="w-full md:w-1/3 md:my-12">{renderInfoBox()}
         <div className="flex justify-center gap-2 mt-4">
-          {currentStep > 0 && <ButtonWIcon text="Previous" defaultIcon={<Image src={StarIcon} alt="Previous Icon" width={20} height={20} />} activeIcon={<Image src={StarIcon} alt="Previous Icon Active" width={20} height={20} />} defaultBgColor="var(--accent-color)" activeBgColor="#ffffff" onClick={() => setCurrentStep((prev) => prev - 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
-          {currentStep < steps.length - 1 && <ButtonWIcon text="Next" defaultIcon={<Image src={StarIcon} alt="Next Icon" width={20} height={20} />} activeIcon={<Image src={StarIcon} alt="Next Icon Active" width={20} height={20} />} defaultBgColor="var(--accent-color)" activeBgColor="#ffffff" onClick={() => setCurrentStep((prev) => prev + 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
+          {currentStep > 0 && <ButtonWIcon text="Previous" defaultIcon={<Image src={StarIcon} alt="Previous Icon"  width={20} height={20} />} activeColor="#fffff" activeIcon={<Image src={StarIcon} alt="Previous Icon Active" width={20} height={20} />} defaultBgColor="var(--accent-color)" activeBgColor="#881523" onClick={() => setCurrentStep((prev) => prev - 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
+          {currentStep < steps.length - 1 && <ButtonWIcon text="Next" defaultIcon={<Image src={StarIcon} alt="Next Icon" width={20} height={20} />} activeColor="#fffff" activeIcon={<Image src={StarIcon} alt="Next Icon Active" width={20} height={20} />} defaultBgColor="var(--accent-color)" activeBgColor="#881523" onClick={() => setCurrentStep((prev) => prev + 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
         </div></div>
       </div>
     </div>

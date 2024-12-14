@@ -8,12 +8,11 @@ import Banner from "../components/Banner";
 import ticketPlain from "../../public/pics/ticketplain.svg";
 import ticketWStar from "../../public/pics/ticketwstar.svg";
 import Image from "next/image";
-import ListItem from "@/components/ListItem";
 import Star from "../../public/pics/star.svg";
 import BlackStar from "../../public/pics/blackstar.svg";
 
 const Basket = () => {
-  const { cartItems, clearCart, updateItemQuantity, cartTotal } = useContext(CartContext);
+  const { cartItems, clearCart, updateItemQuantity, removeItemFromCart, cartTotal } = useContext(CartContext);
   const router = useRouter();
 
   const bookingFee = 99;
@@ -21,6 +20,16 @@ const Basket = () => {
 
   const handleCheckout = () => {
     router.push("/checkout");
+  };
+
+  const handleUpdateItemQuantity = (itemId, newQuantity) => {
+    if (newQuantity <= 0) {
+      // Hvis mængden er 0 eller mindre, fjern produktet fra kurven
+      removeItemFromCart(itemId);
+    } else {
+      // Ellers opdater mængden af produktet
+      updateItemQuantity(itemId, newQuantity);
+    }
   };
 
   return (
@@ -41,11 +50,18 @@ const Basket = () => {
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <button onClick={() => updateItemQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1} className="bg-white text-black rounded-full w-8 h-8 flex items-center justify-center">
+                  <button
+                    onClick={() => handleUpdateItemQuantity(item.id, item.quantity - 1)} 
+                    disabled={item.quantity <= 1} 
+                    className="bg-white text-black rounded-full w-8 h-8 flex items-center justify-center"
+                  >
                     -
                   </button>
                   <span className="text-lg">{item.quantity}</span>
-                  <button onClick={() => updateItemQuantity(item.id, item.quantity + 1)} className="bg-white text-black rounded-full w-8 h-8 flex items-center justify-center">
+                  <button 
+                    onClick={() => handleUpdateItemQuantity(item.id, item.quantity + 1)} 
+                    className="bg-white text-black rounded-full w-8 h-8 flex items-center justify-center"
+                  >
                     +
                   </button>
                 </div>
@@ -56,7 +72,15 @@ const Basket = () => {
           )}
 
           <div className="flex justify-center mt-6">
-            <ButtonWIcon text="Clear basket" defaultIcon={<Image src={Star} alt="Star Icon" width={20} height={20} />} activeIcon={<Image src={BlackStar} alt="Active Icon" width={20} height={20} />} defaultBgColor="#881523" activeBgColor="#ffffff" onClick={clearCart} className="w-full max-w-xs h-12 flex items-center justify-center" />
+            <ButtonWIcon 
+              text="Clear basket" 
+              defaultIcon={<Image src={Star} alt="Star Icon" width={20} height={20} />} 
+              activeIcon={<Image src={BlackStar} alt="Active Icon" width={20} height={20} />} 
+              defaultBgColor="#881523" 
+              activeBgColor="#ffffff" 
+              onClick={clearCart} 
+              className="w-full max-w-xs h-12 flex items-center justify-center" 
+            />
           </div>
         </div>
 
@@ -82,7 +106,15 @@ const Basket = () => {
           <p className="text-xl font-bold">
             <strong>Total:</strong> <span className="float-right">{totalWithFee},-</span>
           </p>
-          <ButtonWIcon text="Checkout" defaultIcon={<Image src={Star} alt="Star Icon" width={20} height={20} />} activeIcon={<Image src={Star} alt="Star Icon Active" width={20} height={20} />} defaultBgColor="#881523" activeBgColor="#ffffff" onClick={handleCheckout} className="mt-6 w-full h-12 grid  m-auto items-center justify-center" />
+          <ButtonWIcon 
+            text="Checkout" 
+            defaultIcon={<Image src={Star} alt="Star Icon" width={20} height={20} />} 
+            activeIcon={<Image src={Star} alt="Star Icon Active" width={20} height={20} />} 
+            defaultBgColor="#881523" 
+            activeBgColor="#ffffff" 
+            onClick={handleCheckout} 
+            className="mt-6 w-full h-12 grid  m-auto items-center justify-center" 
+          />
         </div>
       </div>
     </div>

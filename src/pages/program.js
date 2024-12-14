@@ -126,11 +126,11 @@ const Program = () => {
           ) : (
             Object.entries(filteredSchedule).map(([stage, days]) => (
               <div key={stage} className=" p-4">
-                <h3 className="text-xl text-center font-bold mb-5 uppercase">{stage}</h3>
+                <h2 className="text-xl text-center font-bold mb-5 uppercase">{stage}</h2>
                 <div className="space-y-2">
                   {Object.entries(days).map(([dayKey, acts]) => (
                     <div key={dayKey}>
-                      <h4 className="text-center">{dayKey}</h4>
+                      <h3 className="text-center">{dayKey}</h3>
                       {acts.map((act, index) => (
                         <div key={index} className="grid grid-cols-[6fr,1fr,1fr] text-white items-center">
                           <span className="uppercase">

@@ -1,53 +1,51 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import backgroundCard from "../../public/pics/card.png"
+import backgroundCard from "../../public/pics/card.png";
 import ButtonWIcon from "./ButtonWIcon";
-import Star from "../../public/pics/star.svg"
+import Star from "../../public/pics/star.svg";
 
 export default function Modal({ isOpen, closeModal }) {
-    // State variabler til at holde styr på input felterne (email, password) og om brugeren er på login eller sign-up formularen
-    const [email, setEmail] = useState(""); //  email
-    const [password, setPassword] = useState(""); // password
-    const [isSignUp, setIsSignUp] = useState(false); 
-  
-    // Funktion til at håndtere login formularens indsendelse
-    const handleLogin = (e) => {
-      e.preventDefault(); // Forhindrer standard formular opførsel (f.eks. side-refresh)
-      console.log("Logging in with", email, password); // Log email og password 
-      closeModal(); // Luk modalvinduet efter login
-    };
-  
-    // Funktion til at håndtere sign-up formularens indsendelse
-    const handleSignUp = (e) => {
-      e.preventDefault(); // Forhindrer standard formular opførsel 
-      console.log("Signing up with", email, password); // Log email og password
-      closeModal(); // Luk modalvinduet efter sign-up
-    };
-  
-    // Funktion til at fortsætte som gæst (uden at logge ind)
-    const handleContinueAsGuest = () => {
-      console.log("Continuing as guest"); // Log besked om at brugeren fortsætter som gæst
-      closeModal(); // Luk modalvinduet når man fortsætter som gæst
-    };
-  
-    // Funktion til at skifte til sign-up formularen
-    const switchToSignUp = () => {
-      setIsSignUp(true); // Sæt isSignUp til true for at vise sign-up formularen
-    };
-  
-    // Funktion til at skifte til login formularen
-    const switchToLogin = () => {
-      setIsSignUp(false); // Sæt isSignUp til false for at vise login formularen
-    };
-  
-    // Hvis modalvinduet ikke er åbent, render ikke noget (return null)
-    if (!isOpen) return null;
-  
+  const [email, setEmail] = useState(""); // email
+  const [password, setPassword] = useState(""); // password
+  const [isSignUp, setIsSignUp] = useState(false); // Toggle for sign-up or login
+
+  // Handle form submission for login
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log("Logging in with", email, password);
+    closeModal(); // Close the modal after login
+  };
+
+  // Handle form submission for sign-up
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    console.log("Signing up with", email, password);
+    closeModal(); // Close the modal after sign-up
+  };
+
+  // Continue as guest (no login)
+  const handleContinueAsGuest = () => {
+    console.log("Continuing as guest");
+    closeModal(); // Close the modal when continuing as guest
+  };
+
+  // Switch to sign-up form
+  const switchToSignUp = () => {
+    setIsSignUp(true);
+  };
+
+  // Switch to login form
+  const switchToLogin = () => {
+    setIsSignUp(false);
+  };
+
+  // If modal is not open, render nothing
+  if (!isOpen) return null;
+
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-      {/* Modal Background with Image */}
       <div className="relative p-10 w-96 before:content-[''] before:absolute before:-top-8 before:-right-8 before:-z-10 before:w-full before:h-full before:border-[8px] before:border-[#881523] before:opacity-100 before:rounded-lg">
-      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0">
           <Image
             src={backgroundCard}
             alt="Ticket background"
@@ -58,17 +56,11 @@ export default function Modal({ isOpen, closeModal }) {
           />
         </div>
 
-        {/* Modal Content on top of the image */}
         <div className="relative z-10">
-        <h1 className="text-[2rem] text-centermb-4 text-white">
-  {isSignUp ? (
-    "Sign Up"
-  ) : (
-    <>
-      Welcome to <span className="font-serif ">Foo</span>
-    </>
-  )}
-</h1>          
+          <h1 className="text-[2rem] text-center mb-4 text-white">
+            {isSignUp ? "Sign Up" : "Welcome to Foo"}
+          </h1>
+
           {/* Login or Sign-up Form */}
           <form onSubmit={isSignUp ? handleSignUp : handleLogin}>
             <div className="mb-4">
@@ -100,16 +92,16 @@ export default function Modal({ isOpen, closeModal }) {
             </div>
 
             <div className="flex justify-center items-center">
-            <ButtonWIcon
-    text={isSignUp ? "Sign Up" : "Login"} 
-    defaultIcon={<Image src={Star} alt="Star" width={20} height={20} />}
-    defaultBgColor="#2c2c2a" 
-    onClick={handleLogin} 
-  />
+              <ButtonWIcon
+                text={isSignUp ? "Sign Up" : "Login"}
+                defaultIcon={<Image src={Star} alt="Star" width={20} height={20} />}
+                defaultBgColor="#2c2c2a"
+                type="submit" // Set the button to submit the form
+              />
             </div>
           </form>
 
-          {/* Links to switch between login and sign-up */}
+          {/* Switch between login and sign-up */}
           {!isSignUp ? (
             <p className="text-center text-sm mt-4 font-sans text-white">
               Don't have an account?{" "}
@@ -132,15 +124,14 @@ export default function Modal({ isOpen, closeModal }) {
             </p>
           )}
 
+          {/* Continue as guest */}
           <div className="mt-4 flex justify-center text-center">
             <ButtonWIcon
-            defaultIcon={<Image src={Star} alt="Star" width={20} height={20} />}
-            text="Continue as guest"
-            defaultBgColor="#2c2c2a"
+              defaultIcon={<Image src={Star} alt="Star" width={20} height={20} />}
+              text="Continue as guest"
+              defaultBgColor="#2c2c2a"
               onClick={handleContinueAsGuest}
-              
-            >
-            </ButtonWIcon>
+            />
           </div>
 
           {/* Close Button */}
