@@ -22,17 +22,18 @@ function Checkout() {
     selectedOptional,
     setSelectedOptional,
     userInfos,
-    setUserInfo,
+    setUserInfos,
   } = useContext(CartContext);
 
-  const updateUserInfo = (index, updatedInfo) => {
-    setUserInfo((prevUserInfos) => {
-      const newUserInfos = [...prevUserInfos];
-      newUserInfos[index] = {
-        ...newUserInfos[index],
-        ...updatedInfo, // Opdaterer de relevante felter
-      };
-      return newUserInfos;
+  const updateUserInfo = (index, newInfo) => {
+    setUserInfos((prevUserInfos) => {
+      if (index < 0 || index >= prevUserInfos.length) {
+        console.error("Invalid index for userInfos update");
+        return prevUserInfos; // Prevent updating if the index is out of bounds
+      }
+      const updatedUserInfos = [...prevUserInfos];
+      updatedUserInfos[index] = { ...updatedUserInfos[index], ...newInfo };
+      return updatedUserInfos;
     });
   };
 

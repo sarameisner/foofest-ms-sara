@@ -105,6 +105,7 @@ const updateUserInfo = (index, newInfo) => {
         userInfos,
         updateUserInfo,
         setUserInfo,
+        setUserInfos,
         cartTotal,
       }}
     >
