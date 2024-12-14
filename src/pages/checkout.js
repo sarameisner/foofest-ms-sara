@@ -37,7 +37,10 @@ function Checkout() {
       return updatedUserInfos;
     });
   };
-
+  const handlePaymentCompletion = (id) => {
+    setReservationId(id); // Set the reservation ID when payment is successful.
+    // Any other actions to complete the booking process.
+  };
   const [paymentDetails, setPaymentDetails] = useState({
     cardOwner: "",
     cardNumber: "",
@@ -49,7 +52,7 @@ function Checkout() {
   const steps = [
     {
       title: "Choose Camping area",
-      content: <Camping selectedCampingArea={selectedCamping} setCampingArea={setSelectedCamping} ticketCount={cartItems.length} setReservationId={setReservationId} />,
+      content: <Camping selectedCampingArea={selectedCamping} setCampingArea={setSelectedCamping} ticketCount={cartItems.length} setReservationId={setReservationId}  />,
     },
     {
       title: "Choose tent",
@@ -57,15 +60,15 @@ function Checkout() {
     },
     {
       title: "Information",
-      content: <BookingInfo userInfos={userInfos} updateUserInfo={updateUserInfo} />,
+      content: <BookingInfo userInfos={userInfos} updateUserInfo={updateUserInfo} handlePaymentCompletion={handlePaymentCompletion} />,
     },
     {
       title: "Payment",
-      content: <PaymentForm paymentDetails={paymentDetails} setPaymentDetails={setPaymentDetails} />,
+      content: <PaymentForm paymentDetails={paymentDetails} setPaymentDetails={setPaymentDetails}  />,
     },
     {
       title: "",
-      content: <CheckoutCompleted />,
+      content: <CheckoutCompleted reservationId={reservationId} />,
     },
   ];
 

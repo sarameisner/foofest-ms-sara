@@ -1,17 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import ticketDisplay from "../../public/pics/ticketdisplay.png";
 
-const CheckoutCompleted = () => {
-  const router = useRouter();
-
+const CheckoutCompleted = ({ reservationId }) => {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-[var(--background)] text-[var(--font-color)] px-4">
       <h1 className="text-3xl md:text-4xl font-bold mb-4">YOUR BOOKING IS COMPLETED</h1>
       <p className="text-lg mb-4">Thank you for your purchase!</p>
       <p className="text-sm mb-8">
-        We sent an email confirmation to this address: <span className="font-semibold">something@something.com</span>
+        Here is your reservation id:<span className="font-semibold">{reservationId}</span>
       </p>
       <div className="w-72 h-auto mb-8">
         <Image src={ticketDisplay} alt="Ticket Display" layout="responsive" objectFit="contain" />
@@ -24,3 +21,4 @@ const CheckoutCompleted = () => {
 };
 
 export default CheckoutCompleted;
+
