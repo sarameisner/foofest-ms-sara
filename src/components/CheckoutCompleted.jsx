@@ -1,5 +1,8 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import Star from "../../public/pics/star.svg"
+import ButtonWIcon from "./ButtonWIcon";
 import ticketDisplay from "../../public/pics/ticketdisplay.png";
 
 const CheckoutCompleted = ({ reservationId }) => {
@@ -13,9 +16,9 @@ const CheckoutCompleted = ({ reservationId }) => {
       <div className="w-72 h-auto mb-8">
         <Image src={ticketDisplay} alt="Ticket Display" layout="responsive" objectFit="contain" />
       </div>
-      <button onClick={() => router.push("/")} className="px-6 py-3 bg-[var(--accent-color)] text-white rounded-lg hover:bg-[var(--light-grey)]">
-        Home
-      </button>
+      <Link href="/"><ButtonWIcon defaultIcon={<Image src={Star} alt="Default Icon" width={20} height={20}/>}
+text="Home" onClick={() => router.push("/")} >
+      </ButtonWIcon></Link>
     </div>
   );
 };
