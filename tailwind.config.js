@@ -8,7 +8,9 @@ module.exports = {
         },
         backgroundImage: {
           "gradient-background": "linear-gradient(180deg, #2B2B2B 13.5%, #881523 47.5%, #2B2B2B 84.5%);",
+          'gradingBG': 'linear-gradient(180deg, #000 0%, #2B2B2B 31%)',
         },
+        gradingBG: "linear-gradient(180deg, #000 25%, #2B2B2B 100%);",
         background: "var(--background)",
         foreground: "var(--foreground)",
         accent: "var(--accent-color)",

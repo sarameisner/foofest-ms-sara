@@ -129,19 +129,22 @@ const Program = () => {
                 <h2 className="text-xl text-center font-bold mb-5 uppercase">{stage}</h2>
                 <div className="space-y-2">
                   {Object.entries(days).map(([dayKey, acts]) => (
-                    <div key={dayKey}>
-                      <h3 className="text-center">{dayKey}</h3>
-                      {acts.map((act, index) => (
-                        <div key={index} className="grid grid-cols-[6fr,1fr,1fr] text-white items-center">
-                          <span className="uppercase">
-                          <Link href={`/bands/${bands.find(band => band.name === act.act)?.slug || act.act}`}>
-  {act.act}
-</Link>                          </span>
-                          <span>-</span>
-                          <span className="text-white">{act.start}</span>
-                        </div>
-                      ))}
-                    </div>
+  <div key={dayKey}>
+    <h3 className="text-center">{dayKey}</h3>
+    {acts
+      ?.filter((event) => event.act.toLowerCase() !== "break") // Filtrer "break" ud
+      .map((act, index) => (
+        <div key={index} className="grid grid-cols-[6fr,1fr,1fr] text-white items-center">
+          <span className="uppercase">
+            <Link href={`/bands/${bands.find(band => band.name === act.act)?.slug || act.act}`}>
+              {act.act}
+            </Link>
+          </span>
+          <span>-</span>
+          <span className="text-white">{act.start}</span>
+        </div>
+      ))}
+  </div>
                   ))}
                 </div>
               </div>
