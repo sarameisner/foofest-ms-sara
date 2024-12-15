@@ -1,14 +1,21 @@
+
+
 const Footer = () => {
+
+    
   return (
     <footer
       // linjen over footeren
-      className="py-8 pb-40 border-t"
+      className="py-8 pb-40"
       style={{
         backgroundColor: "var(--background)",
         color: "var(--font-color)",
         borderColor: "var(--light-grey-font)",
       }}
     >
+     
+
+        
       <div className="container mx-auto flex flex-wrap justify-between items-start gap-8 md:gap-16">
    
         <div className="space-y-2 flex-1">

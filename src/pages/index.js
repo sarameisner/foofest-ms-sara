@@ -36,11 +36,12 @@ export default function Home() {
         priority 
       />
     </div>,
-
+  ]
   return (
     <div>
       <Popup isOpen={isModalOpen} closeModal={closeModal}  />
      <FrontPageHeader/>
+     <RunningBanner items={bannerItems} speed="medium"  />
     </div>
   );
 }
