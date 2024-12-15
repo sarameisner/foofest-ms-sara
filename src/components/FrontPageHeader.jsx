@@ -12,11 +12,18 @@ const FrontPageHeader = () => {
   return (
     <div className="relative w-full">
       {/* sektion med baggrundsbilledet */}
-      <div className="relative w-full h-[60vh] bg-cover bg-center">
-        <Image src={backgroundImage} alt="Concert Background" layout="fill" objectFit="cover" className="-z-10" />
+      <div className="relative w-full h-[100vh] bg-cover bg-center">
+      <video
+    className="absolute top-0 left-0 w-full h-full object-cover"
+    src="/2022395-hd_1920_1080_30fps.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+  ></video>
         
         {/* dato placeret lidt længere nede */}
-        <div className="absolute top-[70%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+        <div className="absolute top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
           <p className="text-xl md:text-3xl font-normal text-white">2.12.2024 - 20.12.2024</p>
         </div>
 
