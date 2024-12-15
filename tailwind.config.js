@@ -4,6 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+          "gradient-background": "var(--gradient-background)", // Bruger din CSS-variabel
+        },
+        backgroundImage: {
+          "gradient-background": "linear-gradient(180deg, #2B2B2B 13.5%, #881523 47.5%, #2B2B2B 84.5%);",
+        },
         background: "var(--background)",
         foreground: "var(--foreground)",
         accent: "var(--accent-color)",
@@ -16,7 +21,6 @@ module.exports = {
         serif: ["La Belle Aurore", "serif"],
         display: ["Bangla Sangam MN", "sans-serif"],
       },
-    },
   },
   plugins: [],
 };

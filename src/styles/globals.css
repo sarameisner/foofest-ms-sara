@@ -11,6 +11,7 @@
   --light-grey: rgba(255, 255, 255, 0.54);
   --light-grey-font: rgba(255, 255, 255, 0.5);
   --font-color: #fff;
+  --gradient-background: linear-gradient(180deg, #D09086 0%, #881523 47.5%, #2B2B2B 100%);
   --padding-10: 10px;
   --padding-20: 20px;
   --padding-50: 50px;

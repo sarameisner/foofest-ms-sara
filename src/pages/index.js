@@ -1,47 +1,51 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import Loading from "@/components/Loading";
 import FrontPageHeader from "@/components/FrontPageHeader";
 import Popup from "@/components/PopUp";
+import RunningBanner from "@/components/RunningBanner";
+import Star from "../../public/pics/star.svg"; // Tjek importen!
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
-  setTimeout(() => {
-    setLoading(false); // Data er hentet, fjern loading
-  }, 100); // Simuler en forsinkelse på 3 sekunder for demonstration
-
-  // Åbn modal automatisk når komponenten først bliver indlæst
   useEffect(() => {
-    setIsModalOpen(true);
+    const timer = setTimeout(() => setLoading(false), 100); // Fjern loading efter 100ms
+    return () => clearTimeout(timer); // Rens op
   }, []);
 
-  
-  const closeModal = () => {
-    setIsModalOpen(false); // Luk modal
-  };
-  if (loading) {
-    return <Loading />; // Vis Loading-komponenten, mens data bliver hentet
-  }
+  useEffect(() => {
+    setIsModalOpen(true); // Åbn modal ved første render
+  }, []);
+
   const bannerItems = [
     <div key="1" className="text-xl font-bold">FOO FEST</div>,
-    <div key="2" className="text-xl font-bold">DECEMBER 2TH - 20th, 2024</div>,
-      <div key="3" className="text-xl font-bold">
+    <div key="2" className="text-xl font-bold">MARCH 24th - 28th, 2025</div>,
+    <div key="3" className="text-xl font-bold">
       <Image
         src={Star}
-        alt="Star"
-        width={35} 
-        height={35} 
-        priority 
+        alt="star"
+        width={35}
+        height={35}
+        priority
       />
     </div>,
-  ]
+  ];
+
+  const closeModal = () => setIsModalOpen(false);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div>
-      <Popup isOpen={isModalOpen} closeModal={closeModal}  />
-     <FrontPageHeader/>
-     <RunningBanner items={bannerItems} speed="medium"  />
+      <Popup isOpen={isModalOpen} closeModal={closeModal} />
+      <FrontPageHeader />
+      <RunningBanner items={bannerItems} speed="medium" />
     </div>
   );
 }

@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer
       // linjen over footeren
-      className="py-8 pb-40"
+      className="py-8 pb-40 border-t"
       style={{
         backgroundColor: "var(--background)",
         color: "var(--font-color)",
