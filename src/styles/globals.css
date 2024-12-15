@@ -58,3 +58,25 @@ p {
   font-family: "Bangla Sangam MN", sans-serif;
   color: var(--font-color);
 }
+
+@keyframes infiniteScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Slow, medium, fast speeds */
+.animate-infinite-scroll-slow {
+  animation: infiniteScroll 30s linear infinite;
+}
+
+.animate-infinite-scroll-medium {
+  animation: infiniteScroll 15s linear infinite;
+}
+
+.animate-infinite-scroll-fast {
+  animation: infiniteScroll 8s linear infinite;
+}

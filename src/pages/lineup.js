@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import Band from "@/components/Band"; 
 import FrontPage from "../../public/pics/frontpagepic.jpg";
 import DaySelector from "@/components/DaySelector";

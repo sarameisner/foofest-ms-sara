@@ -24,6 +24,18 @@ export default function Home() {
   if (loading) {
     return <Loading />; // Vis Loading-komponenten, mens data bliver hentet
   }
+  const bannerItems = [
+    <div key="1" className="text-xl font-bold">FOO FEST</div>,
+    <div key="2" className="text-xl font-bold">DECEMBER 2TH - 20th, 2024</div>,
+      <div key="3" className="text-xl font-bold">
+      <Image
+        src={Star}
+        alt="Star"
+        width={35} 
+        height={35} 
+        priority 
+      />
+    </div>,
 
   return (
     <div>
