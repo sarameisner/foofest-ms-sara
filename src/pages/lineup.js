@@ -12,7 +12,8 @@ const Schedule = () => {
   const [bands, setBands] = useState([]);
   const [day, setDay] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  
+  
   // Fetch schedule and band data
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +46,7 @@ const Schedule = () => {
   }
 
   return (
+    <div>
     <div className="p-6 mt-40">
       {/* Background Image */}
       <div className="relative h-[10rem]">
@@ -71,7 +73,6 @@ const Schedule = () => {
           </div>
         </div>
       </div>
-
       {/* Band Grid */}
       <div className="flex flex-row flex-wrap w-[80vw] m-auto justify-center lg:grid-cols-5 gap-3 mt-36 pb-[50px]">
         {bands.map((band, index) => {
@@ -100,6 +101,8 @@ const Schedule = () => {
           );
         })}
       </div>
+      
+    </div>
     </div>
   );
 };

@@ -11,7 +11,7 @@ const InfiniteBanner = ({ items = [], speed = "slow" }) => {
   }));
 
   return (
-    <div className="bg-gradient-background relative w-full pb-10 overflow-hidden pt-10">
+    <div className="bg-grey opacity-80 relative w-full pb-10 overflow-hidden pt-10">
       {/* Scrolling container */}
       <div
         className={`w-full inline-flex will-change-transform animate-infinite-scroll-${speed}`}

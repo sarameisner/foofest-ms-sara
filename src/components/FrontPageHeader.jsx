@@ -5,7 +5,10 @@ import lineupBracelet from "../../public/pics/bracelets1.png";
 import programBracelet from "../../public/pics/bracelets2.png";
 import ticketsBracelet from "../../public/pics/bracelets3.png";
 
+
 const FrontPageHeader = () => {
+
+
   return (
     <div className="relative w-full">
       {/* sektion med baggrundsbilledet */}
@@ -26,7 +29,6 @@ const FrontPageHeader = () => {
           </a>
         </div>
       </div>
-
       {/* sektion med armbånd */}
       <div className="w-full bg-[var(--background)] flex flex-col items-center space-y-12 py-24 z-10">
         <a href="/program" className="transform rotate-[-5deg] hover:scale-105 transition-transform">
