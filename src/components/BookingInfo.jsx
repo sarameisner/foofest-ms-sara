@@ -74,7 +74,7 @@ function BookingInfo({ userInfos, updateUserInfo }) {
     <div className="flex flex-col gap-8 mt-10">
       <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
         {formData.map((data, index) => (
-          <div key={index} className="p-4 rounded-md gap-10 border-2 border-[#881523]">
+          <div key={index} className="p-4 rounded-md gap-10 ">
             <h3 className="text-lg font-semibold mb-2 text-white">
               Ticket {index + 1} ({userInfos[index]?.ticketType || "Unknown"})
             </h3>
