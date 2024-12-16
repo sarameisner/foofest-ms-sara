@@ -27,9 +27,12 @@ function Camping() {
               onClick={() => {
                 if (!isDisabled) setSelectedCamping(area.area);
               }}
-              className={`relative group p-4 rounded-lg ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} ${isSelected ? "border-[#881523]" : "border-transparent"} border-2`}
+              className={`relative mb-3 group p-4 rounded-lg ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}  `}
             >
-              <div className="relative w-full p-8 group-hover:translate-x-4 group-hover:translate-y-4 transition-all duration-500 ease-out rounded-2xl flex flex-col justify-center items-center">
+                    <div className={`absolute inset-0 z-0 before:content-[''] before:absolute before:-top-4 before:-right-4 before:-z-10 before:w-96 before:h-32 before:border-[8px] before:border-[#881523] before:opacity-100 before:rounded-lg transition-all duration-500 ease-out group-hover:top-[1rem] group-hover:left-[1rem] ${isSelected ? "before:border-white" : ""}`} ></div>
+
+                    <div className="relative z-0 p-8 w-96  group-hover:translate-x-4 group-hover:translate-y-[-10px] transition-all duration-500 ease-out rounded-2xl bg-opacity-90 flex flex-col justify-center items-center">
+
                 <div className="absolute rounded-xl inset-0 z-0">
                   <Image src={isSelected ? backgroundWhite : backgroundCard} alt="Camping area background" layout="fill" objectFit="cover" quality={100} className="w-full rounded-xl" />
                 </div>

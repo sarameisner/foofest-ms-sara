@@ -110,8 +110,16 @@ function Checkout() {
         <div className="w-full md:w-1/3 md:my-12">
           {renderInfoBox()}
           <div className="flex justify-center gap-2 mt-4">
-            {currentStep > 0 && currentStep < steps.length - 1 && <ButtonWIcon text="Previous" defaultIcon={<Image src={StarIcon} alt="Previous Icon" width={20} height={20} />} activeIcon={<Image src={StarIcon} alt="Previous Icon Active" width={20} height={20} />} defaultBgColor="var(--accent-color)" activeBgColor="#ffffff" onClick={() => setCurrentStep((prev) => prev - 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
-            {currentStep < steps.length - 1 && <ButtonWIcon text="Next" defaultIcon={<Image src={StarIcon} alt="Next Icon" width={20} height={20} />} activeIcon={<Image src={StarIcon} alt="Next Icon Active" width={20} height={20} />} defaultBgColor="var(--accent-color)" activeBgColor="#ffffff" onClick={() => setCurrentStep((prev) => prev + 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
+            {currentStep > 0 && currentStep < steps.length - 1 && 
+            <ButtonWIcon text="Previous" 
+            defaultIcon={<Image src={StarIcon} alt="Previous Icon" width={20} height={20} />} 
+            activeIcon={<Image src={StarIcon} alt="Previous Icon Active" width={20} height={20} />} 
+            defaultBgColor="var(--accent-color)" 
+            activeColor="white"
+            activeBgColor="var(--accent-color)" onClick={() => setCurrentStep((prev) => prev - 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
+            {currentStep < steps.length - 1 && 
+            <ButtonWIcon text="Next"
+            activeColor="white" defaultIcon={<Image src={StarIcon} alt="Next Icon" width={20} height={20} />} activeIcon={<Image src={StarIcon} alt="Next Icon Active" width={20} height={20} />} defaultBgColor="var(--accent-color)" activeBgColor="var(--accent-color)" onClick={() => setCurrentStep((prev) => prev + 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
           </div>
         </div>
       </div>
