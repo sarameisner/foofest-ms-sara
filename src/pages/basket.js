@@ -16,7 +16,7 @@ const Basket = () => {
   const router = useRouter();
 
   const bookingFee = 99;
-  const totalWithFee = cartTotal + bookingFee;
+  const totalWithFee = cartTotal ;
 
   const handleCheckout = () => {
     router.push("/checkout");

@@ -26,6 +26,15 @@ export const CartProvider = ({ children }) => {
 
   // Nulstil timeren
   const resetTimer = () => setRemainingTime(null);
+  
+  const clearCart = () => {
+    setCartItems([]); // Ryd kurven
+    setUserInfos([]); // Nulstil brugerinfo
+    setSelectedCamping(null); // Nulstil campingvalg
+    setSelectedOptional([]); // Nulstil tilvalg
+    setCartTotal(0); // Nulstil totalpris
+    setReservationId(null); // Nulstil reservation ID
+  };
 
   // Timer-logik
   useEffect(() => {
@@ -33,6 +42,7 @@ export const CartProvider = ({ children }) => {
     if (remainingTime > 0) {
       timer = setInterval(() => setRemainingTime((prev) => prev - 1), 1000);
     } else if (remainingTime === 0) {
+      clearCart();
       resetTimer();
     }
     return () => clearInterval(timer);
@@ -159,6 +169,7 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         tickets,
+        clearCart,
         cartItems,
         setCartItems,
         userInfos,
