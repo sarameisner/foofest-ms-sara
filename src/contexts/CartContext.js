@@ -111,6 +111,17 @@ export const CartProvider = ({ children }) => {
     );
   }, [cartItems]);
 
+  const updateUserInfo = (index, updatedInfo) => {
+    setUserInfos((prevUserInfos) => {
+      const newUserInfos = [...prevUserInfos];
+      newUserInfos[index] = {
+        ...newUserInfos[index],
+        ...updatedInfo,
+      };
+      return newUserInfos;
+    });
+  };
+
   // Beregn totalpris
   useEffect(() => {
     const ticketTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -152,6 +163,7 @@ export const CartProvider = ({ children }) => {
         setCartItems,
         userInfos,
         setUserInfos,
+        updateUserInfo,
         selectedCamping,
         setSelectedCamping,
         selectedOptional,
