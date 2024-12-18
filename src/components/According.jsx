@@ -2,9 +2,8 @@
 import React, { useState, memo } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
-import Card from "../../public/pics/card.png"; // Billedimport
 
-// FAQItem komponenten for hvert spørgsmål
+// memo sørger for at en komponent kun rendes, hvis den props ændres
 const FAQItem = memo(({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -14,25 +13,24 @@ const FAQItem = memo(({ question, answer }) => {
         onClick={() => setIsOpen(!isOpen)} 
         className="w-full flex justify-between items-center text-left"
       >
-        <span className="text-[1.5rem] font-serif p-5 font-semibold text-white">{question}</span>
+        <span className="text-[1.5rem] font-serif p-[--padding-20] font-semibold text-[--font-color]">{question}</span>
         
         {/* Toggling arrows (back and down) with smooth transition */}
         {isOpen ? (
           <IoIosArrowBack 
-            className={`text-white transition-transform duration-[1200ms] ease-in-out`} 
+            className={`text-[--font-color] transition-transform duration-[1200ms] ease-in-out`} 
           />
         ) : (
           <IoIosArrowDown 
-            className={`text-white transition-transform duration-[1200ms] ease-in-out transform rotate-0`} 
+            className={`text-[--font-color] transition-transform duration-[1200ms] ease-in-out transform rotate-0`} 
           />
         )}
       </button>
       
       {/* Smooth transition for opening/closing the answer */}
       <div 
-        className={`overflow-hidden transition-all duration-[1200ms] ease-in-out ${isOpen ? 'max-h-screen' : 'max-h-0'}`}
-      >
-        {isOpen && <p className="p-10 text-black_color">{answer}</p>}
+        className={`overflow-hidden transition-all duration-[1200ms] ease-in-out ${isOpen ? 'max-h-screen' : 'max-h-0'}`}>
+        {isOpen && <p className="p-[--padding-50] text-black_color">{answer}</p>}
       </div>
     </div>
   );
@@ -44,7 +42,7 @@ FAQItem.displayName = "FAQItem";
 const According = ({ title, faqItems }) => {
   return (
     <div 
-      className="m-[100px] bg-cover bg-center"
+      className="m-[--padding-100] bg-cover bg-center"
     >
       <section className="grid w-[600px] m-auto bg-[var(--accent-color)] p-10  bg-opacity-50 rounded-lg">
         <div>

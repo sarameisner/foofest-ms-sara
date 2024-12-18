@@ -7,10 +7,15 @@ import DayFiltering from "@/components/DayFiltering";
 import Loading from "@/components/Loading"; // For days filtering
 
 const Program = () => {
+    //state for gemme festivallens schedule
   const [schedule, setSchedule] = useState({});
+  // state for at gemme banddata
   const [bands, setBands] = useState([]);
+  // state til at gemme den valgte data
   const [day, setDay] = useState("all");
+  //State til at gemme den valgte scene
   const [selectedStage, setSelectedStage] = useState("all");
+  // state til at håndtere loading status
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -61,10 +66,10 @@ const Program = () => {
   // Funktion til at filtrere programmet, men den virker altså ikke æv
   const filterDay = (filteredSchedule) => {
     if (day === "all") {
-      return filteredSchedule; // virker stadig ikke
+      return filteredSchedule; 
     }
 
-    const filtered = {}; // virker ikke æv
+    const filtered = {}; 
     Object.entries(filteredSchedule).forEach(([stage, stageData]) => {
       const filteredDays = Object.entries(stageData).reduce((acc, [dayKey, acts]) => {
         if (dayKey === day) {
@@ -110,7 +115,7 @@ const Program = () => {
   return (
     <div>
       <Banner text="PROGRAM" />
-      <div className="mt-10 p-4">
+      <div className="mt-[--padding-10] p-[--padding-5]">
         <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-10 justify-center mb-8">
           <h3 className="text-2xl text-center sm:text-left">Filter by...</h3>
           <div className="flex gap-4">
@@ -120,13 +125,13 @@ const Program = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 w-full max-w-[1200px] mx-auto pb-52">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 w-full max-w-[1200px] mx-auto pb-[--padding-200]">
           {Object.entries(filteredSchedule).length === 0 ? (
             <div className="text-center text-gray-500 col-span-full">No data available for this filter</div>
           ) : (
             Object.entries(filteredSchedule).map(([stage, days]) => (
               <div key={stage} className=" p-4">
-                <h2 className="text-xl text-center font-bold mb-5 uppercase">{stage}</h2>
+                <h2 className="text-xl text-center font-bold mb-[--padding-5] uppercase">{stage}</h2>
                 <div className="space-y-2">
                   {Object.entries(days).map(([dayKey, acts]) => (
   <div key={dayKey}>
@@ -134,14 +139,14 @@ const Program = () => {
     {acts
       ?.filter((event) => event.act.toLowerCase() !== "break") // Filtrer "break" ud
       .map((act, index) => (
-        <div key={index} className="grid grid-cols-[6fr,1fr,1fr] text-white items-center">
+        <div key={index} className="grid grid-cols-[6fr,1fr,1fr] text-[--font-color] items-center">
           <span className="uppercase">
             <Link href={`/bands/${bands.find(band => band.name === act.act)?.slug || act.act}`}>
               {act.act}
             </Link>
           </span>
           <span>-</span>
-          <span className="text-white">{act.start}</span>
+          <span className="text-[--font-color]">{act.start}</span>
         </div>
       ))}
   </div>

@@ -6,9 +6,8 @@ const Footer = () => {
   return (
     <footer
       // linjen over footeren
-      className="py-8 pb-40 border-t"
+      className="py-[--padding-20] pb-[--padding-150] border-t"
       style={{
-        backgroundColor: "var(--background)",
         color: "var(--font-color)",
         borderColor: "var(--light-grey-font)",
       }}
@@ -20,7 +19,7 @@ const Footer = () => {
    
         <div className="space-y-2 flex-1">
           {/* Overskrift */}
-          <h4 className="text-[6rem] text-center md:text-left" style={{ color: "var(--font-color)" }}>
+          <h4 className="text-[6rem] text-center md:text-left" >
             Foo
           </h4>
           {/* adresse */}
@@ -39,7 +38,7 @@ const Footer = () => {
           </a>
 
           <p
-            className="text-sm mt-4 font-sans text-center md:text-left"
+            className="text-sm mt-[--padding-20] font-sans text-center md:text-left"
             style={{
               color: "var(--light-grey-font)",
             }}
@@ -52,26 +51,15 @@ const Footer = () => {
         <div className="flex flex-wrap gap-4 md:gap-8 flex-1 justify-center md:justify-end">
           <div className="space-y-1 text-center md:text-left">
             <p
-              className="font-normal font-sans"
-              style={{
-                color: "var(--font-color)",
-              }}
+              
             >
               ABOUT
             </p>
             <p
-              className="font-normal font-sans"
-              style={{
-                color: "var(--font-color)",
-              }}
             >
               PROGRAM
             </p>
             <p
-              className="font-normal font-sans"
-              style={{
-                color: "var(--font-color)",
-              }}
             >
               TICKETS
             </p>
@@ -79,34 +67,19 @@ const Footer = () => {
 
           <div className="space-y-1 text-center md:text-left">
             <p
-              className="font-normal font-sans"
-              style={{
-                color: "var(--font-color)",
-              }}
             >
               FAQ
             </p>
             <p
-              className="font-normal font-sans"
-              style={{
-                color: "var(--font-color)",
-              }}
             >
               TERMS & CONDITIONS
             </p>
             <p
-              className="font-normal font-sans"
-              style={{
-                color: "var(--font-color)",
-              }}
+
             >
               PRIVACY POLICY
             </p>
             <p
-              className="font-normal font-sans"
-              style={{
-                color: "var(--font-color)",
-              }}
             >
               COOKIE POLICY
             </p>

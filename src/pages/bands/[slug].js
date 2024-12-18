@@ -116,29 +116,32 @@ const BandDetails = () => {
     <div>
       <Banner text={bandDetails.name} />
 
-      <div className="grid max-w-[1000px] m-auto grid-cols-1 mt-10 mb-52 md:grid-cols-2 gap-20">
-        <div className="relative w-full h-64 md:h-96 px-4 md:px-0">
-          <div className="relative p-2 w-96 before:content-[''] before:absolute before:-top-4 before:-right-4 before:-z-10 before:w-full before:h-full before:border-[8px] before:border-[#881523] before:opacity-100 before:rounded-lg">
+      <div className="grid max-w-[1000px] m-auto grid-cols-1 mt-10 mb-[--padding-200] md:grid-cols-2 gap-20">
+        <div className="relative w-full h-64 md:h-96 px-[--padding-20] md:px-0">
+          <div className="relative p-[--padding-10] w-96 before:content-[''] before:absolute before:-top-4 before:-right-4 before:-z-10 before:w-full before:h-full before:border-[8px] before:border-[--accent-color] before:opacity-100 before:rounded-lg">
             <img src={imageUrl} alt={bandDetails.name} className="rounded-lg" />
           </div>
         </div>
-        <div className="px-4 md:px-0">
+        <div className="px-[--padding-20] md:px-0">
           {bandSchedule && (
             <div className="grid grid-cols-3 md:grid-rows-3 gap-4">
-              <p className="text-center md:text-left mb-2">
+              <p className="text-center md:text-left mb-[--padding-10]">
                 <span className="text-xl uppercase">{bandSchedule.day}</span>
               </p>
-              <p className="text-center md:text-left mb-2">
+              <p className="text-center md:text-left mb-[--padding-10]">
                 <span className="text-xl">{bandSchedule.time}</span>
               </p>
-              <p className="text-center md:text-left mb-2">
+              <p className="text-center md:text-left mb-[--padding-10]">
                 <span className="text-xl uppercase">{bandSchedule.stage}</span>
               </p>
             </div>
           )}
-          <p className="mb-10">{bandDetails.bio}</p>
-          <div className="flex justify-center mt-10">
-            <ButtonWIcon text="Add to your favorite" defaultIcon={<Image src={Hjerte} alt="Heart Icon" width={20} height={20} />} activeIcon={<Image src={SortHjerte} alt="Active Icon" width={20} height={20} />} defaultBgColor="#881523" onClick={handleAddToFavorites} />
+          <p className="mb-[--padding-50]">{bandDetails.bio}</p>
+          <div className="flex justify-center mt-[--padding-50]">
+            <ButtonWIcon text="Add to your favorite" 
+            defaultIcon={<Image src={Hjerte} alt="Heart Icon" width={20} height={20} />} 
+            activeIcon={<Image src={SortHjerte} alt="Active Icon" width={20} height={20} />} 
+             onClick={handleAddToFavorites} />
           </div>
         </div>
       </div>
