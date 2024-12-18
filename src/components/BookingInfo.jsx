@@ -8,7 +8,6 @@ import BlackStar from "../../public/pics/blackstar.svg";
 function BookingInfo({ userInfos, updateUserInfo, onFormSubmit }) {
   // state til at holde dataen
   const [formData, setFormData] = useState([]);
-  
 
   // state til fejl & succes beskeder
   const [formError, setFormError] = useState(null);
@@ -42,7 +41,7 @@ function BookingInfo({ userInfos, updateUserInfo, onFormSubmit }) {
     updateUserInfo(index, { [field]: value });
   };
 
-  // Håndter formularindsendelsen
+  // håndter formularindsendelsen
   const handleSubmit = async (e) => {
     e.preventDefault();
     // opretter datarray til at indsætte i supbase
@@ -56,15 +55,17 @@ function BookingInfo({ userInfos, updateUserInfo, onFormSubmit }) {
       // indsætter dataen i supabase
       const { error } = await supabase.from("foofest").insert(insertData);
 
+      // fejlbesked
       if (error) {
         console.error("Error inserting data: ", error.message);
         setFormError("Failed to save booking information.");
         setSuccessMessage(null);
+        // hvis indsendelsen lykkedes kommer denne besked
       } else {
         setSuccessMessage("Your booking information has been saved successfully!");
         setFormError(null);
-
-      }if (onFormSubmit) onFormSubmit();
+      }
+      if (onFormSubmit) onFormSubmit();
     } catch (err) {
       console.error("Unexpected error: ", err.message);
       setFormError("Unexpected error occurred.");
@@ -109,3 +110,6 @@ function BookingInfo({ userInfos, updateUserInfo, onFormSubmit }) {
 }
 
 export default BookingInfo;
+
+// koden her opretter en formular til at indsamle brugeroplysninger - det er tredje sted i checkoutflowet
+// brugeren kan indtaste navn, email og fødselsdag - og alt dette data gemmer vi i vores database i supabase
