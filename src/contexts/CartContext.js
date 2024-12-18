@@ -41,7 +41,7 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     let timer;
     if (remainingTime > 0) {
-      timer = setInterval(() => setRemainingTime((prev) => prev - 1), 100);
+      timer = setInterval(() => setRemainingTime((prev) => prev - 1), 1000);
     } else if (remainingTime === 0) {
       clearCart();
       resetTimer();

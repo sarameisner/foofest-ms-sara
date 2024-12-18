@@ -6,7 +6,7 @@ import ButtonWIcon from "./ButtonWIcon";
 import ticketDisplay from "../../public/pics/ticketdisplay.png";
 import supabase from "@/config/supabaseClient"; 
 
-const CheckoutCompleted = ({ reservationId }) => {
+const CheckoutCompleted = () => {
   const [email, setEmail] = useState(null);  
   const [loading, setLoading] = useState(true);  
   const [error, setError] = useState(null);  //
