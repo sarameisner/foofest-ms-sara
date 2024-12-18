@@ -23,7 +23,7 @@ const ListItem = ({
       <div className="flex items-center gap-2">
         <button 
           onClick={() => onRemove(item)} 
-          className="bg-white text-black rounded-full w-8 h-8 flex items-center justify-center" 
+          className="bg-[ --light-grey] text-[--color-black] rounded-full w-8 h-8 flex items-center justify-center" 
           disabled={quantity <= 0}
         >
           -
@@ -31,7 +31,7 @@ const ListItem = ({
         <span>{quantity}</span>
         <button 
           onClick={() => onAdd(item)} 
-          className="bg-white text-black rounded-full w-8 h-8 flex items-center justify-center"
+          className="bg-[ --light-grey] text-[--color-black] rounded-full w-8 h-8 flex items-center justify-center"
         >
           +
         </button>

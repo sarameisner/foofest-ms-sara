@@ -24,7 +24,7 @@ const DaySelector = ({ onDayChange, selectedDay }) => {
           style={{ backgroundColor: "transparent" }}
             key={day}
             onClick={() => handleDayClick(day)}
-            className="w-full text-start font-bold mb-2 text-white uppercase"
+            className="w-full text-start font-bold mb-2 text-[--font-color] uppercase"
           >
             {selectedDay === dayMapping[day] && "☆"} 
             {day}
@@ -39,7 +39,7 @@ const DaySelector = ({ onDayChange, selectedDay }) => {
           style={{ backgroundColor: "transparent" }}
             key={day}
             onClick={() => handleDayClick(day)}
-            className="w-full font-bold text-start mb-2 text-white uppercase"
+            className="w-full font-bold text-start mb-[--padding-10] text-[--font-color] uppercase"
     
           >
             {selectedDay === dayMapping[day] || day === "All" ? "☆" : null}
