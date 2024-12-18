@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ButtonWIcon = ({ text, defaultIcon, activeIcon, defaultBgColor, activeColor, activeBgColor ,defaultColor, onClick }) => {
+const ButtonWIcon = ({ text, defaultIcon, activeIcon, defaultBgColor, activeColor, activeBgColor, className,  disabled ,defaultColor, onClick }) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleButtonClick = () => {
@@ -10,6 +10,7 @@ const ButtonWIcon = ({ text, defaultIcon, activeIcon, defaultBgColor, activeColo
 
   return (
     <button
+    
       onClick={handleButtonClick}
       style={{
         backgroundColor: isActive ? activeBgColor || "#ffffff" : defaultBgColor || "#881523",
@@ -21,7 +22,10 @@ const ButtonWIcon = ({ text, defaultIcon, activeIcon, defaultBgColor, activeColo
         cursor: "pointer",
         color: isActive ? activeColor || "#000000" : defaultColor || "#ffffff",
       }}
-      className="hover:opacity-90 transition-all duration-200"
+      disabled={disabled}
+      className={`${className} ${
+        disabled ? "opacity-50 cursor-not-allowed" : ""
+      }`}
     >
       <span style={{ marginRight: "0.5rem", display: "flex", alignItems: "center"}}>{isActive ? activeIcon : defaultIcon}</span>
       <span>{text}</span>

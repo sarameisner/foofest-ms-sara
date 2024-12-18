@@ -34,13 +34,14 @@ export const CartProvider = ({ children }) => {
     setSelectedOptional([]); // Nulstil tilvalg
     setCartTotal(0); // Nulstil totalpris
     setReservationId(null); // Nulstil reservation ID
+
   };
 
   // Timer-logik
   useEffect(() => {
     let timer;
     if (remainingTime > 0) {
-      timer = setInterval(() => setRemainingTime((prev) => prev - 1), 1000);
+      timer = setInterval(() => setRemainingTime((prev) => prev - 1), 100);
     } else if (remainingTime === 0) {
       clearCart();
       resetTimer();
@@ -164,13 +165,14 @@ export const CartProvider = ({ children }) => {
       setCartItems((prevItems) => prevItems.map((item) => (item.id === productId ? { ...item, quantity } : item)));
     }
   };
-
+  
   return (
     <CartContext.Provider
       value={{
         tickets,
         clearCart,
         cartItems,
+        setCartTotal,
         setCartItems,
         userInfos,
         setUserInfos,

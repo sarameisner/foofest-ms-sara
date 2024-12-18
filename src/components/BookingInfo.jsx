@@ -5,9 +5,10 @@ import Star from "../../public/pics/star.svg";
 import Image from "next/image";
 import BlackStar from "../../public/pics/blackstar.svg";
 
-function BookingInfo({ userInfos, updateUserInfo }) {
+function BookingInfo({ userInfos, updateUserInfo, onFormSubmit }) {
   // state til at holde dataen
   const [formData, setFormData] = useState([]);
+  
 
   // state til fejl & succes beskeder
   const [formError, setFormError] = useState(null);
@@ -62,7 +63,8 @@ function BookingInfo({ userInfos, updateUserInfo }) {
       } else {
         setSuccessMessage("Your booking information has been saved successfully!");
         setFormError(null);
-      }
+
+      }if (onFormSubmit) onFormSubmit();
     } catch (err) {
       console.error("Unexpected error: ", err.message);
       setFormError("Unexpected error occurred.");

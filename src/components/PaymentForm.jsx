@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/Payment.module.css";
 
-function PaymentForm() {
+function PaymentForm({ onValidityChange }) {
   const [paymentDetails, setPaymentDetails] = useState({
     cardName: "",
     cardNumber: "",
@@ -43,6 +43,11 @@ function PaymentForm() {
   const isCardNumberValid = paymentDetails.cardNumber.length === 16;
   const isExpiryDateValid = /^\d{2}\/\d{2}$/.test(paymentDetails.expiryDate);
   const isCvvValid = paymentDetails.cvv.length === 3;
+  const isFormValid = isCardNumberValid && isExpiryDateValid && isCvvValid;
+
+  useEffect(() => {
+    onValidityChange(isFormValid);
+  }, [isFormValid, onValidityChange]);
 
   return (
     <div className="mt-10">

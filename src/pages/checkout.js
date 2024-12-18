@@ -13,9 +13,32 @@ import StarIcon from "../../public/pics/star.svg";
 function Checkout() {
   // statet der holder styr på hvilket step vi er på i vores flow
   const [currentStep, setCurrentStep] = useState(0);
-  // her henter vi vores værdier fra CartContext
-  const { cartItems, cartTotal, selectedCamping, selectedOptional, remainingTime, formatTime, resetTimer, startTimer, userInfos, updateUserInfo } = useContext(CartContext);
+// state der tjekker om vi har submittet info til database
+const [isSubmitted, setIsSubmitted] = useState(false); // Track om der er trykket på submit
+const [stepSpecificDisable, setStepSpecificDisable] = useState(true);
+//checker om payment er udfyldt
+const [isPaymentValid, setIsPaymentValid] = useState(false);
 
+  // her henter vi vores værdier fra CartContext
+  const { cartItems,cartTotal, selectedCamping, selectedOptional, remainingTime, formatTime, resetTimer, startTimer, userInfos, updateUserInfo } = useContext(CartContext);
+
+
+  const handlePaymentValidityChange = (isValid) => {
+    setIsPaymentValid(isValid);
+  };
+// håndtere deaktiverting baseret på trine
+useEffect(() => {
+  if (currentStep === 3) {
+    setStepSpecificDisable(!isPaymentValid);
+
+  }else if (currentStep=== 2) {
+    setStepSpecificDisable(!isSubmitted); // Deaktiver knappen, hvis der ikke er trykket Submit
+  } else if (currentStep === 0) {
+    setStepSpecificDisable(!selectedCamping); // Deaktiver knappen, hvis camping ikke er valgt
+  } else {
+    setStepSpecificDisable(false); // For alle andre trin er knappen ikke trinspecifikt deaktiveret
+  }
+}, [currentStep, isSubmitted, isPaymentValid, selectedCamping]);
   // timeren starter og bliver nulstillet hvis siden bliver forladt
   useEffect(() => {
     startTimer();
@@ -29,7 +52,7 @@ function Checkout() {
     }
   }, [currentStep]);
 
-  // vores steps med de tilhørende komponenter
+ 
   const steps = [
     {
       title: "Choose camping site",
@@ -41,11 +64,11 @@ function Checkout() {
     },
     {
       title: "Information",
-      content: <BookingInfo userInfos={userInfos} updateUserInfo={updateUserInfo} />,
+      content: <BookingInfo userInfos={userInfos} updateUserInfo={updateUserInfo} onFormSubmit={() => setIsSubmitted(true)}  />,
     },
     {
       title: "Payment",
-      content: <PaymentForm />,
+      content: <PaymentForm onValidityChange={handlePaymentValidityChange} />,
     },
     {
       title: "",
@@ -116,10 +139,25 @@ function Checkout() {
             activeIcon={<Image src={StarIcon} alt="Previous Icon Active" width={20} height={20} />} 
             defaultBgColor="var(--accent-color)" 
             activeColor="white"
+            disabled={!cartItems || cartItems.length === 0}
             activeBgColor="var(--accent-color)" onClick={() => setCurrentStep((prev) => prev - 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
             {currentStep < steps.length - 1 && 
             <ButtonWIcon text="Next"
-            activeColor="white" defaultIcon={<Image src={StarIcon} alt="Next Icon" width={20} height={20} />} activeIcon={<Image src={StarIcon} alt="Next Icon Active" width={20} height={20} />} defaultBgColor="var(--accent-color)" activeBgColor="var(--accent-color)" onClick={() => setCurrentStep((prev) => prev + 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
+            activeColor="white" 
+           
+            defaultIcon={<Image src={StarIcon} alt="Next Icon" width={20} height={20} />} 
+            activeIcon={<Image src={StarIcon} alt="Next Icon Active" width={20} height={20} />} 
+            defaultBgColor="var(--accent-color)" 
+            activeBgColor="var(--accent-color)" onClick={() => setCurrentStep((prev) => prev + 1)}
+            disabled={
+              stepSpecificDisable || // Deaktiver, hvis trin-specifik handling ikke er opfyldt
+              (!cartItems || cartItems.length === 0) // Deaktiver, hvis kurven er tom
+            }// Knappen deaktiveres, hvis kurven er tom
+            className={`px-4 py-2 rounded-lg ${
+              stepSpecificDisable
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-white hover:text-[var(--accent-color)]"
+            }`}/>}
           </div>
         </div>
       </div>

@@ -18,9 +18,15 @@ const Basket = () => {
   const bookingFee = 99;
   const totalWithFee = cartTotal ;
 
+  // så man ikke kan gå til checkout hvis kurven er tom
   const handleCheckout = () => {
-    router.push("/checkout");
+    if (!isCheckoutDisabled) {
+      router.push("/checkout");
+    }
   };
+
+  // Definer en konstant for at deaktivere knappen
+  const isCheckoutDisabled = cartItems.length === 0;
 
   const handleUpdateItemQuantity = (itemId, newQuantity) => {
     if (newQuantity <= 0) {
@@ -112,8 +118,11 @@ const Basket = () => {
             activeIcon={<Image src={Star} alt="Star Icon Active" width={20} height={20} />} 
             defaultBgColor="#881523" 
             activeBgColor="#ffffff" 
+            disabled={cartItems.length === 0}
             onClick={handleCheckout} 
-            className="mt-6 w-full h-12 grid  m-auto items-center justify-center" 
+            className={`mt-6 w-full h-12 grid m-auto items-center justify-center ${
+                isCheckoutDisabled ? "opacity-50 cursor-not-allowed" : ""
+              }`}
           />
         </div>
       </div>
