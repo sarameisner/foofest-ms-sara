@@ -116,13 +116,13 @@ const BandDetails = () => {
     <div>
       <Banner text={bandDetails.name} />
 
-      <div className="grid max-w-[1000px] m-auto grid-cols-1 mt-10 mb-[--padding-200] md:grid-cols-1 gap-20">
-        <div className="relative w-full h-64 md:h-96 px-[--padding-20] md:px-0">
-          <div className="relative p-[--padding-10] w-96 before:content-[''] before:absolute before:-top-4 before:-right-4 before:-z-10 before:w-full before:h-full before:border-[8px] before:border-[--accent-color] before:opacity-100 before:rounded-lg">
-            <img src={imageUrl} alt={bandDetails.name} className="rounded-lg" />
-          </div>
-        </div>
-        <div className="px-[--padding-20] md:px-0">
+      <div className="grid max-w-[1000px] m-auto mt-10 mb-[--padding-200] grid-cols-1 md:grid-cols-2 gap-10 ">
+      <div className="relative w-full h-full md:h-96 px-[--padding-20] md:px-0 flex justify-center md:justify-start">
+  <div className="relative p-[--padding-10] w-96 before:content-[''] before:absolute before:-top-4 before:-right-4 before:-z-10 before:w-full before:h-full before:border-[8px] before:border-[--accent-color] before:opacity-100 before:rounded-lg">
+    <img src={imageUrl} alt={bandDetails.name} className="rounded-lg" />
+  </div>
+</div>
+<div className="px-[--padding-50] sm:px-[--padding-20]">
           {bandSchedule && (
             <div className="grid grid-cols-3 md:grid-rows-3 gap-4">
               <p className="text-center md:text-left mb-[--padding-10]">
