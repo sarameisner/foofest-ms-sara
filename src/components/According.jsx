@@ -42,17 +42,17 @@ FAQItem.displayName = "FAQItem";
 const According = ({ title, faqItems }) => {
   return (
     <div 
-      className="m-[--padding-100] bg-cover bg-center"
-    >
-      <section className="grid w-[600px] m-auto bg-[var(--accent-color)] p-10  bg-opacity-50 rounded-lg">
-        <div>
-          <h2 className="text-3xl mb-6 font-bold text-center text-white">{title}</h2>
-          {faqItems.map((item, index) => (
-            <FAQItem key={index} question={item.question} answer={item.answer} />
-          ))}
-        </div>
-      </section>
-    </div>
+    className="m-[--padding-100] bg-cover bg-center"
+  >
+    <section className="grid w-full max-w-[600px] m-auto bg-[var(--accent-color)] p-6 sm:p-10 bg-opacity-50 rounded-lg">
+      <div>
+        <h2 className="text-xl sm:text-3xl mb-4 sm:mb-6 font-bold text-center text-white">{title}</h2>
+        {faqItems.map((item, index) => (
+          <FAQItem key={index} question={item.question} answer={item.answer} />
+        ))}
+      </div>
+    </section>
+  </div>
   );
 };
 
