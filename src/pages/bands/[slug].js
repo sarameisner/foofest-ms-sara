@@ -116,7 +116,7 @@ const BandDetails = () => {
     <div>
       <Banner text={bandDetails.name} />
 
-      <div className="grid max-w-[1000px] m-auto grid-cols-1 mt-10 mb-[--padding-200] md:grid-cols-2 gap-20">
+      <div className="grid max-w-[1000px] m-auto grid-cols-1 mt-10 mb-[--padding-200] md:grid-cols-1 gap-20">
         <div className="relative w-full h-64 md:h-96 px-[--padding-20] md:px-0">
           <div className="relative p-[--padding-10] w-96 before:content-[''] before:absolute before:-top-4 before:-right-4 before:-z-10 before:w-full before:h-full before:border-[8px] before:border-[--accent-color] before:opacity-100 before:rounded-lg">
             <img src={imageUrl} alt={bandDetails.name} className="rounded-lg" />
