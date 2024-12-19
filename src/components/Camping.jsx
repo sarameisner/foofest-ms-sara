@@ -6,33 +6,39 @@ import { CartContext } from "../contexts/CartContext";
 import Loading from "./Loading";
 
 function Camping() {
+  // henter værdierne fra cartcontext
   const { campingData, loading, error, selectedCamping, setSelectedCamping } = useContext(CartContext);
 
-  // Håndterer indlæsningsstatus og fejl
+  // håndterer indlæsningsstatus og fejl
+  // viser loading komponentet når dataen er igang med at indlæse
   if (loading) return <Loading />;
+  // viser fejlbeskeden hvis der skulle opstå en fejl
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
+  // og hvis ingen campingområder er tilgængelige kommer denne besked
   if (!campingData || campingData.length === 0) return <p className="text-center">No camping options available.</p>;
 
   return (
     <div className="mt-10">
       <h2 className="text-center text-xl font-bold mb-6">Select Your Camping Area</h2>
+      {/* liste over campingområder, som er dynamisk genereret fra campingData i cartcontext */}
       <ul className="grid grid-cols-1 sm:grid-cols-1 w-[400px] m-auto mt-5 lg:grid-cols-1 gap-5">
         {campingData.map((area) => {
+          // tjekker om et område skal være deaktiveret eller markeret som valgt
           const isDisabled = area.available === 0;
           const isSelected = selectedCamping === area.area;
 
           return (
             <li
+              // unik nøgle for hver campingområde
               key={area.area}
               onClick={() => {
                 if (!isDisabled) setSelectedCamping(area.area);
               }}
               className={`relative mb-3 group p-4 rounded-lg ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}  `}
             >
-                    <div className={`absolute inset-0 z-0 before:content-[''] before:absolute before:-top-4 before:-right-4 before:-z-10 before:w-96 before:h-32 before:border-[8px] before:border-[#881523] before:opacity-100 before:rounded-lg transition-all duration-500 ease-out group-hover:top-[1rem] group-hover:left-[1rem] ${isSelected ? "before:border-white" : ""}`} ></div>
+              <div className={`absolute inset-0 z-0 before:content-[''] before:absolute before:-top-4 before:-right-4 before:-z-10 before:w-96 before:h-32 before:border-[8px] before:border-[#881523] before:opacity-100 before:rounded-lg transition-all duration-500 ease-out group-hover:top-[1rem] group-hover:left-[1rem] ${isSelected ? "before:border-white" : ""}`}></div>
 
-                    <div className="relative z-0 p-8 w-96  group-hover:translate-x-4 group-hover:translate-y-[-10px] transition-all duration-500 ease-out rounded-2xl bg-opacity-90 flex flex-col justify-center items-center">
-
+              <div className="relative z-0 p-8 w-96  group-hover:translate-x-4 group-hover:translate-y-[-10px] transition-all duration-500 ease-out rounded-2xl bg-opacity-90 flex flex-col justify-center items-center">
                 <div className="absolute rounded-xl inset-0 z-0">
                   <Image src={isSelected ? backgroundWhite : backgroundCard} alt="Camping area background" layout="fill" objectFit="cover" quality={100} className="w-full rounded-xl" />
                 </div>

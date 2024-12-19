@@ -13,32 +13,35 @@ import StarIcon from "../../public/pics/star.svg";
 function Checkout() {
   // statet der holder styr på hvilket step vi er på i vores flow
   const [currentStep, setCurrentStep] = useState(0);
-// state der tjekker om vi har submittet info til database
-const [isSubmitted, setIsSubmitted] = useState(false); // Track om der er trykket på submit
-const [stepSpecificDisable, setStepSpecificDisable] = useState(true);
-//checker om payment er udfyldt
-const [isPaymentValid, setIsPaymentValid] = useState(false);
+
+  // state der tjekker om vi har submittet info til database
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // state til at håndtere om next knappen skal være aktiv
+  const [stepSpecificDisable, setStepSpecificDisable] = useState(true);
+
+  // checker om payment er udfyldt
+  const [isPaymentValid, setIsPaymentValid] = useState(false);
 
   // her henter vi vores værdier fra CartContext
-  const { cartItems,cartTotal, selectedCamping, selectedOptional, remainingTime, formatTime, resetTimer, startTimer, userInfos, updateUserInfo } = useContext(CartContext);
+  const { cartItems, cartTotal, selectedCamping, selectedOptional, remainingTime, formatTime, resetTimer, startTimer, userInfos, updateUserInfo } = useContext(CartContext);
 
-
+  // håndterer ændringer i betalingsvalidering
   const handlePaymentValidityChange = (isValid) => {
     setIsPaymentValid(isValid);
   };
-// håndtere deaktiverting baseret på trine
-useEffect(() => {
-  if (currentStep === 3) {
-    setStepSpecificDisable(!isPaymentValid);
-
-  }else if (currentStep=== 2) {
-    setStepSpecificDisable(!isSubmitted); // Deaktiver knappen, hvis der ikke er trykket Submit
-  } else if (currentStep === 0) {
-    setStepSpecificDisable(!selectedCamping); // Deaktiver knappen, hvis camping ikke er valgt
-  } else {
-    setStepSpecificDisable(false); // For alle andre trin er knappen ikke trinspecifikt deaktiveret
-  }
-}, [currentStep, isSubmitted, isPaymentValid, selectedCamping]);
+  // håndtere deaktiverting baseret på det aktuelle trin
+  useEffect(() => {
+    if (currentStep === 3) {
+      setStepSpecificDisable(!isPaymentValid);
+    } else if (currentStep === 2) {
+      setStepSpecificDisable(!isSubmitted); // deaktiver knappen, hvis der ikke er trykket submit
+    } else if (currentStep === 0) {
+      setStepSpecificDisable(!selectedCamping); // hvis camping ikke er valgt
+    } else {
+      setStepSpecificDisable(false); //
+    }
+  }, [currentStep, isSubmitted, isPaymentValid, selectedCamping]);
   // timeren starter og bliver nulstillet hvis siden bliver forladt
   useEffect(() => {
     startTimer();
@@ -52,7 +55,7 @@ useEffect(() => {
     }
   }, [currentStep]);
 
- 
+  //  her er definationen af trin i checkoutflowet, og her henter vi de tilhørende komponenter
   const steps = [
     {
       title: "Choose camping site",
@@ -64,7 +67,7 @@ useEffect(() => {
     },
     {
       title: "Information",
-      content: <BookingInfo userInfos={userInfos} updateUserInfo={updateUserInfo} onFormSubmit={() => setIsSubmitted(true)}  />,
+      content: <BookingInfo userInfos={userInfos} updateUserInfo={updateUserInfo} onFormSubmit={() => setIsSubmitted(true)} />,
     },
     {
       title: "Payment",
@@ -133,31 +136,24 @@ useEffect(() => {
         <div className="w-full md:w-1/3 md:my-12">
           {renderInfoBox()}
           <div className="flex justify-center gap-2 mt-4">
-            {currentStep > 0 && currentStep < steps.length - 1 && 
-            <ButtonWIcon text="Previous" 
-            defaultIcon={<Image src={StarIcon} alt="Previous Icon" width={20} height={20} />} 
-            activeIcon={<Image src={StarIcon} alt="Previous Icon Active" width={20} height={20} />} 
-            defaultBgColor="var(--accent-color)" 
-            activeColor="white"
-            disabled={!cartItems || cartItems.length === 0}
-            activeBgColor="var(--accent-color)" onClick={() => setCurrentStep((prev) => prev - 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
-            {currentStep < steps.length - 1 && 
-            <ButtonWIcon text="Next"
-            activeColor="white" 
-           
-            defaultIcon={<Image src={StarIcon} alt="Next Icon" width={20} height={20} />} 
-            activeIcon={<Image src={StarIcon} alt="Next Icon Active" width={20} height={20} />} 
-            defaultBgColor="var(--accent-color)" 
-            activeBgColor="var(--accent-color)" onClick={() => setCurrentStep((prev) => prev + 1)}
-            disabled={
-              stepSpecificDisable || // Deaktiver, hvis trin-specifik handling ikke er opfyldt
-              (!cartItems || cartItems.length === 0) // Deaktiver, hvis kurven er tom
-            }// Knappen deaktiveres, hvis kurven er tom
-            className={`px-4 py-2 rounded-lg ${
-              stepSpecificDisable
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-white hover:text-[var(--accent-color)]"
-            }`}/>}
+            {currentStep > 0 && currentStep < steps.length - 1 && <ButtonWIcon text="Previous" defaultIcon={<Image src={StarIcon} alt="Previous Icon" width={20} height={20} />} activeIcon={<Image src={StarIcon} alt="Previous Icon Active" width={20} height={20} />} defaultBgColor="var(--accent-color)" activeColor="white" disabled={!cartItems || cartItems.length === 0} activeBgColor="var(--accent-color)" onClick={() => setCurrentStep((prev) => prev - 1)} className="px-4 py-2 rounded-lg hover:bg-white hover:text-[var(--accent-color)]" />}
+            {currentStep < steps.length - 1 && (
+              <ButtonWIcon
+                text="Next"
+                activeColor="white"
+                defaultIcon={<Image src={StarIcon} alt="Next Icon" width={20} height={20} />}
+                activeIcon={<Image src={StarIcon} alt="Next Icon Active" width={20} height={20} />}
+                defaultBgColor="var(--accent-color)"
+                activeBgColor="var(--accent-color)"
+                onClick={() => setCurrentStep((prev) => prev + 1)}
+                disabled={
+                  stepSpecificDisable || // Deaktiver, hvis trin-specifik handling ikke er opfyldt
+                  !cartItems ||
+                  cartItems.length === 0 // Deaktiver, hvis kurven er tom
+                } // Knappen deaktiveres, hvis kurven er tom
+                className={`px-4 py-2 rounded-lg ${stepSpecificDisable ? "opacity-50 cursor-not-allowed" : "hover:bg-white hover:text-[var(--accent-color)]"}`}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -166,3 +162,9 @@ useEffect(() => {
 }
 
 export default Checkout;
+
+// her håndterer vi altså checkout flowet
+
+// vi har opdelt flowet i trin og bruger state til at styre hvilke trin brugeren befinder sig på
+
+// siden opdaterer dynamisk en infoboks med brugerens valg og den totalepris for de valg

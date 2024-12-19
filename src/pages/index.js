@@ -4,22 +4,26 @@ import React, { useState, useEffect } from "react";
 import Loading from "@/components/Loading";
 import FrontPageHeader from "@/components/FrontPageHeader";
 import Popup from "@/components/PopUp";
-import According from "@/components/According"
-
+import According from "@/components/According";
 
 export default function Home() {
+  // state til at styre om login pop uppen er åben eller ikke
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // indlæsningsstatus
   const [loading, setLoading] = useState(true);
 
+  // effekt til at fjerne loading efter 100ms
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 100); // Fjern loading efter 100ms
-    return () => clearTimeout(timer); // Rens op
+    const timer = setTimeout(() => setLoading(false), 100);
+    return () => clearTimeout(timer);
   }, []);
 
+  // pop up åbner når siden indlæses
   useEffect(() => {
-    setIsModalOpen(true); // Åbn modal ved første render
+    setIsModalOpen(true);
   }, []);
 
+  // array med spg og svar til vores faq sektion
   const faq1 = [
     {
       question: "What is Foo Fest?",
@@ -33,12 +37,8 @@ export default function Home() {
       question: "How do i buy tickets",
       answer: "Tickets can be sold in our ticket link up top. You can either but a VIP ticket priced at 1299,- or a regular ticket priced at 799,-",
     },
-    
   ];
-
-
-
-
+  // lukning af pop up
   const closeModal = () => setIsModalOpen(false);
 
   if (loading) {
@@ -49,8 +49,7 @@ export default function Home() {
     <div>
       <Popup isOpen={isModalOpen} closeModal={closeModal} />
       <FrontPageHeader />
-      <According title="WHAT IS FOO FEST" faqItems={faq1} /> 
-
+      <According title="WHAT IS FOO FEST" faqItems={faq1} />
     </div>
   );
 }
