@@ -106,7 +106,7 @@ const BandDetails = () => {
     }
   }
   let imageUrl;
-  if (bandDetails.logo.match(/[^/]+(jpg|png)$/)) {
+  if (bandDetails.logo.match(/[^/]+(jpg|png|svg|JPG)$/)) {
     imageUrl = "https://peach-polar-planarian.glitch.me/logos/" + bandDetails.logo;
   } else {
     imageUrl = bandDetails.logo;
