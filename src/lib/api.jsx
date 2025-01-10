@@ -1,46 +1,47 @@
-const API_BASE_URL = "http://localhost:8080";
+// lib/api.js
+// denne fil samler alle API-kald til én central fil for at gøre koden mere overskuelig og nemmere at vedligeholde
 
-export const api = {
-  getAvailableSpots: async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/available-spots`);
-      if (!response.ok) throw new Error("Failed to fetch spots");
-      return response.json();
-    } catch (error) {
-      console.error("Error fetching spots:", error);
-      throw error;
-    }
-  },
+// henter campingdata fra API
+export const fetchCampingData = async () => {
+  try {
+    const response = await fetch("https://peach-polar-planarian.glitch.me/available-spots"); // henter ledige campingpladser
+    if (!response.ok) throw new Error("Failed to fetch camping data"); // håndterer fejl
+    return await response.json(); // returner campingdata
+  } catch (error) {
+    console.error("Error fetching camping data:", error.message);
+    throw error;
+  }
+};
 
-  reserveSpot: async (area, amount) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/reserve-spot`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ area, amount }),
-      });
-      if (!response.ok) throw new Error("Failed to reserve spot");
-      return response.json();
-    } catch (error) {
-      console.error("Error reserving spot:", error);
-      throw error;
-    }
-  },
+// reserver en campingplads
+export const reserveSpot = async (area, amount) => {
+  try {
+    const response = await fetch("https://peach-polar-planarian.glitch.me/reserve-spot", {
+      method: "PUT", // API'en kræver en PUT-anmodning for at reservere
+      headers: { "Content-Type": "application/json" }, // sæt headers til JSON
+      body: JSON.stringify({ area, amount }), // send data som JSON
+    });
 
-  fulfillReservation: async (id) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/fullfill-reservation`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id }),
-      });
-      if (!response.ok) throw new Error("Failed to fulfill reservation");
-      return response.json();
-    } catch (error) {
-      console.error("Error fulfilling reservation:", error);
-      throw error;
-    }
-  },
+    if (!response.ok) throw new Error("Failed to reserve spot"); // håndterer fejl
+    return await response.json(); // returnerer reservationsdata
+  } catch (error) {
+    console.error("Error reserving spot:", error.message); // logger fejl
+    throw error; // ooog genkaster fejlen
+  }
+};
 
-  // Tilføj evt. flere funktioner baseret på dine API-behov
+// Bekræft en reservation
+export const confirmReservation = async (reservationId) => {
+  try {
+    const response = await fetch("https://peach-polar-planarian.glitch.me/fullfill-reservation", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: reservationId }),
+    });
+
+    if (!response.ok) throw new Error("Failed to confirm reservation");
+  } catch (error) {
+    console.error("Error confirming reservation:", error.message);
+    throw error;
+  }
 };

@@ -1,51 +1,44 @@
 import React, { createContext, useState, useEffect } from "react";
+import { fetchCampingData, reserveSpot, confirmReservation } from "@/lib/api"; // importer centraliserede API-kald
 
 // opretter konteksten
 export const CartContext = createContext();
 
-// her laver vi cartprovider som laver den global state
+// CartProvider - her opretter vi den globale state
 export const CartProvider = ({ children }) => {
-  // de mulige billetter
+  // States
   const [tickets] = useState([
     { id: 1, name: "Regular Ticket", price: 799 },
     { id: 2, name: "VIP Ticket", price: 1299 },
   ]);
-  // states
-  // valgte varer i kurven
-  const [cartItems, setCartItems] = useState([]);
-  // brugeroplysninger
-  const [userInfos, setUserInfos] = useState([]);
-  // valgt camping
-  const [selectedCamping, setSelectedCamping] = useState(null);
-  // valg af ekstraudstyr som er vores telte
-  const [selectedOptional, setSelectedOptional] = useState([]);
-  // totalprisen
-  const [cartTotal, setCartTotal] = useState(0);
-  // tid tilbage på reservationen
-  const [remainingTime, setRemainingTime] = useState(null);
-  // data om campingområder
-  const [campingData, setCampingData] = useState([]);
-  // indlæsningsstatus
-  const [loading, setLoading] = useState(true);
-  // til fejlmeddelser
-  const [error, setError] = useState(null);
-  // reservations id
-  const [reservationId, setReservationId] = useState(null);
+  const [cartItems, setCartItems] = useState([]); // valgte varer i kurven
+  const [userInfos, setUserInfos] = useState([]); // brugeroplysninger
+  const [selectedCamping, setSelectedCamping] = useState(null); // valgt camping
+  const [selectedOptional, setSelectedOptional] = useState([]); // valg af ekstraudstyr
+  const [cartTotal, setCartTotal] = useState(0); // totalpris
+  const [remainingTime, setRemainingTime] = useState(null); // tid tilbage på reservationen
+  const [campingData, setCampingData] = useState([]); // campingområder
+  const [loading, setLoading] = useState(true); // indlæsningsstatus
+  const [error, setError] = useState(null); // fejlmeddelelser
+  const [reservationId, setReservationId] = useState(null); // reservations ID
+
   // start timeren
   const startTimer = (seconds = 300) => setRemainingTime(seconds);
+
   // nulstil timeren
   const resetTimer = () => setRemainingTime(null);
 
+  // funktion til at rydde hele kurven
   const clearCart = () => {
-    setCartItems([]); // rydder kurven
-    setUserInfos([]); // nulstiller brugerinfo
-    setSelectedCamping(null); // nulstil campingvalg
-    setSelectedOptional([]); // nulstil tilvalg
-    setCartTotal(0); // totalpris
-    setReservationId(null); // og til sidst nulstiller reservation id'et
+    setCartItems([]);
+    setUserInfos([]);
+    setSelectedCamping(null);
+    setSelectedOptional([]);
+    setCartTotal(0);
+    setReservationId(null);
   };
 
-  // timer-logik
+  // timer-logik: håndterer nedtælling og rydder kurven, hvis tiden udløber
   useEffect(() => {
     let timer;
     if (remainingTime > 0) {
@@ -54,72 +47,48 @@ export const CartProvider = ({ children }) => {
       clearCart();
       resetTimer();
     }
-    return () => clearInterval(timer);
+    return () => clearInterval(timer); // rydder intervallet ved unmount
   }, [remainingTime]);
 
-  // her henter vi campingdata fra vores api
+  // henter campingdata fra API via den nye fetchCampingData-funktion
   useEffect(() => {
-    const fetchCampingData = async () => {
+    const loadCampingData = async () => {
       try {
-        // indlæsningen starter
         setLoading(true);
-        const response = await fetch("https://peach-polar-planarian.glitch.me/available-spots");
-        if (!response.ok) throw new Error("Failed to fetch camping data");
-        const data = await response.json();
-        console.log("Camping Data:", data);
-        // opdaterer campingdata
+        const data = await fetchCampingData(); // centraliseret API-kald
         setCampingData(data);
-      } catch (err) {
-        console.error(err.message);
-        setError(err.message);
+      } catch (error) {
+        setError(error.message);
       } finally {
-        setLoading(false);
+        setLoading(false); // uanset hvad, stopper vi indlæsning
       }
     };
 
-    fetchCampingData();
+    loadCampingData();
   }, []);
 
-  // reserver campingplads via api
-  const reserveSpot = async (area, amount) => {
+  // reserverer campingplads via API
+  const reserveSpotHandler = async (area, amount) => {
     try {
-      const response = await fetch("https://peach-polar-planarian.glitch.me/reserve-spot", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ area, amount }),
-      });
-
-      const data = await response.json();
-      if (!response.ok) throw new Error("Failed to reserve spot");
-      // gemmer reservations id'et
-      setReservationId(data.id);
-      // starter timeren
-      startTimer();
-    } catch (err) {
-      console.error(err.message);
-      setError(err.message);
+      const data = await reserveSpot(area, amount); // centraliseret API-kald
+      setReservationId(data.id); // gem reservations ID
+      startTimer(); // start reservationstimer
+    } catch (error) {
+      setError(error.message);
     }
   };
 
-  // bekræft reservation igen via en api anmodning
-  const confirmReservation = async () => {
+  // bekræft reservation via API
+  const confirmReservationHandler = async () => {
     try {
-      const response = await fetch("https://peach-polar-planarian.glitch.me/fullfill-reservation", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: reservationId }),
-      });
-
-      if (!response.ok) throw new Error("Failed to confirm reservation");
-      // nulstiller timeren ved bekræftelse
-      resetTimer();
-    } catch (err) {
-      console.error(err.message);
-      setError(err.message);
+      await confirmReservation(reservationId); // centraliseret API-kald
+      resetTimer(); // nulstil timeren
+    } catch (error) {
+      setError(error.message);
     }
   };
 
-  // opdater brugeroplysninger baseret på cartItems, altså når varer i kurven ændres
+  // opdater brugeroplysninger baseret på cartItems
   useEffect(() => {
     setUserInfos(
       cartItems.flatMap((item) =>
@@ -133,23 +102,23 @@ export const CartProvider = ({ children }) => {
     );
   }, [cartItems]);
 
+  // funktion til at opdatere en specifik brugers info
   const updateUserInfo = (index, updatedInfo) => {
     setUserInfos((prevUserInfos) => {
       const newUserInfos = [...prevUserInfos];
       newUserInfos[index] = {
         ...newUserInfos[index],
-        // tilføjer nyt data
         ...updatedInfo,
       };
       return newUserInfos;
     });
   };
 
-  // beregner totalpris for kurven
+  // beregn totalpris for kurven
   useEffect(() => {
     const ticketTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     const optionalTotal = selectedOptional.reduce((total, item) => total + item.price * item.quantity, 0);
-    setCartTotal(ticketTotal + optionalTotal + 99); // Booking fee
+    setCartTotal(ticketTotal + optionalTotal + 99); // Inkluderer bookinggebyr
   }, [cartItems, selectedOptional]);
 
   // tilføj vare til kurven
@@ -157,19 +126,21 @@ export const CartProvider = ({ children }) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
       if (existingItem) {
-        return prevItems.map((item) => (item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item));
+        // opdaterer antallet, hvis varen allerede er i kurven
+        return prevItems.map((item) => (item.id === product.id ? { ...item, quantity: item.quantity + product.quantity } : item));
       } else {
-        return [...prevItems, { ...product, quantity: 1 }];
+        // tilføjer varen til kurven med det valgte antal
+        return [...prevItems, { ...product }];
       }
     });
   };
 
-  // fjerner vare fra kurven
+  // fjern vare fra kurven
   const removeItemFromCart = (productId) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
   };
 
-  // opdater antallet af en vare
+  // opdaterer antallet af en vare i kurven
   const updateItemQuantity = (productId, quantity) => {
     if (quantity <= 0) {
       removeItemFromCart(productId);
@@ -177,7 +148,8 @@ export const CartProvider = ({ children }) => {
       setCartItems((prevItems) => prevItems.map((item) => (item.id === productId ? { ...item, quantity } : item)));
     }
   };
-  // her returnerer vi hele konteksten
+
+  // Returner hele konteksten, inklusive opdaterede handler-funktioner
   return (
     <CartContext.Provider
       value={{
@@ -202,8 +174,8 @@ export const CartProvider = ({ children }) => {
         formatTime: (time) => `${String(Math.floor(time / 60)).padStart(2, "0")}:${String(time % 60).padStart(2, "0")}`,
         resetTimer,
         startTimer,
-        reserveSpot,
-        confirmReservation,
+        reserveSpot: reserveSpotHandler,
+        confirmReservation: confirmReservationHandler,
         addToCart,
         removeItemFromCart,
         updateItemQuantity,
@@ -214,8 +186,5 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-// i denne fil opretter vi altså en global state med React Context API for at håndtere billetkøb, brugeroplysninger og campingreservationer
-
-// den inkluderer funktioner til at tilføje/fjerne billetter, beregne totalprisen, håndtere en reservationstimer og hente campingdata fra festivalens API
-
-// alt dette deles med resten af applikationen via CartProvider
+// i denne fil bruger vi nu centraliserede API-kald fra lib/api.jsx for at holde koden mere struktureret og genanvendelig
+// dette gør det nemmere at vedligeholde og giver en ensartet måde at håndtere API-fejl på
