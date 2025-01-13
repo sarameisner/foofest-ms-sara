@@ -4,6 +4,7 @@ import lineupBracelet from "../../public/pics/bracelets1.png";
 import programBracelet from "../../public/pics/bracelets2.png";
 import ticketsBracelet from "../../public/pics/bracelets3.png";
 
+
 const FrontPageHeader = () => {
  
 
@@ -27,9 +28,50 @@ const FrontPageHeader = () => {
         ></video>
         
         {/* Dato */}
-        <div className="absolute top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-          <p className="text-xl md:text-3xl font-normal text-white">2.12.2024 - 20.12.2024</p>
-        </div>
+        <div className="relative w-full">
+  {/* Baggrundsvideo */}
+  <div className="relative w-full h-[100vh] bg-cover bg-center">
+    <video
+      className="absolute top-0 left-0 w-full h-full object-cover"
+      src="/2022395-hd_1920_1080_30fps.mp4"
+      autoPlay
+      loop
+      muted
+      playsInline
+    ></video>
+
+    {/* Dato */}
+    <div className="absolute top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+      {/* Første linje: Biggest Rock Festival */}
+      <p
+        className="text-3xl md:text-6xl font-bold font-sans text-white"
+        style={{
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          borderRight: "2px solid white",
+          width: "fit-content",
+          animation: "typing 3s steps(25, end), blink-caret 0.5s step-end infinite",
+        }}
+      >
+        BIGGEST ROCK FESTIVAL
+      </p>
+
+      {/* Anden linje: On Faroe Islands */}
+      <p
+        className="text-xl md:text-5xl font-bold mt-10 font-sans text-white "style={{
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          opacity: 0, 
+          visibility: "hidden", 
+          animation: "typing 3s steps(39, end) 3.5s forwards, fadeIn 0.5s 3.5s forwards",
+        }}
+      >
+      Faroe Islands - 02/12 - 20/12
+      </p>   
+    </div>
+  </div>
+</div>
+
 
         {/* CTA til billetter */}
         <div className="absolute hover:underline text-white bottom-8 right-8 text-right flex items-center space-x-4 ">
