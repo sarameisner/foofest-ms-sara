@@ -3,6 +3,7 @@ import Banner from "@/components/Banner";
 import ButtonWIcon from "@/components/ButtonWIcon";
 import Hjerte from "../../public/pics/heart.svg"
 import Image from "next/image";
+import Head from "next/head";
 
 
 const Favorites = () => {
@@ -27,6 +28,12 @@ const Favorites = () => {
     };
   
   return (
+    <>
+    <Head>
+      <title>Favorites</title>
+      <meta name="description" content="Review and manage your festival tickets. Checkout to secure your spot at the event!" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </Head>
     <div className="mb-[--padding-50]">
       <Banner text="Your profile" />
       <div className="text-center sm:w-[600px] md:w-[700px] lg:w-[900px] m-auto">
@@ -73,6 +80,7 @@ const Favorites = () => {
         ))}
       </ul>
     </div>
+    </>
   );
 };
 

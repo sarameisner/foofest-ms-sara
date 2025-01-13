@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import BottomNav from "@/components/BottomNav";
 import RunningBanner from "@/components/RunningBanner"
 import Image from "next/image";
+import Head from "next/head";
 import Star from "../../public/pics/blackstar.svg"
 
 function MyApp({ Component, pageProps }) {
@@ -24,10 +25,17 @@ function MyApp({ Component, pageProps }) {
       />
     </div>,
   ];
+ 
   return (
     // vores provider til createContext, så vi har adgang fra context. 
     <CartProvider>
       <div className="layout-wrapper"> 
+      <Head>
+          <title>Foo Fest</title>
+          <meta name="description" content="Welcome to Foo Fest, the ultimate festival experience!" />
+          <link rel="icon" href="/favicon.ico" />
+          
+        </Head>
         <TopNav />
         <main>
           <Component {...pageProps} />

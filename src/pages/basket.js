@@ -8,6 +8,7 @@ import Banner from "../components/Banner";
 import ticketPlain from "../../public/pics/ticketplain.svg";
 import ticketWStar from "../../public/pics/ticketwstar.svg";
 import Image from "next/image";
+import Head from "next/head";
 import Star from "../../public/pics/star.svg";
 import BlackStar from "../../public/pics/blackstar.svg";
 
@@ -41,6 +42,13 @@ const Basket = () => {
   };
 
   return (
+    <>
+
+    <Head>
+      <title>Basket</title>
+      <meta name="description" content="Review and manage your festival tickets. Checkout to secure your spot at the event!" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </Head>
     <div className="basket-container text-white p-4 md:p-8">
       <Banner text="Your basket" className="mb-6 text-center" />
 
@@ -103,6 +111,8 @@ const Basket = () => {
         </div>
       </div>
     </div>
+        </>
+
   );
 };
 

@@ -5,6 +5,7 @@ import Band from "@/components/Band";
 import FrontPage from "../../public/pics/frontpagepic.jpg";
 import DaySelector from "@/components/DaySelector";
 import Loading from "@/components/Loading";
+import Head from "next/head";
 
 
 const Schedule = () => {
@@ -50,6 +51,13 @@ const Schedule = () => {
   }
 
   return (
+    <>
+
+    <Head>
+      <title>Lineup</title>
+      <meta name="description" content="Review and manage your festival tickets. Checkout to secure your spot at the event!" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </Head>
     <div>
     <div className="p-[--padding-5] mt-[--padding-150]">
       {/* Background Image */}
@@ -109,6 +117,7 @@ const Schedule = () => {
       
     </div>
     </div>
+    </>
   );
 };
 

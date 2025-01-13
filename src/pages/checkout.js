@@ -8,6 +8,7 @@ import CheckoutCompleted from "@/components/CheckoutCompleted";
 import { CartContext } from "../contexts/CartContext";
 import ButtonWIcon from "@/components/ButtonWIcon";
 import Image from "next/image";
+import Head from "next/head";
 import StarIcon from "../../public/pics/star.svg";
 
 function Checkout() {
@@ -125,6 +126,12 @@ function Checkout() {
   );
 
   return (
+    <>
+    <Head>
+      <title>Checkout</title>
+      <meta name="description" content="Review and manage your festival tickets. Checkout to secure your spot at the event!" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </Head>
     <div className="mt-40">
       {currentStep < steps.length - 1 && (
         <div>
@@ -158,6 +165,7 @@ function Checkout() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
