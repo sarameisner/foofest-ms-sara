@@ -118,7 +118,7 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     const ticketTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     const optionalTotal = selectedOptional.reduce((total, item) => total + item.price * item.quantity, 0);
-    setCartTotal(ticketTotal + optionalTotal + 99); // Inkluderer bookinggebyr
+    setCartTotal(ticketTotal + optionalTotal + 99); // inkluderer bookinggebyr
   }, [cartItems, selectedOptional]);
 
   // tilføj vare til kurven
@@ -149,7 +149,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // Returner hele konteksten, inklusive opdaterede handler-funktioner
+  // returner hele konteksten, inklusive opdaterede handler-funktioner
   return (
     <CartContext.Provider
       value={{
@@ -187,4 +187,5 @@ export const CartProvider = ({ children }) => {
 };
 
 // i denne fil bruger vi nu centraliserede API-kald fra lib/api.jsx for at holde koden mere struktureret og genanvendelig
+
 // dette gør det nemmere at vedligeholde og giver en ensartet måde at håndtere API-fejl på
