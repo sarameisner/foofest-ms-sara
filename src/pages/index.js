@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Loading from "@/components/Loading";
 import FrontPageHeader from "@/components/FrontPageHeader";
 import Popup from "@/components/PopUp";
+import Head from "next/head";
 import According from "@/components/According";
 
 export default function Home() {
@@ -46,10 +47,17 @@ export default function Home() {
   }
 
   return (
+    <>
+    <Head>
+      <title>Frontpage</title>
+      <meta name="description" content="Review and manage your festival tickets. Checkout to secure your spot at the event!" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </Head>
     <div>
       <Popup isOpen={isModalOpen} closeModal={closeModal} />
       <FrontPageHeader />
       <According title="WHAT IS FOO FEST" faqItems={faq1} />
     </div>
+    </>
   );
 }

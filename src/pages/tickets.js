@@ -1,5 +1,6 @@
 import React from "react";
 import Tickets from "@/components/Tickets";
+import Head from "next/head";
 import According from "@/components/According";
 
 export default function TicketsPage() {
@@ -20,6 +21,11 @@ export default function TicketsPage() {
       ];
   return (
     <>
+    <Head>
+      <title>Tickets</title>
+      <meta name="description" content="Review and manage your festival tickets. Checkout to secure your spot at the event!" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </Head>
       <Tickets />
       <According title="OFTEN ASKED" faqItems={faq1} /> {/* Første FAQ-sektion */}
     </>

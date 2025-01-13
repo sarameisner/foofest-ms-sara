@@ -6,6 +6,7 @@ import Banner from "@/components/Banner";
 import Hjerte from "../../../public/pics/heart.svg";
 import SortHjerte from "../../../public/pics/blackheart.svg";
 import Loading from "@/components/Loading";
+import Head from "next/head";
 
 const BandDetails = () => {
   // Vi ruger  router til at få adgang til `slug`
@@ -113,6 +114,12 @@ const BandDetails = () => {
   }
 
   return (
+    <>
+    <Head>
+      <title>Band</title>
+      <meta name="description" content="Review and manage your festival tickets. Checkout to secure your spot at the event!" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </Head>
     <div>
       <Banner text={bandDetails.name} />
 
@@ -146,6 +153,7 @@ const BandDetails = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

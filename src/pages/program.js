@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import StageFiltering from "@/components/Stagefiltering"; // For stage filtering
 import DayFiltering from "@/components/DayFiltering";
+import Head from "next/head";
 import Loading from "@/components/Loading"; // For days filtering
 
 const Program = () => {
@@ -113,6 +114,13 @@ const Program = () => {
   ];
 
   return (
+    <>
+
+    <Head>
+      <title>Program</title>
+      <meta name="description" content="Review and manage your festival tickets. Checkout to secure your spot at the event!" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </Head>
     <div>
       <Banner text="PROGRAM" />
       <div className="mt-[--padding-10] p-[--padding-5]">
@@ -159,6 +167,7 @@ const Program = () => {
       </div>
       
     </div>
+    </>
   );
 };
 
